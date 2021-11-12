@@ -1,6 +1,6 @@
 import Foundation
 
-/// Struct that presents the Srings used by the App.
+/// Struct that presents the Strings used by the App.
 struct BBBString {
   
     private init() {}
