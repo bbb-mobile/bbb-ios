@@ -13,16 +13,12 @@ class WebViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupWebView()
     }
     
-    // MARK: - load views
+    // MARK: - setup webView
     
-    override func loadView() {
-        super.loadView()
-        loadWebView()
-    }
-    
-    private func loadWebView() {
+    private func setupWebView() {
         guard let baseURL = BBBURL.baseURL else { return }
         webView.navigationDelegate = self
         webView.load(URLRequest(url: baseURL))
