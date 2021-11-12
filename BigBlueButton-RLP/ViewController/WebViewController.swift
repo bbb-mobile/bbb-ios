@@ -24,8 +24,15 @@ class WebViewController: UIViewController {
     
     private func loadWebView() {
         guard let baseURL = BBBURL.baseURL else { return }
+        webView.navigationDelegate = self
         webView.load(URLRequest(url: baseURL))
         webView.allowsBackForwardNavigationGestures = true
+    }
+}
+
+extension WebViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        self.presentSimpleAlert(title: BBBString.failedLoadUrlTitle, message: BBBString.failedLoadUrlMessage)
     }
 }
 

@@ -1,0 +1,588 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		942077F1273E722800E6EEBB /* ViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942077F0273E722800E6EEBB /* ViewController+.swift */; };
+		942077F3273E759300E6EEBB /* BBBString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942077F2273E759300E6EEBB /* BBBString.swift */; };
+		946C34D9273D2EFE002C0E2C /* BBBURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946C34D8273D2EFE002C0E2C /* BBBURL.swift */; };
+		946C34DB273D42EB002C0E2C /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946C34DA273D42EB002C0E2C /* AppEnvironment.swift */; };
+		94A7B73A273D17AE00862DA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7B739273D17AE00862DA1 /* AppDelegate.swift */; };
+		94A7B73C273D17AE00862DA1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7B73B273D17AE00862DA1 /* SceneDelegate.swift */; };
+		94A7B73E273D17AE00862DA1 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7B73D273D17AE00862DA1 /* WebViewController.swift */; };
+		94A7B741273D17AE00862DA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94A7B73F273D17AE00862DA1 /* Main.storyboard */; };
+		94A7B743273D17B200862DA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94A7B742273D17B200862DA1 /* Assets.xcassets */; };
+		94A7B746273D17B200862DA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94A7B744273D17B200862DA1 /* LaunchScreen.storyboard */; };
+		94A7B751273D17B200862DA1 /* BigBlueButton_RLPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7B750273D17B200862DA1 /* BigBlueButton_RLPTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		94A7B74D273D17B200862DA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 94A7B72E273D17AE00862DA1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 94A7B735273D17AE00862DA1;
+			remoteInfo = "BigBlueButton-RLP";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		942077F0273E722800E6EEBB /* ViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+.swift"; sourceTree = "<group>"; };
+		942077F2273E759300E6EEBB /* BBBString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBBString.swift; sourceTree = "<group>"; };
+		946C34D8273D2EFE002C0E2C /* BBBURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBBURL.swift; sourceTree = "<group>"; };
+		946C34DA273D42EB002C0E2C /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		94A7B736273D17AE00862DA1 /* BigBlueButton-RLP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BigBlueButton-RLP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		94A7B739273D17AE00862DA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		94A7B73B273D17AE00862DA1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		94A7B73D273D17AE00862DA1 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		94A7B740273D17AE00862DA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		94A7B742273D17B200862DA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		94A7B745273D17B200862DA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		94A7B747273D17B200862DA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94A7B74C273D17B200862DA1 /* BigBlueButton-RLPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BigBlueButton-RLPTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		94A7B750273D17B200862DA1 /* BigBlueButton_RLPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigBlueButton_RLPTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		94A7B733273D17AE00862DA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94A7B749273D17B200862DA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		946C34CF273D1DB8002C0E2C /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				94A7B73D273D17AE00862DA1 /* WebViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		946C34D0273D1DE6002C0E2C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		946C34D1273D1DF0002C0E2C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				942077F0273E722800E6EEBB /* ViewController+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		946C34D2273D1E20002C0E2C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		946C34D3273D1E39002C0E2C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				94A7B742273D17B200862DA1 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		946C34D4273D1E57002C0E2C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		946C34D5273D1EAB002C0E2C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				946C34D7273D1EF3002C0E2C /* Constants */,
+				946C34DA273D42EB002C0E2C /* AppEnvironment.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		946C34D6273D1EC4002C0E2C /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				94A7B744273D17B200862DA1 /* LaunchScreen.storyboard */,
+				94A7B73F273D17AE00862DA1 /* Main.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		946C34D7273D1EF3002C0E2C /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				946C34D8273D2EFE002C0E2C /* BBBURL.swift */,
+				942077F2273E759300E6EEBB /* BBBString.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		94A7B72D273D17AE00862DA1 = {
+			isa = PBXGroup;
+			children = (
+				94A7B738273D17AE00862DA1 /* BigBlueButton-RLP */,
+				94A7B74F273D17B200862DA1 /* BigBlueButton-RLPTests */,
+				94A7B737273D17AE00862DA1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		94A7B737273D17AE00862DA1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				94A7B736273D17AE00862DA1 /* BigBlueButton-RLP.app */,
+				94A7B74C273D17B200862DA1 /* BigBlueButton-RLPTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		94A7B738273D17AE00862DA1 /* BigBlueButton-RLP */ = {
+			isa = PBXGroup;
+			children = (
+				946C34CF273D1DB8002C0E2C /* ViewController */,
+				946C34D2273D1E20002C0E2C /* ViewModel */,
+				946C34D4273D1E57002C0E2C /* View */,
+				946C34D0273D1DE6002C0E2C /* Model */,
+				946C34D5273D1EAB002C0E2C /* Utilities */,
+				946C34D1273D1DF0002C0E2C /* Extensions */,
+				946C34D6273D1EC4002C0E2C /* Storyboard */,
+				946C34D3273D1E39002C0E2C /* Resources */,
+				94A7B739273D17AE00862DA1 /* AppDelegate.swift */,
+				94A7B73B273D17AE00862DA1 /* SceneDelegate.swift */,
+				94A7B747273D17B200862DA1 /* Info.plist */,
+			);
+			path = "BigBlueButton-RLP";
+			sourceTree = "<group>";
+		};
+		94A7B74F273D17B200862DA1 /* BigBlueButton-RLPTests */ = {
+			isa = PBXGroup;
+			children = (
+				94A7B750273D17B200862DA1 /* BigBlueButton_RLPTests.swift */,
+			);
+			path = "BigBlueButton-RLPTests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		94A7B735273D17AE00862DA1 /* BigBlueButton-RLP */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 94A7B760273D17B300862DA1 /* Build configuration list for PBXNativeTarget "BigBlueButton-RLP" */;
+			buildPhases = (
+				94A7B732273D17AE00862DA1 /* Sources */,
+				94A7B733273D17AE00862DA1 /* Frameworks */,
+				94A7B734273D17AE00862DA1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BigBlueButton-RLP";
+			productName = "BigBlueButton-RLP";
+			productReference = 94A7B736273D17AE00862DA1 /* BigBlueButton-RLP.app */;
+			productType = "com.apple.product-type.application";
+		};
+		94A7B74B273D17B200862DA1 /* BigBlueButton-RLPTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 94A7B763273D17B300862DA1 /* Build configuration list for PBXNativeTarget "BigBlueButton-RLPTests" */;
+			buildPhases = (
+				94A7B748273D17B200862DA1 /* Sources */,
+				94A7B749273D17B200862DA1 /* Frameworks */,
+				94A7B74A273D17B200862DA1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				94A7B74E273D17B200862DA1 /* PBXTargetDependency */,
+			);
+			name = "BigBlueButton-RLPTests";
+			productName = "BigBlueButton-RLPTests";
+			productReference = 94A7B74C273D17B200862DA1 /* BigBlueButton-RLPTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		94A7B72E273D17AE00862DA1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					94A7B735273D17AE00862DA1 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					94A7B74B273D17B200862DA1 = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 94A7B735273D17AE00862DA1;
+					};
+				};
+			};
+			buildConfigurationList = 94A7B731273D17AE00862DA1 /* Build configuration list for PBXProject "BigBlueButton-RLP" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 94A7B72D273D17AE00862DA1;
+			productRefGroup = 94A7B737273D17AE00862DA1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				94A7B735273D17AE00862DA1 /* BigBlueButton-RLP */,
+				94A7B74B273D17B200862DA1 /* BigBlueButton-RLPTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		94A7B734273D17AE00862DA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94A7B746273D17B200862DA1 /* LaunchScreen.storyboard in Resources */,
+				94A7B743273D17B200862DA1 /* Assets.xcassets in Resources */,
+				94A7B741273D17AE00862DA1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94A7B74A273D17B200862DA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		94A7B732273D17AE00862DA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				942077F3273E759300E6EEBB /* BBBString.swift in Sources */,
+				946C34DB273D42EB002C0E2C /* AppEnvironment.swift in Sources */,
+				946C34D9273D2EFE002C0E2C /* BBBURL.swift in Sources */,
+				94A7B73E273D17AE00862DA1 /* WebViewController.swift in Sources */,
+				94A7B73A273D17AE00862DA1 /* AppDelegate.swift in Sources */,
+				94A7B73C273D17AE00862DA1 /* SceneDelegate.swift in Sources */,
+				942077F1273E722800E6EEBB /* ViewController+.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94A7B748273D17B200862DA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94A7B751273D17B200862DA1 /* BigBlueButton_RLPTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		94A7B74E273D17B200862DA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 94A7B735273D17AE00862DA1 /* BigBlueButton-RLP */;
+			targetProxy = 94A7B74D273D17B200862DA1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		94A7B73F273D17AE00862DA1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				94A7B740273D17AE00862DA1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		94A7B744273D17B200862DA1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				94A7B745273D17B200862DA1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		94A7B75E273D17B300862DA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		94A7B75F273D17B300862DA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		94A7B761273D17B300862DA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M6T2825W2N;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "BigBlueButton-RLP/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zuehlke.bbb;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		94A7B762273D17B300862DA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M6T2825W2N;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "BigBlueButton-RLP/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zuehlke.bbb;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		94A7B764273D17B300862DA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M6T2825W2N;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zuehlke.bbb.BigBlueButton-RLPTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BigBlueButton-RLP.app/BigBlueButton-RLP";
+			};
+			name = Debug;
+		};
+		94A7B765273D17B300862DA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M6T2825W2N;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zuehlke.bbb.BigBlueButton-RLPTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BigBlueButton-RLP.app/BigBlueButton-RLP";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		94A7B731273D17AE00862DA1 /* Build configuration list for PBXProject "BigBlueButton-RLP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				94A7B75E273D17B300862DA1 /* Debug */,
+				94A7B75F273D17B300862DA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		94A7B760273D17B300862DA1 /* Build configuration list for PBXNativeTarget "BigBlueButton-RLP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				94A7B761273D17B300862DA1 /* Debug */,
+				94A7B762273D17B300862DA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		94A7B763273D17B300862DA1 /* Build configuration list for PBXNativeTarget "BigBlueButton-RLPTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				94A7B764273D17B300862DA1 /* Debug */,
+				94A7B765273D17B300862DA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 94A7B72E273D17AE00862DA1 /* Project object */;
+}
