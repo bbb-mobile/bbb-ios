@@ -13,16 +13,12 @@ class WebViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupWebView()
     }
     
-    // MARK: - load views
+    // MARK: - setup webView
     
-    override func loadView() {
-        super.loadView()
-        loadWebView()
-    }
-    
-    private func loadWebView() {
+    private func setupWebView() {
         guard let baseURL = BBBURL.baseURL else { return }
         webView.navigationDelegate = self
         webView.load(URLRequest(url: baseURL))
@@ -31,6 +27,11 @@ class WebViewController: UIViewController {
 }
 
 extension WebViewController: WKNavigationDelegate {
+    /// This method will be called when the webview navigation fails.
+    /// - Parameters:
+    ///   - webView: The web view invoking the delegate method.
+    ///   - navigation: The navigation.
+    ///   - error: The error that occurred.
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         self.presentSimpleAlert(title: BBBString.failedLoadUrlTitle, message: BBBString.failedLoadUrlMessage)
     }
