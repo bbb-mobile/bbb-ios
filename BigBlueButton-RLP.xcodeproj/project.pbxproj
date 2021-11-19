@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		70B32A692746C7E900BA40A7 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = 70B32A682746C7E900BA40A7 /* WebRTC */; };
 		942077F1273E722800E6EEBB /* ViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942077F0273E722800E6EEBB /* ViewController+.swift */; };
 		942077F3273E759300E6EEBB /* BBBString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942077F2273E759300E6EEBB /* BBBString.swift */; };
 		946C34D9273D2EFE002C0E2C /* BBBURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946C34D8273D2EFE002C0E2C /* BBBURL.swift */; };
@@ -52,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70B32A692746C7E900BA40A7 /* WebRTC in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +199,9 @@
 			dependencies = (
 			);
 			name = "BigBlueButton-RLP";
+			packageProductDependencies = (
+				70B32A682746C7E900BA40A7 /* WebRTC */,
+			);
 			productName = "BigBlueButton-RLP";
 			productReference = 94A7B736273D17AE00862DA1 /* BigBlueButton-RLP.app */;
 			productType = "com.apple.product-type.application";
@@ -247,6 +252,9 @@
 				Base,
 			);
 			mainGroup = 94A7B72D273D17AE00862DA1;
+			packageReferences = (
+				70B32A672746C7E900BA40A7 /* XCRemoteSwiftPackageReference "WebRTC" */,
+			);
 			productRefGroup = 94A7B737273D17AE00862DA1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -583,6 +591,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		70B32A672746C7E900BA40A7 /* XCRemoteSwiftPackageReference "WebRTC" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stasel/WebRTC";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 95.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		70B32A682746C7E900BA40A7 /* WebRTC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 70B32A672746C7E900BA40A7 /* XCRemoteSwiftPackageReference "WebRTC" */;
+			productName = WebRTC;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 94A7B72E273D17AE00862DA1 /* Project object */;
 }
