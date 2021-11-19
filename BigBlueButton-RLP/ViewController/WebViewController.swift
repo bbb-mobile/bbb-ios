@@ -1,12 +1,10 @@
 import UIKit
 import WebKit
 
-/// ViewController that presents the webview.
 class WebViewController: UIViewController {
     
-    // MARK: Properties
+    // MARK: IBOutlets
     
-    /// webkit web view
     @IBOutlet weak var webView: WKWebView!
     
     // MARK: Views Lifecycle
@@ -16,24 +14,33 @@ class WebViewController: UIViewController {
         setupWebView()
     }
     
-    // MARK: - setup webView
+    // MARK: - Setup WKWebView
     
     private func setupWebView() {
         guard let baseURL = BBBURL.baseURL else { return }
         webView.navigationDelegate = self
         webView.load(URLRequest(url: baseURL))
         webView.allowsBackForwardNavigationGestures = true
+        /// Add UserAgent
+        webView.customUserAgent = BBBString.userAgent
     }
 }
 
 extension WebViewController: WKNavigationDelegate {
+    
     /// This method will be called when the webview navigation fails.
-    /// - Parameters:
-    ///   - webView: The web view invoking the delegate method.
-    ///   - navigation: The navigation.
-    ///   - error: The error that occurred.
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         self.presentSimpleAlert(title: BBBString.failedLoadUrlTitle, message: BBBString.failedLoadUrlMessage)
+    }
+    
+    /// Observe webView URL changes
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
+        decisionHandler(.allow)
+        let urlString = String(describing: navigationAction.request.url)
+        if urlString.contains(BBBString.sessionToken) {
+            /// Joined the room and connected to BBB server. Show the ShareScren button
+            print("JOINED THE ROOM")
+        }
     }
 }
 
