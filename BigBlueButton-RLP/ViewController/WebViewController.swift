@@ -1,51 +1,56 @@
 import UIKit
 import WebKit
 
-class WebViewController: UIViewController {
+class WebViewController: UIViewController, WKUIDelegate {
     
-    // MARK: IBOutlets
+    // MARK: Properties
     
-    @IBOutlet weak var webView: WKWebView!
-    @IBOutlet weak var shareScreenButton: UIButton!
+    var webView: WKWebView!
         
     // MARK: Views Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadWebsite()
+    }
+    
+    override func loadView() {
         setupWebView()
     }
     
     // MARK: - Setup WKWebView
     
     private func setupWebView() {
-        guard let baseURL = BBBURL.baseURL else { return }
+        let webConfiguration = WKWebViewConfiguration()
+        let contentController = WKUserContentController()
+        /// Inject JavaScript which sends message to App
+        let userScript = WKUserScript(source: Constants.jsEventListener, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+        contentController.addUserScript(userScript)
+        /// Add ScriptMessageHandler
+        contentController.add(self, name: Constants.messageName)
+        webConfiguration.userContentController = contentController
+        webConfiguration.preferences.javaScriptEnabled = true
+
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.uiDelegate = self
         webView.navigationDelegate = self
-        webView.load(URLRequest(url: baseURL))
         webView.allowsBackForwardNavigationGestures = true
-        /// Add UserAgent
-        webView.customUserAgent = BBBString.userAgent
+        /// Add custom UserAgent
+        webView.customUserAgent = Constants.userAgent
+        view = webView
     }
     
-    // MARK: IBActions
-    @IBAction func shareScreen(_ sender: UIButton) {
-        do {
-            let jsFileUrl = Bundle.main.url(forResource: BBBString.jsFile, withExtension: "js")!
-            let jsText = try String(contentsOf: jsFileUrl)
-            print(jsText)
-            webView.evaluateJavaScript(jsText) { (result, error) in
-                print("RESULT: \(String(describing: result))")
-                print("ERROR: \(String(describing: error))")
-                
-                
-                //                    let script = WKUserScript(source: jsText,
-                //                                              injectionTime: .atDocumentEnd,
-                //                                              forMainFrameOnly: false)
-                //
-                //                    webView.configuration.userContentController.add(self, name: "callbackHandler")
-                //                    webView.configuration.userContentController.addUserScript(script)
+    private func loadWebsite() {
+        guard let baseURL = BBBURL.baseURL else { return }
+        webView.load(URLRequest(url: baseURL))
+    }
+    
+    private func runJavascript() {
+        /// Fire event to execute javascript
+        webView.evaluateJavaScript(Constants.fireJSEvent) { (_, error) in
+            if error != nil {
+                print("⚡️☠️ Error executing injected javascript script ☠️⚡️")
             }
-        } catch(let error) {
-            print(error.localizedDescription)
         }
     }
 }
@@ -54,36 +59,35 @@ extension WebViewController: WKNavigationDelegate {
     
     /// This method will be called when the webview navigation fails.
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        self.presentSimpleAlert(title: BBBString.failedLoadUrlTitle, message: BBBString.failedLoadUrlMessage)
+        self.presentSimpleAlert(title: Constants.failedLoadUrlTitle, message: Constants.failedLoadUrlMessage)
     }
     
     /// Observe webView URL changes
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         decisionHandler(.allow)
         let urlString = String(describing: navigationAction.request.url)
-        if urlString.contains(BBBString.sessionToken) {
+        if urlString.contains(Constants.sessionToken) {
             /// Joined the room and connected to BBB server.
-            shareScreenButton.isHidden = false
+            runJavascript()
         }
     }
 }
 
-//extension WebViewController: WKScriptMessageHandler {
-//
-//    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-//        if message.name == "callbackHandler" {
-//            guard let body = message.body as? [String: Any] else {
-//                print("could not convert message body to dictionary: \(message.body)")
-//                return
-//            }
-//
-//            guard let payload = body["payload"] as? String else {
-//                print("Could not locate payload param in callback request")
-//                return
-//            }
-//
-//            print(payload)
-//        }
-//    }
-//}
+extension WebViewController: WKScriptMessageHandler {
+
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == Constants.messageName {
+            guard let body = message.body as? [String: Any] else {
+                print("Could not convert message body to dictionary: \(message.body)")
+                return
+            }
+            guard let payload = body["payload"] as? String else {
+                print("Could not locate payload param in callback request")
+                return
+            }
+            
+            print(payload)
+        }
+    }
+}
 
