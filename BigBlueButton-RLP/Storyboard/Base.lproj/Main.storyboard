@@ -25,17 +25,32 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMa-bq-9xx">
+                                <rect key="frame" x="152" y="662" width="110.5" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="sk3-du-Lg3"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Share Screen"/>
+                                <connections>
+                                    <action selector="shareScreen:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kWU-ge-c0N"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XWK-Da-XTG" secondAttribute="trailing" id="Yjo-4B-X7B"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="uMa-bq-9xx" secondAttribute="bottom" constant="150" id="bVS-Q3-ZfC"/>
                             <constraint firstItem="XWK-Da-XTG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="c8e-mw-gRG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XWK-Da-XTG" secondAttribute="bottom" id="dMf-3s-RrJ"/>
                             <constraint firstItem="XWK-Da-XTG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="eJF-YU-SAW"/>
+                            <constraint firstItem="uMa-bq-9xx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ss1-lB-z41"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="shareScreenButton" destination="uMa-bq-9xx" id="3bN-km-8eY"/>
                         <outlet property="webView" destination="XWK-Da-XTG" id="Awp-Q9-hdb"/>
                     </connections>
                 </viewController>

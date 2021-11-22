@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		70B32A692746C7E900BA40A7 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = 70B32A682746C7E900BA40A7 /* WebRTC */; };
+		70BFA3572747D58700AB858A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFA3562747D58700AB858A /* String+.swift */; };
+		70BFA3592747D7D800AB858A /* javascriptSnippet.js in Resources */ = {isa = PBXBuildFile; fileRef = 70BFA3582747D7D800AB858A /* javascriptSnippet.js */; };
 		942077F1273E722800E6EEBB /* ViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942077F0273E722800E6EEBB /* ViewController+.swift */; };
 		942077F3273E759300E6EEBB /* BBBString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942077F2273E759300E6EEBB /* BBBString.swift */; };
 		946C34D9273D2EFE002C0E2C /* BBBURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946C34D8273D2EFE002C0E2C /* BBBURL.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		70BFA3562747D58700AB858A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		70BFA3582747D7D800AB858A /* javascriptSnippet.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = javascriptSnippet.js; sourceTree = "<group>"; };
 		942077F0273E722800E6EEBB /* ViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+.swift"; sourceTree = "<group>"; };
 		942077F2273E759300E6EEBB /* BBBString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBBString.swift; sourceTree = "<group>"; };
 		946C34D8273D2EFE002C0E2C /* BBBURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBBURL.swift; sourceTree = "<group>"; };
@@ -86,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				942077F0273E722800E6EEBB /* ViewController+.swift */,
+				70BFA3562747D58700AB858A /* String+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -100,6 +105,7 @@
 		946C34D3273D1E39002C0E2C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				70BFA3582747D7D800AB858A /* javascriptSnippet.js */,
 				94A7B742273D17B200862DA1 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -271,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94A7B746273D17B200862DA1 /* LaunchScreen.storyboard in Resources */,
+				70BFA3592747D7D800AB858A /* javascriptSnippet.js in Resources */,
 				94A7B743273D17B200862DA1 /* Assets.xcassets in Resources */,
 				94A7B741273D17AE00862DA1 /* Main.storyboard in Resources */,
 			);
@@ -292,6 +299,7 @@
 			files = (
 				942077F3273E759300E6EEBB /* BBBString.swift in Sources */,
 				946C34DB273D42EB002C0E2C /* AppEnvironment.swift in Sources */,
+				70BFA3572747D58700AB858A /* String+.swift in Sources */,
 				946C34D9273D2EFE002C0E2C /* BBBURL.swift in Sources */,
 				94A7B73E273D17AE00862DA1 /* WebViewController.swift in Sources */,
 				94A7B73A273D17AE00862DA1 /* AppDelegate.swift in Sources */,

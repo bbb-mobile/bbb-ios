@@ -6,7 +6,8 @@ class WebViewController: UIViewController {
     // MARK: IBOutlets
     
     @IBOutlet weak var webView: WKWebView!
-    
+    @IBOutlet weak var shareScreenButton: UIButton!
+        
     // MARK: Views Lifecycle
     
     override func viewDidLoad() {
@@ -24,6 +25,29 @@ class WebViewController: UIViewController {
         /// Add UserAgent
         webView.customUserAgent = BBBString.userAgent
     }
+    
+    // MARK: IBActions
+    @IBAction func shareScreen(_ sender: UIButton) {
+        do {
+            let jsFileUrl = Bundle.main.url(forResource: BBBString.jsFile, withExtension: "js")!
+            let jsText = try String(contentsOf: jsFileUrl)
+            print(jsText)
+            webView.evaluateJavaScript(jsText) { (result, error) in
+                print("RESULT: \(String(describing: result))")
+                print("ERROR: \(String(describing: error))")
+                
+                
+                //                    let script = WKUserScript(source: jsText,
+                //                                              injectionTime: .atDocumentEnd,
+                //                                              forMainFrameOnly: false)
+                //
+                //                    webView.configuration.userContentController.add(self, name: "callbackHandler")
+                //                    webView.configuration.userContentController.addUserScript(script)
+            }
+        } catch(let error) {
+            print(error.localizedDescription)
+        }
+    }
 }
 
 extension WebViewController: WKNavigationDelegate {
@@ -38,9 +62,28 @@ extension WebViewController: WKNavigationDelegate {
         decisionHandler(.allow)
         let urlString = String(describing: navigationAction.request.url)
         if urlString.contains(BBBString.sessionToken) {
-            /// Joined the room and connected to BBB server. Show the ShareScren button
-            print("JOINED THE ROOM")
+            /// Joined the room and connected to BBB server.
+            shareScreenButton.isHidden = false
         }
     }
 }
+
+//extension WebViewController: WKScriptMessageHandler {
+//
+//    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+//        if message.name == "callbackHandler" {
+//            guard let body = message.body as? [String: Any] else {
+//                print("could not convert message body to dictionary: \(message.body)")
+//                return
+//            }
+//
+//            guard let payload = body["payload"] as? String else {
+//                print("Could not locate payload param in callback request")
+//                return
+//            }
+//
+//            print(payload)
+//        }
+//    }
+//}
 
