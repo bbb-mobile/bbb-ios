@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		702CB58C274D05E8005D3C17 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB589274D05E8005D3C17 /* Message.swift */; };
+		702CB58D274D05E8005D3C17 /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB58A274D05E8005D3C17 /* WebRTCClient.swift */; };
+		702CB58E274D05E8005D3C17 /* SignalingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB58B274D05E8005D3C17 /* SignalingClient.swift */; };
+		702CB591274D0620005D3C17 /* NativeWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB58F274D0620005D3C17 /* NativeWebSocket.swift */; };
+		702CB592274D0620005D3C17 /* WebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB590274D0620005D3C17 /* WebSocketProvider.swift */; };
+		702CB596274D06A7005D3C17 /* IceCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB593274D06A7005D3C17 /* IceCandidate.swift */; };
+		702CB597274D06A7005D3C17 /* RTCStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB594274D06A7005D3C17 /* RTCStates.swift */; };
+		702CB598274D06A7005D3C17 /* SessionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB595274D06A7005D3C17 /* SessionDescription.swift */; };
 		70B32A692746C7E900BA40A7 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = 70B32A682746C7E900BA40A7 /* WebRTC */; };
 		70BFA3572747D58700AB858A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFA3562747D58700AB858A /* String+.swift */; };
 		942077F1273E722800E6EEBB /* ViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942077F0273E722800E6EEBB /* ViewController+.swift */; };
@@ -33,6 +41,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		702CB589274D05E8005D3C17 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		702CB58A274D05E8005D3C17 /* WebRTCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
+		702CB58B274D05E8005D3C17 /* SignalingClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
+		702CB58F274D0620005D3C17 /* NativeWebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeWebSocket.swift; sourceTree = "<group>"; };
+		702CB590274D0620005D3C17 /* WebSocketProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketProvider.swift; sourceTree = "<group>"; };
+		702CB593274D06A7005D3C17 /* IceCandidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceCandidate.swift; sourceTree = "<group>"; };
+		702CB594274D06A7005D3C17 /* RTCStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTCStates.swift; sourceTree = "<group>"; };
+		702CB595274D06A7005D3C17 /* SessionDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDescription.swift; sourceTree = "<group>"; };
 		70BFA3562747D58700AB858A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		942077F0273E722800E6EEBB /* ViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+.swift"; sourceTree = "<group>"; };
 		942077F2273E759300E6EEBB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -69,6 +85,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		702CB588274D0591005D3C17 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				702CB590274D0620005D3C17 /* WebSocketProvider.swift */,
+				702CB58F274D0620005D3C17 /* NativeWebSocket.swift */,
+				702CB58B274D05E8005D3C17 /* SignalingClient.swift */,
+				702CB58A274D05E8005D3C17 /* WebRTCClient.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		702CB599274D074E005D3C17 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				702CB595274D06A7005D3C17 /* SessionDescription.swift */,
+				702CB593274D06A7005D3C17 /* IceCandidate.swift */,
+				702CB589274D05E8005D3C17 /* Message.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		946C34CF273D1DB8002C0E2C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +118,7 @@
 		946C34D1273D1DF0002C0E2C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				702CB594274D06A7005D3C17 /* RTCStates.swift */,
 				942077F0273E722800E6EEBB /* ViewController+.swift */,
 				70BFA3562747D58700AB858A /* String+.swift */,
 			);
@@ -144,6 +182,8 @@
 				94A7B739273D17AE00862DA1 /* AppDelegate.swift */,
 				94A7B73B273D17AE00862DA1 /* SceneDelegate.swift */,
 				946C34CF273D1DB8002C0E2C /* Scenes */,
+				702CB599274D074E005D3C17 /* Model */,
+				702CB588274D0591005D3C17 /* Services */,
 				946C34D5273D1EAB002C0E2C /* Utilities */,
 				946C34D7273D1EF3002C0E2C /* Constants */,
 				946C34D1273D1DF0002C0E2C /* Extensions */,
@@ -269,12 +309,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				702CB592274D0620005D3C17 /* WebSocketProvider.swift in Sources */,
 				942077F3273E759300E6EEBB /* Constants.swift in Sources */,
+				702CB58D274D05E8005D3C17 /* WebRTCClient.swift in Sources */,
 				946C34DB273D42EB002C0E2C /* AppEnvironment.swift in Sources */,
 				70BFA3572747D58700AB858A /* String+.swift in Sources */,
+				702CB58C274D05E8005D3C17 /* Message.swift in Sources */,
+				702CB58E274D05E8005D3C17 /* SignalingClient.swift in Sources */,
+				702CB596274D06A7005D3C17 /* IceCandidate.swift in Sources */,
+				702CB591274D0620005D3C17 /* NativeWebSocket.swift in Sources */,
 				946C34D9273D2EFE002C0E2C /* BBBURL.swift in Sources */,
 				94A7B73E273D17AE00862DA1 /* WebViewController.swift in Sources */,
+				702CB598274D06A7005D3C17 /* SessionDescription.swift in Sources */,
 				94A7B73A273D17AE00862DA1 /* AppDelegate.swift in Sources */,
+				702CB597274D06A7005D3C17 /* RTCStates.swift in Sources */,
 				94A7B73C273D17AE00862DA1 /* SceneDelegate.swift in Sources */,
 				942077F1273E722800E6EEBB /* ViewController+.swift in Sources */,
 			);
