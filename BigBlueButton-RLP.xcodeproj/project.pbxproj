@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		70B32A692746C7E900BA40A7 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = 70B32A682746C7E900BA40A7 /* WebRTC */; };
+		70BFA3572747D58700AB858A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFA3562747D58700AB858A /* String+.swift */; };
 		942077F1273E722800E6EEBB /* ViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942077F0273E722800E6EEBB /* ViewController+.swift */; };
-		942077F3273E759300E6EEBB /* BBBString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942077F2273E759300E6EEBB /* BBBString.swift */; };
+		942077F3273E759300E6EEBB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942077F2273E759300E6EEBB /* Constants.swift */; };
 		946C34D9273D2EFE002C0E2C /* BBBURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946C34D8273D2EFE002C0E2C /* BBBURL.swift */; };
 		946C34DB273D42EB002C0E2C /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946C34DA273D42EB002C0E2C /* AppEnvironment.swift */; };
 		94A7B73A273D17AE00862DA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7B739273D17AE00862DA1 /* AppDelegate.swift */; };
@@ -32,8 +33,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		70BFA3562747D58700AB858A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		942077F0273E722800E6EEBB /* ViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+.swift"; sourceTree = "<group>"; };
-		942077F2273E759300E6EEBB /* BBBString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBBString.swift; sourceTree = "<group>"; };
+		942077F2273E759300E6EEBB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		946C34D8273D2EFE002C0E2C /* BBBURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBBURL.swift; sourceTree = "<group>"; };
 		946C34DA273D42EB002C0E2C /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		94A7B736273D17AE00862DA1 /* BigBlueButton-RLP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BigBlueButton-RLP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				942077F0273E722800E6EEBB /* ViewController+.swift */,
+				70BFA3562747D58700AB858A /* String+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -134,7 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				946C34D8273D2EFE002C0E2C /* BBBURL.swift */,
-				942077F2273E759300E6EEBB /* BBBString.swift */,
+				942077F2273E759300E6EEBB /* Constants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -290,8 +293,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				942077F3273E759300E6EEBB /* BBBString.swift in Sources */,
+				942077F3273E759300E6EEBB /* Constants.swift in Sources */,
 				946C34DB273D42EB002C0E2C /* AppEnvironment.swift in Sources */,
+				70BFA3572747D58700AB858A /* String+.swift in Sources */,
 				946C34D9273D2EFE002C0E2C /* BBBURL.swift in Sources */,
 				94A7B73E273D17AE00862DA1 /* WebViewController.swift in Sources */,
 				94A7B73A273D17AE00862DA1 /* AppDelegate.swift in Sources */,

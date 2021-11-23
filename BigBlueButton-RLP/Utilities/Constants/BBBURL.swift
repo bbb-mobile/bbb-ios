@@ -24,7 +24,7 @@ struct BBBURL {
         
         private init() {}
         
-        /// Debug base url
-        static let baseURL = URL(string: "https://bbbtest.zdv.uni-mainz.de/b/")
+        /// Debug base url. Mock Meeting Room join url
+        static let baseURL = URL(string: "https://bbbtest.zdv.uni-mainz.de/b/mil-tju-0kl-cja")
     }
 }
