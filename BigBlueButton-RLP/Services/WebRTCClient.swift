@@ -69,6 +69,7 @@ final class WebRTCClient: NSObject {
     }
     
     // MARK: Signaling
+    
     func offer(completion: @escaping (_ sdp: RTCSessionDescription) -> Void) {
         let constrains = RTCMediaConstraints(mandatoryConstraints: self.mediaConstrains,
                                              optionalConstraints: nil)
@@ -106,6 +107,7 @@ final class WebRTCClient: NSObject {
     }
     
     // MARK: Media
+    
     func startCaptureLocalVideo(renderer: RTCVideoRenderer) {
         guard let capturer = self.videoCapturer as? RTCCameraVideoCapturer else {
             return
@@ -189,6 +191,7 @@ final class WebRTCClient: NSObject {
     }
     
     // MARK: Data Channels
+    
     private func createDataChannel() -> RTCDataChannel? {
         let config = RTCDataChannelConfiguration()
         guard let dataChannel = self.peerConnection.dataChannel(forLabel: "WebRTCData", configuration: config) else {
@@ -253,6 +256,7 @@ extension WebRTCClient {
 }
 
 // MARK: - Video control
+
 extension WebRTCClient {
     func hideVideo() {
         self.setVideoEnabled(false)
@@ -265,6 +269,7 @@ extension WebRTCClient {
     }
 }
 // MARK:- Audio control
+
 extension WebRTCClient {
     func muteAudio() {
         self.setAudioEnabled(false)
