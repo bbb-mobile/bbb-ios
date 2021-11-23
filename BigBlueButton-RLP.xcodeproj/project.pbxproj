@@ -69,19 +69,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		946C34CF273D1DB8002C0E2C /* ViewController */ = {
+		946C34CF273D1DB8002C0E2C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				94A7B73F273D17AE00862DA1 /* Main.storyboard */,
 				94A7B73D273D17AE00862DA1 /* WebViewController.swift */,
 			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		946C34D0273D1DE6002C0E2C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		946C34D1273D1DF0002C0E2C /* Extensions */ = {
@@ -93,13 +87,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		946C34D2273D1E20002C0E2C /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		946C34D3273D1E39002C0E2C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,29 +95,20 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		946C34D4273D1E57002C0E2C /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		946C34D5273D1EAB002C0E2C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				946C34D7273D1EF3002C0E2C /* Constants */,
 				946C34DA273D42EB002C0E2C /* AppEnvironment.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		946C34D6273D1EC4002C0E2C /* Storyboard */ = {
+		946C34D6273D1EC4002C0E2C /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
 				94A7B744273D17B200862DA1 /* LaunchScreen.storyboard */,
-				94A7B73F273D17AE00862DA1 /* Main.storyboard */,
 			);
-			path = Storyboard;
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		946C34D7273D1EF3002C0E2C /* Constants */ = {
@@ -163,16 +141,14 @@
 		94A7B738273D17AE00862DA1 /* BigBlueButton-RLP */ = {
 			isa = PBXGroup;
 			children = (
-				946C34CF273D1DB8002C0E2C /* ViewController */,
-				946C34D2273D1E20002C0E2C /* ViewModel */,
-				946C34D4273D1E57002C0E2C /* View */,
-				946C34D0273D1DE6002C0E2C /* Model */,
-				946C34D5273D1EAB002C0E2C /* Utilities */,
-				946C34D1273D1DF0002C0E2C /* Extensions */,
-				946C34D6273D1EC4002C0E2C /* Storyboard */,
-				946C34D3273D1E39002C0E2C /* Resources */,
 				94A7B739273D17AE00862DA1 /* AppDelegate.swift */,
 				94A7B73B273D17AE00862DA1 /* SceneDelegate.swift */,
+				946C34CF273D1DB8002C0E2C /* Scenes */,
+				946C34D5273D1EAB002C0E2C /* Utilities */,
+				946C34D7273D1EF3002C0E2C /* Constants */,
+				946C34D1273D1DF0002C0E2C /* Extensions */,
+				946C34D3273D1E39002C0E2C /* Resources */,
+				946C34D6273D1EC4002C0E2C /* SupportingFiles */,
 				94A7B747273D17B200862DA1 /* Info.plist */,
 			);
 			path = "BigBlueButton-RLP";

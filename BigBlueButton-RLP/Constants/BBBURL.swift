@@ -5,10 +5,12 @@ struct BBBURL {
     
     private init() {}
     
-    /// webpage base url
+    /// Webpage base url
     static let baseURL = AppEnvironment.isDebugMode ?
                          Debug.baseURL : Release.baseURL
     
+    /// Websocket server url.
+    static let websocketURL: String? = nil
     
     /// Struct that presents the release URLs used by the App.
     private struct Release {
@@ -24,7 +26,7 @@ struct BBBURL {
         
         private init() {}
         
-        /// Debug base url. Mock Meeting Room join url
-        static let baseURL = URL(string: "https://bbbtest.zdv.uni-mainz.de/b/mil-tju-0kl-cja")
+        /// Debug base url.
+        static let baseURL = URL(string: "https://bbbtest.zdv.uni-mainz.de/b/")
     }
 }
