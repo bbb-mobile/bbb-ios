@@ -5,8 +5,10 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     // MARK: Properties
     
-    var webView: WKWebView!
-        
+    private var webView: WKWebView!
+    private let signalClient: SignalingClient? = nil
+    private let webRTCClient: WebRTCClient? = nil
+    
     // MARK: Views Lifecycle
     
     override func viewDidLoad() {
@@ -87,6 +89,10 @@ extension WebViewController: WKScriptMessageHandler {
             }
             
             print(payload)
+            // Extract websocketURL and make a WebRTC connection to BBB server
+            // 1. Create local sdp offer
+            // 2. Connect
+            // 3. Set remote sdp offer
         }
     }
 }

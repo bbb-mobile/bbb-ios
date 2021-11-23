@@ -12,6 +12,13 @@ struct BBBURL {
     /// Websocket server url.
     static let websocketURL: String? = nil
     
+    /// Google's public stun servers. For production apps you should deploy your own stun/turn servers.
+    static let defaultIceServers = ["stun:stun.l.google.com:19302",
+                                         "stun:stun1.l.google.com:19302",
+                                         "stun:stun2.l.google.com:19302",
+                                         "stun:stun3.l.google.com:19302",
+                                         "stun:stun4.l.google.com:19302"]
+    
     /// Struct that presents the release URLs used by the App.
     private struct Release {
         
