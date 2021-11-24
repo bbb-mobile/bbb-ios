@@ -24,25 +24,29 @@ class NativeWebSocket: NSObject, WebSocketProvider {
         let socket = urlSession.webSocketTask(with: url)
         socket.resume()
         self.socket = socket
-        self.readMessage()
+        self.listen()
     }
 
     func send(data: Data) {
-        self.socket?.send(.data(data)) { _ in }
+        self.socket?.send(.data(data)) { error in
+            if error != nil {
+                print(error!.localizedDescription)
+            }
+        }
     }
     
-    private func readMessage() {
+    private func listen() {
         self.socket?.receive { [weak self] message in
             guard let self = self else { return }
             
             switch message {
             case .success(.data(let data)):
                 self.delegate?.webSocket(self, didReceiveData: data)
-                self.readMessage()
+                self.listen()
                 
             case .success:
                 debugPrint("Warning: Expected to receive data format but received a string. Check the websocket server config.")
-                self.readMessage()
+                self.listen()
 
             case .failure:
                 self.disconnect()

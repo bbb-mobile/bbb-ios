@@ -10,8 +10,8 @@ class WebViewController: UIViewController, WKUIDelegate {
     private var signalingClient: SignalingClient?
     private var webRTCClient: WebRTCClient
     
-    private var isWebsocketConnected: Bool = false
-    private var isPayloadReceived: Bool = false
+    private var isPayloadReceived = false
+    private var hasSesssionToken = false
     
     // MARK: - Initialization
     
@@ -93,8 +93,11 @@ extension WebViewController: WKNavigationDelegate {
         decisionHandler(.allow)
         let urlString = String(describing: navigationAction.request.url)
         if urlString.contains(Constants.sessionToken) {
-            /// Joined the room and connected to BBB server.
-            runJavascript()
+            // Joined the room and connected to BBB server.
+            if !hasSesssionToken {
+                runJavascript()
+                hasSesssionToken = true
+            }
         }
     }
 }
@@ -104,18 +107,18 @@ extension WebViewController: WKNavigationDelegate {
 extension WebViewController: WKScriptMessageHandler {
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if message.name == Constants.messageName {
-            guard let body = message.body as? [String: Any] else {
-                print("Could not convert message body to dictionary: \(message.body)")
-                return
-            }
-            guard let payload = body["payload"] as? String else {
-                print("Could not locate payload param in callback request")
-                return
-            }
-                        
-            // Create JSON data from payload and parse it
-            if !isWebsocketConnected && !isPayloadReceived {
+        if !isPayloadReceived {
+            if message.name == Constants.messageName {
+                guard let body = message.body as? [String: Any] else {
+                    print("Could not convert message body to dictionary: \(message.body)")
+                    return
+                }
+                guard let payload = body["payload"] as? String else {
+                    print("Could not locate payload param in callback request")
+                    return
+                }
+                
+                // Create JSON data from payload and parse it
                 isPayloadReceived = true
                 let jsonData = Data(payload.utf8)
                 do {
@@ -145,12 +148,10 @@ extension WebViewController: SignalClientDelegate {
     func signalClientDidConnect(_ signalClient: SignalingClient) {
         // Send local SDP to server
         sendSDPOffer()
-        isWebsocketConnected = true
         print("Websocket connected")
     }
     
     func signalClientDidDisconnect(_ signalClient: SignalingClient) {
-        isWebsocketConnected = false
         print("Websocket disconnected")
     }
     

@@ -34,6 +34,6 @@ struct BBBURL {
         private init() {}
         
         /// Debug base url.
-        static let baseURL = URL(string: "https://bbbtest.zdv.uni-mainz.de/b/")
+        static let baseURL = URL(string: "https://bbbtest.zdv.uni-mainz.de/b/mil-tju-0kl-cja")
     }
 }
