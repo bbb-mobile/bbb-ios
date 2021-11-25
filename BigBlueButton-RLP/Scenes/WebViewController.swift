@@ -29,10 +29,40 @@ class WebViewController: UIViewController, WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadWebsite()
+        setupShareButton()
+        
     }
     
     override func loadView() {
         setupWebView()
+    }
+    
+    // MARK: - Mock share screen button
+    
+    private let shareScreenButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Share Button", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.red, for: .normal)
+        button.backgroundColor = .white
+        button.isHidden = true
+        button.addTarget(self, action: #selector(shareScreen), for: .touchUpInside)
+        return button
+    }()
+    
+    private func setupShareButton() {
+        view.addSubview(shareScreenButton)
+        NSLayoutConstraint.activate([
+            shareScreenButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80),
+            shareScreenButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 120),
+            shareScreenButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -120),
+            shareScreenButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    
+    @objc func shareScreen(sender: UIButton!) {
+       sendSDPOffer()
     }
     
     // MARK: - Setup WKWebView
@@ -146,9 +176,10 @@ extension WebViewController: WKScriptMessageHandler {
 
 extension WebViewController: SignalClientDelegate {
     func signalClientDidConnect(_ signalClient: SignalingClient) {
-        // Send local SDP to server
-        sendSDPOffer()
         print("Websocket connected")
+        DispatchQueue.main.async {
+            self.shareScreenButton.isHidden = false
+        }
     }
     
     func signalClientDidDisconnect(_ signalClient: SignalingClient) {
