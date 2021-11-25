@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func buildWebViewController() -> WebViewController {
-        let webRTCClient = WebRTCClient(iceServers: BBBURL.defaultIceServers)
+        let webRTCClient = WebRTCClient(iceServers: BBBURL.bbbTurnServers)
         let webViewController = WebViewController(webRTCClient: webRTCClient)
         return webViewController
     }

@@ -71,13 +71,9 @@ final class WebRTCClient: NSObject {
     // MARK: Signaling
     
     func offer(completion: @escaping (_ sdp: RTCSessionDescription) -> Void) {
-        let constrains = RTCMediaConstraints(mandatoryConstraints: self.mediaConstrains,
-                                             optionalConstraints: nil)
+        let constrains = RTCMediaConstraints(mandatoryConstraints: self.mediaConstrains, optionalConstraints: nil)
         self.peerConnection.offer(for: constrains) { (sdp, error) in
-            guard let sdp = sdp else {
-                return
-            }
-            
+            guard let sdp = sdp else { return }
             self.peerConnection.setLocalDescription(sdp, completionHandler: { (error) in
                 completion(sdp)
             })
@@ -85,13 +81,9 @@ final class WebRTCClient: NSObject {
     }
     
     func answer(completion: @escaping (_ sdp: RTCSessionDescription) -> Void)  {
-        let constrains = RTCMediaConstraints(mandatoryConstraints: self.mediaConstrains,
-                                             optionalConstraints: nil)
+        let constrains = RTCMediaConstraints(mandatoryConstraints: self.mediaConstrains, optionalConstraints: nil)
         self.peerConnection.answer(for: constrains) { (sdp, error) in
-            guard let sdp = sdp else {
-                return
-            }
-            
+            guard let sdp = sdp else { return }
             self.peerConnection.setLocalDescription(sdp, completionHandler: { (error) in
                 completion(sdp)
             })

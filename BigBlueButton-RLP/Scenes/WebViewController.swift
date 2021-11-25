@@ -171,3 +171,26 @@ extension WebViewController: SignalClientDelegate {
         }
     }
 }
+
+// MARK: - WebRTCClient Delegate Methods
+
+extension WebViewController: WebRTCClientDelegate {
+    
+    func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
+        print("Discovered local candidate")
+        signalingClient?.send(candidate: candidate)
+    }
+    
+    func webRTCClient(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {
+        print(state)
+    }
+    
+    func webRTCClient(_ client: WebRTCClient, didReceiveData data: Data) {
+        DispatchQueue.main.async {
+            let message = String(data: data, encoding: .utf8) ?? "(Binary: \(data.count) bytes)"
+            let alert = UIAlertController(title: "Message from WebRTC", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+}
