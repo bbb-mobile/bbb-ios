@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		702CB58C274D05E8005D3C17 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB589274D05E8005D3C17 /* Message.swift */; };
+		702CB58D274D05E8005D3C17 /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB58A274D05E8005D3C17 /* WebRTCClient.swift */; };
+		702CB58E274D05E8005D3C17 /* SignalingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB58B274D05E8005D3C17 /* SignalingClient.swift */; };
+		702CB591274D0620005D3C17 /* NativeWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB58F274D0620005D3C17 /* NativeWebSocket.swift */; };
+		702CB592274D0620005D3C17 /* WebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB590274D0620005D3C17 /* WebSocketProvider.swift */; };
+		702CB596274D06A7005D3C17 /* IceCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB593274D06A7005D3C17 /* IceCandidate.swift */; };
+		702CB597274D06A7005D3C17 /* RTCStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB594274D06A7005D3C17 /* RTCStates.swift */; };
+		702CB598274D06A7005D3C17 /* SessionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB595274D06A7005D3C17 /* SessionDescription.swift */; };
 		70B32A692746C7E900BA40A7 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = 70B32A682746C7E900BA40A7 /* WebRTC */; };
 		70BFA3572747D58700AB858A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFA3562747D58700AB858A /* String+.swift */; };
 		942077F1273E722800E6EEBB /* ViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942077F0273E722800E6EEBB /* ViewController+.swift */; };
@@ -14,9 +22,7 @@
 		946C34D9273D2EFE002C0E2C /* BBBURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946C34D8273D2EFE002C0E2C /* BBBURL.swift */; };
 		946C34DB273D42EB002C0E2C /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946C34DA273D42EB002C0E2C /* AppEnvironment.swift */; };
 		94A7B73A273D17AE00862DA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7B739273D17AE00862DA1 /* AppDelegate.swift */; };
-		94A7B73C273D17AE00862DA1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7B73B273D17AE00862DA1 /* SceneDelegate.swift */; };
 		94A7B73E273D17AE00862DA1 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7B73D273D17AE00862DA1 /* WebViewController.swift */; };
-		94A7B741273D17AE00862DA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94A7B73F273D17AE00862DA1 /* Main.storyboard */; };
 		94A7B743273D17B200862DA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94A7B742273D17B200862DA1 /* Assets.xcassets */; };
 		94A7B746273D17B200862DA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94A7B744273D17B200862DA1 /* LaunchScreen.storyboard */; };
 		94A7B751273D17B200862DA1 /* BigBlueButton_RLPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7B750273D17B200862DA1 /* BigBlueButton_RLPTests.swift */; };
@@ -33,6 +39,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		702CB589274D05E8005D3C17 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		702CB58A274D05E8005D3C17 /* WebRTCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
+		702CB58B274D05E8005D3C17 /* SignalingClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
+		702CB58F274D0620005D3C17 /* NativeWebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeWebSocket.swift; sourceTree = "<group>"; };
+		702CB590274D0620005D3C17 /* WebSocketProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketProvider.swift; sourceTree = "<group>"; };
+		702CB593274D06A7005D3C17 /* IceCandidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceCandidate.swift; sourceTree = "<group>"; };
+		702CB594274D06A7005D3C17 /* RTCStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTCStates.swift; sourceTree = "<group>"; };
+		702CB595274D06A7005D3C17 /* SessionDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDescription.swift; sourceTree = "<group>"; };
 		70BFA3562747D58700AB858A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		942077F0273E722800E6EEBB /* ViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+.swift"; sourceTree = "<group>"; };
 		942077F2273E759300E6EEBB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -40,9 +54,7 @@
 		946C34DA273D42EB002C0E2C /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		94A7B736273D17AE00862DA1 /* BigBlueButton-RLP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BigBlueButton-RLP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94A7B739273D17AE00862DA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		94A7B73B273D17AE00862DA1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		94A7B73D273D17AE00862DA1 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		94A7B740273D17AE00862DA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		94A7B742273D17B200862DA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94A7B745273D17B200862DA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		94A7B747273D17B200862DA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -69,35 +81,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		946C34CF273D1DB8002C0E2C /* ViewController */ = {
+		702CB588274D0591005D3C17 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				702CB590274D0620005D3C17 /* WebSocketProvider.swift */,
+				702CB58F274D0620005D3C17 /* NativeWebSocket.swift */,
+				702CB58B274D05E8005D3C17 /* SignalingClient.swift */,
+				702CB58A274D05E8005D3C17 /* WebRTCClient.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		702CB599274D074E005D3C17 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				702CB595274D06A7005D3C17 /* SessionDescription.swift */,
+				702CB593274D06A7005D3C17 /* IceCandidate.swift */,
+				702CB589274D05E8005D3C17 /* Message.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		946C34CF273D1DB8002C0E2C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				94A7B73D273D17AE00862DA1 /* WebViewController.swift */,
 			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		946C34D0273D1DE6002C0E2C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		946C34D1273D1DF0002C0E2C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				702CB594274D06A7005D3C17 /* RTCStates.swift */,
 				942077F0273E722800E6EEBB /* ViewController+.swift */,
 				70BFA3562747D58700AB858A /* String+.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		946C34D2273D1E20002C0E2C /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		946C34D3273D1E39002C0E2C /* Resources */ = {
@@ -108,29 +128,20 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		946C34D4273D1E57002C0E2C /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		946C34D5273D1EAB002C0E2C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				946C34D7273D1EF3002C0E2C /* Constants */,
 				946C34DA273D42EB002C0E2C /* AppEnvironment.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		946C34D6273D1EC4002C0E2C /* Storyboard */ = {
+		946C34D6273D1EC4002C0E2C /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
 				94A7B744273D17B200862DA1 /* LaunchScreen.storyboard */,
-				94A7B73F273D17AE00862DA1 /* Main.storyboard */,
 			);
-			path = Storyboard;
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		946C34D7273D1EF3002C0E2C /* Constants */ = {
@@ -163,16 +174,15 @@
 		94A7B738273D17AE00862DA1 /* BigBlueButton-RLP */ = {
 			isa = PBXGroup;
 			children = (
-				946C34CF273D1DB8002C0E2C /* ViewController */,
-				946C34D2273D1E20002C0E2C /* ViewModel */,
-				946C34D4273D1E57002C0E2C /* View */,
-				946C34D0273D1DE6002C0E2C /* Model */,
-				946C34D5273D1EAB002C0E2C /* Utilities */,
-				946C34D1273D1DF0002C0E2C /* Extensions */,
-				946C34D6273D1EC4002C0E2C /* Storyboard */,
-				946C34D3273D1E39002C0E2C /* Resources */,
 				94A7B739273D17AE00862DA1 /* AppDelegate.swift */,
-				94A7B73B273D17AE00862DA1 /* SceneDelegate.swift */,
+				946C34CF273D1DB8002C0E2C /* Scenes */,
+				702CB599274D074E005D3C17 /* Model */,
+				702CB588274D0591005D3C17 /* Services */,
+				946C34D5273D1EAB002C0E2C /* Utilities */,
+				946C34D7273D1EF3002C0E2C /* Constants */,
+				946C34D1273D1DF0002C0E2C /* Extensions */,
+				946C34D3273D1E39002C0E2C /* Resources */,
+				946C34D6273D1EC4002C0E2C /* SupportingFiles */,
 				94A7B747273D17B200862DA1 /* Info.plist */,
 			);
 			path = "BigBlueButton-RLP";
@@ -275,7 +285,6 @@
 			files = (
 				94A7B746273D17B200862DA1 /* LaunchScreen.storyboard in Resources */,
 				94A7B743273D17B200862DA1 /* Assets.xcassets in Resources */,
-				94A7B741273D17AE00862DA1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,13 +302,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				702CB592274D0620005D3C17 /* WebSocketProvider.swift in Sources */,
 				942077F3273E759300E6EEBB /* Constants.swift in Sources */,
+				702CB58D274D05E8005D3C17 /* WebRTCClient.swift in Sources */,
 				946C34DB273D42EB002C0E2C /* AppEnvironment.swift in Sources */,
 				70BFA3572747D58700AB858A /* String+.swift in Sources */,
+				702CB58C274D05E8005D3C17 /* Message.swift in Sources */,
+				702CB58E274D05E8005D3C17 /* SignalingClient.swift in Sources */,
+				702CB596274D06A7005D3C17 /* IceCandidate.swift in Sources */,
+				702CB591274D0620005D3C17 /* NativeWebSocket.swift in Sources */,
 				946C34D9273D2EFE002C0E2C /* BBBURL.swift in Sources */,
 				94A7B73E273D17AE00862DA1 /* WebViewController.swift in Sources */,
+				702CB598274D06A7005D3C17 /* SessionDescription.swift in Sources */,
 				94A7B73A273D17AE00862DA1 /* AppDelegate.swift in Sources */,
-				94A7B73C273D17AE00862DA1 /* SceneDelegate.swift in Sources */,
+				702CB597274D06A7005D3C17 /* RTCStates.swift in Sources */,
 				942077F1273E722800E6EEBB /* ViewController+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,14 +339,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		94A7B73F273D17AE00862DA1 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				94A7B740273D17AE00862DA1 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		94A7B744273D17B200862DA1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -470,7 +478,6 @@
 				INFOPLIST_FILE = "BigBlueButton-RLP/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -498,7 +505,6 @@
 				INFOPLIST_FILE = "BigBlueButton-RLP/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
