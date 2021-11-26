@@ -12,6 +12,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     private var isPayloadReceived = false
     private var hasSesssionToken = false
+    private var socketMessageToSend = SocketMessage()
     
     // MARK: - Initialization
     
@@ -62,7 +63,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     }
     
     @objc func shareScreen(sender: UIButton!) {
-       sendSDPOffer()
+        // Do nothing for now
     }
     
     // MARK: - Setup WKWebView
@@ -105,6 +106,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     private func sendSDPOffer() {
         webRTCClient.offer { [weak self] (sdp) in
+            // TO DO: - Change sdp sending model
             self?.signalingClient?.send(sdp: sdp)
             print("Sent sdp offer: \(sdp)")
         }
@@ -139,33 +141,28 @@ extension WebViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if !isPayloadReceived {
             if message.name == Constants.messageName {
-                guard let body = message.body as? [String: Any] else {
-                    print("Could not convert message body to dictionary: \(message.body)")
-                    return
-                }
-                guard let payload = body["payload"] as? String else {
-                    print("Could not locate payload param in callback request")
-                    return
-                }
-                
-                // Create JSON data from payload and parse it
-                isPayloadReceived = true
-                let jsonData = Data(payload.utf8)
+                guard let messageBody = message.body as? [String: Any] else { return }
+                let payload = Data((messageBody["payload"] as? String)!.utf8)
                 do {
-                    if let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
-                        // Connect to websocket
-                        if let websocketUrlString = json["websocketUrl"] as? String {
-                            guard let websocketUrl = URL(string: websocketUrlString) else { return }
-                            let websocketProvider: WebSocketProvider = NativeWebSocket(url: websocketUrl)
-                            signalingClient = SignalingClient(webSocket: websocketProvider)
-                            signalingClient?.delegate = self
-                            signalingClient?.connect()
-                        } else {
-                            print("Could not parse websocket URL")
-                        }
+                    let payloadData = try JSONDecoder().decode(PayloadData.self, from: payload)
+                    if payloadData.payload.voiceBridge != "" {
+                        isPayloadReceived = true
+                        socketMessageToSend = SocketMessage(internalMeetingId: payloadData.payload.internalMeetingId,
+                                                            voiceBridge: payloadData.payload.voiceBridge,
+                                                            caleeName: "GLOBAL_AUDIO_\(payloadData.payload.voiceBridge)",
+                                                            userId: payloadData.payload.callerName,
+                                                            userName: payloadData.payload.userName)
+                        // Audio connection established, we can send offer to webRTC through websocket
+                        let websocketUrlString = payloadData.websocketUrl
+                        print("WEBSOCKET URL: \(websocketUrlString)")
+                        guard let websocketUrl = URL(string: websocketUrlString) else { return }
+                        let websocketProvider: WebSocketProvider = StarscreamWebSocket(url: websocketUrl)
+                        signalingClient = SignalingClient(webSocket: websocketProvider)
+                        signalingClient?.delegate = self
+                        signalingClient?.connect()
                     }
                 } catch (let error) {
-                    print("Failed to load: \(error.localizedDescription)")
+                    print("Failed to load payload data: \(error.localizedDescription)")
                 }
             }
         }
@@ -177,9 +174,7 @@ extension WebViewController: WKScriptMessageHandler {
 extension WebViewController: SignalClientDelegate {
     func signalClientDidConnect(_ signalClient: SignalingClient) {
         print("Websocket connected")
-        DispatchQueue.main.async {
-            self.shareScreenButton.isHidden = false
-        }
+        signalClient.sendTestMessage(socketMessageToSend)
     }
     
     func signalClientDidDisconnect(_ signalClient: SignalingClient) {

@@ -7,6 +7,8 @@
 
 import Foundation
 
+// TO DO: Change model for sending sdp offer and candidates
+
 enum Message {
     case sdp(SessionDescription)
     case candidate(IceCandidate)

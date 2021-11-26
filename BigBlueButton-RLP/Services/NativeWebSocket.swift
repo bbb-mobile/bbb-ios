@@ -35,6 +35,14 @@ class NativeWebSocket: NSObject, WebSocketProvider {
         }
     }
     
+    func send(string: String) {
+        self.socket?.send(.string(string)) { error in
+            if error != nil {
+                print(error!.localizedDescription)
+            }
+        }
+    }
+    
     private func listen() {
         self.socket?.receive { [weak self] message in
             guard let self = self else { return }

@@ -31,11 +31,21 @@ final class SignalingClient {
         self.webSocket.connect()
     }
     
+    func sendTestMessage(_ message: SocketMessage) {
+        do {
+            let dataMessage = try self.encoder.encode(message)
+            self.webSocket.send(data: dataMessage)
+        } catch (let error) {
+            debugPrint("Warning: Could not encode socket message: \(error)")
+        }
+    }
+    
     func send(sdp rtcSdp: RTCSessionDescription) {
         let message = Message.sdp(SessionDescription(from: rtcSdp))
         do {
             let dataMessage = try self.encoder.encode(message)
-            
+            let jsonString = String(data: dataMessage, encoding: .utf8)!
+            print("JSON: \(jsonString)")
             self.webSocket.send(data: dataMessage)
         }
         catch {
