@@ -57,6 +57,8 @@
 		70BFA3562747D58700AB858A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		942077F0273E722800E6EEBB /* ViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+.swift"; sourceTree = "<group>"; };
 		942077F2273E759300E6EEBB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		94576E262750E8960087A2E1 /* BigBlueButton-RLPRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BigBlueButton-RLPRelease.entitlements"; sourceTree = "<group>"; };
+		94576E272750E8CD0087A2E1 /* BigBlueButton-RLPDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BigBlueButton-RLPDebug.entitlements"; sourceTree = "<group>"; };
 		946C34D8273D2EFE002C0E2C /* BBBURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBBURL.swift; sourceTree = "<group>"; };
 		946C34DA273D42EB002C0E2C /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		94A7B736273D17AE00862DA1 /* BigBlueButton-RLP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BigBlueButton-RLP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -185,6 +187,8 @@
 		94A7B738273D17AE00862DA1 /* BigBlueButton-RLP */ = {
 			isa = PBXGroup;
 			children = (
+				94576E272750E8CD0087A2E1 /* BigBlueButton-RLPDebug.entitlements */,
+				94576E262750E8960087A2E1 /* BigBlueButton-RLPRelease.entitlements */,
 				94A7B739273D17AE00862DA1 /* AppDelegate.swift */,
 				946C34CF273D1DB8002C0E2C /* Scenes */,
 				702CB599274D074E005D3C17 /* Model */,
@@ -487,6 +491,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "BigBlueButton-RLP/BigBlueButton-RLPDebug.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M6T2825W2N;
@@ -514,6 +519,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "BigBlueButton-RLP/BigBlueButton-RLPRelease.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M6T2825W2N;
