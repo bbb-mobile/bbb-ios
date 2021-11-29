@@ -12,7 +12,8 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     private var isPayloadReceived = false
     private var hasSesssionToken = false
-    private var socketMessageToSend = SocketMessage()
+    private var initialSocketMessage = InitialSocketMessage()
+    private var socketConnectionData: ConnectionData?
     
     // MARK: - Initialization
     
@@ -104,11 +105,20 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     // MARK: - WebRTC
     
-    private func sendSDPOffer() {
+    private func sendLocalSdpOffer() {
         webRTCClient.offer { [weak self] (sdp) in
-            // TO DO: - Change sdp sending model
-            self?.signalingClient?.send(sdp: sdp)
-            print("Sent sdp offer: \(sdp)")
+            guard let `self` = self, let data = self.socketConnectionData else { return }
+            var offer = SdpOffer(from: data)
+            offer.sdpOffer = sdp.sdp
+            self.signalingClient?.sendOffer(offer)
+        }
+    }
+    
+    private func setRemoteSdpOffer(_ remoteSdp: RTCSessionDescription) {
+        webRTCClient.set(remoteSdp: remoteSdp) { (error) in
+            if error != nil {
+                print(error!.localizedDescription)
+            }
         }
     }
 }
@@ -144,18 +154,20 @@ extension WebViewController: WKScriptMessageHandler {
                 guard let messageBody = message.body as? [String: Any] else { return }
                 let payload = Data((messageBody["payload"] as? String)!.utf8)
                 do {
-                    let payloadData = try JSONDecoder().decode(PayloadData.self, from: payload)
-                    if payloadData.payload.voiceBridge != "" {
+                    let jsData = try JSONDecoder().decode(JavascriptData.self, from: payload)
+                    if jsData.payload.voiceBridge != "" {
                         isPayloadReceived = true
-                        socketMessageToSend = SocketMessage(internalMeetingId: payloadData.payload.internalMeetingId,
-                                                            voiceBridge: payloadData.payload.voiceBridge,
-                                                            caleeName: "GLOBAL_AUDIO_\(payloadData.payload.voiceBridge)",
-                                                            userId: payloadData.payload.callerName,
-                                                            userName: payloadData.payload.userName)
-                        // Audio connection established, we can send offer to webRTC through websocket
-                        let websocketUrlString = payloadData.websocketUrl
-                        print("WEBSOCKET URL: \(websocketUrlString)")
+                        socketConnectionData = jsData.payload
+                        initialSocketMessage = InitialSocketMessage(internalMeetingId: jsData.payload.internalMeetingId,
+                                                                    voiceBridge: jsData.payload.voiceBridge,
+                                                                    caleeName: "GLOBAL_AUDIO_\(jsData.payload.voiceBridge)",
+                                                                    userId: jsData.payload.callerName,
+                                                                    userName: jsData.payload.userName)
+                        // Audio connection established, we can send/receive webRTC offers through websocket
+                        let websocketUrlString = jsData.websocketUrl
+                        print("WSURL: \(websocketUrlString)")
                         guard let websocketUrl = URL(string: websocketUrlString) else { return }
+                        // Use Starscream socket library
                         let websocketProvider: WebSocketProvider = StarscreamWebSocket(url: websocketUrl)
                         signalingClient = SignalingClient(webSocket: websocketProvider)
                         signalingClient?.delegate = self
@@ -172,23 +184,33 @@ extension WebViewController: WKScriptMessageHandler {
 // MARK: - SignalClientDelegate Delegate Methods
 
 extension WebViewController: SignalClientDelegate {
+    
     func signalClientDidConnect(_ signalClient: SignalingClient) {
         print("Websocket connected")
-        signalClient.sendTestMessage(socketMessageToSend)
+        // Send webRTC socket message to establish initial audio connection
+        self.signalingClient?.sendInitialSocketMessage(initialSocketMessage)
+//        sendLocalSdpOffer()
     }
     
     func signalClientDidDisconnect(_ signalClient: SignalingClient) {
         print("Websocket disconnected")
     }
     
+    func signalClient(_ signalClient: SignalingClient, didReceiveSocketMessage message: String) {
+        // Get sdpAnswer and send sdpOffer
+        let webRtcData = Data(message.utf8)
+        do {
+            let webRtcAnswer = try JSONDecoder().decode(SdpAnswer.self, from: webRtcData)
+            let remoteSdp = RTCSessionDescription(type: .answer, sdp: webRtcAnswer.sdpAnswer)
+            setRemoteSdpOffer(remoteSdp)
+        } catch (let error) {
+            print("Failed to load webRtcAnswer: \(error.localizedDescription)")
+        }
+    }
+    
     func signalClient(_ signalClient: SignalingClient, didReceiveRemoteSdp sdp: RTCSessionDescription) {
         print("Received remote sdp")
-        // Set remote SDP
-        self.webRTCClient.set(remoteSdp: sdp) { (error) in
-            if error != nil {
-                print(error!.localizedDescription)
-            }
-        }
+        
     }
     
     func signalClient(_ signalClient: SignalingClient, didReceiveCandidate candidate: RTCIceCandidate) {
@@ -204,7 +226,7 @@ extension WebViewController: WebRTCClientDelegate {
     
     func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
         print("Discovered local candidate")
-        signalingClient?.send(candidate: candidate)
+//        signalingClient?.send(candidate: candidate)
     }
     
     func webRTCClient(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {

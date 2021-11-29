@@ -29,8 +29,8 @@ class StarscreamWebSocket: WebSocketProvider {
         self.socket.write(data: data)
     }
     
-    func send(string: String) {
-        socket.write(string: string)
+    func send(message: String) {
+        socket.write(string: message)
     }
     
     func handleError(_ error: Error?) {
@@ -49,9 +49,9 @@ extension StarscreamWebSocket: WebSocketDelegate {
             isConnected = false
             print("websocket is disconnected: \(reason) with code: \(code)")
             self.delegate?.webSocketDidDisconnect(self)
-        case .text(let string):
-            print("Received text: \(string)")
-            // TO DO: sdp answer is received here. Send it to delegate method to set it.
+        case .text(let message):
+            print("Received text: \(message)")
+            self.delegate?.webSocket(self, didReceiveSocketMessage: message)
         case .binary(let data):
             print("Received data: \(data.count)")
             self.delegate?.webSocket(self, didReceiveData: data)

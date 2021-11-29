@@ -7,32 +7,8 @@
 
 import Foundation
 
-/// Model which parse data returned from executed javascript snippet
-struct Payload: Codable {
-    let payload: PayloadData
-}
-
-struct PayloadData: Codable {
-    let websocketUrl: String
-    let payload: ConnectionData
-}
-
-struct ConnectionData: Codable {
-    
-    let callerName: String
-    let bitrate: Int
-    let hasAudio: Bool
-    let id: String
-    let internalMeetingId: String
-    let role: String
-    let sdpOffer: String?
-    let type: String
-    let userName: String
-    let voiceBridge: String
-}
-
-/// Model of the socket message to be sent to server when connection is established
-struct SocketMessage: Codable {
+/// Model of the socket message to be sent to server when audio connection is established
+struct InitialSocketMessage: Codable {
     
     let id: String
     let type: String
@@ -48,8 +24,8 @@ struct SocketMessage: Codable {
          type: String = "audio",
          role: String = "recv",
          internalMeetingId: String = "",
-         voiceBridge: String = "23538",
-         caleeName: String = "GLOBAL_AUDIO_23538",
+         voiceBridge: String = "",
+         caleeName: String = "",
          userId: String = "",
          userName: String = "",
          mediaServer: String = "mediasoup") {
