@@ -15,7 +15,7 @@ struct SdpOffer: Codable {
     let voiceBridge: String
     var sdpOffer: String
     
-    init(from data: ConnectionData) {
+    init(from data: JavascriptData.Payload) {
         self.id = "subscriberAnswer"
         self.type = data.type
         self.role = data.role

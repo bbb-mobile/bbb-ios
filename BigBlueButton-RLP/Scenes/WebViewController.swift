@@ -13,7 +13,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     private var isPayloadReceived = false
     private var hasSesssionToken = false
     private var initialSocketMessage = InitialSocketMessage()
-    private var socketConnectionData: ConnectionData?
+    private var javascriptPayload: JavascriptData.Payload?
     
     // MARK: - Initialization
     
@@ -107,10 +107,12 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     private func sendLocalSdpOffer() {
         webRTCClient.offer { [weak self] (sdp) in
-            guard let `self` = self, let data = self.socketConnectionData else { return }
-            var offer = SdpOffer(from: data)
-            offer.sdpOffer = sdp.sdp
-            self.signalingClient?.sendOffer(offer)
+            guard let `self` = self, var data = self.javascriptPayload else { return }
+            data.sdpOffer = sdp.sdp
+            self.signalingClient?.sendInitialSocketMessage(data)
+//            var offer = SdpOffer(from: data)
+//            offer.sdpOffer = sdp.sdp
+//            self.signalingClient?.sendOffer(offer)
         }
     }
     
@@ -155,24 +157,20 @@ extension WebViewController: WKScriptMessageHandler {
                 let payload = Data((messageBody["payload"] as? String)!.utf8)
                 do {
                     let jsData = try JSONDecoder().decode(JavascriptData.self, from: payload)
-                    if jsData.payload.voiceBridge != "" {
-                        isPayloadReceived = true
-                        socketConnectionData = jsData.payload
-                        initialSocketMessage = InitialSocketMessage(internalMeetingId: jsData.payload.internalMeetingId,
-                                                                    voiceBridge: jsData.payload.voiceBridge,
-                                                                    caleeName: "GLOBAL_AUDIO_\(jsData.payload.voiceBridge)",
-                                                                    userId: jsData.payload.callerName,
-                                                                    userName: jsData.payload.userName)
-                        // Audio connection established, we can send/receive webRTC offers through websocket
-                        let websocketUrlString = jsData.websocketUrl
-                        print("WSURL: \(websocketUrlString)")
-                        guard let websocketUrl = URL(string: websocketUrlString) else { return }
-                        // Use Starscream socket library
-                        let websocketProvider: WebSocketProvider = StarscreamWebSocket(url: websocketUrl)
-                        signalingClient = SignalingClient(webSocket: websocketProvider)
-                        signalingClient?.delegate = self
-                        signalingClient?.connect()
-                    }
+                    isPayloadReceived = true
+                    javascriptPayload = jsData.payload
+                    initialSocketMessage = InitialSocketMessage(internalMeetingId: jsData.payload.internalMeetingId,
+                                                                voiceBridge: jsData.payload.voiceBridge,
+                                                                caleeName: "GLOBAL_AUDIO_\(jsData.payload.voiceBridge)",
+                                                                userId: jsData.payload.callerName,
+                                                                userName: jsData.payload.userName)
+                    let websocketUrlString = jsData.websocketUrl
+                    guard let websocketUrl = URL(string: websocketUrlString) else { return }
+                    // Use Starscream socket library
+                    let websocketProvider: WebSocketProvider = StarscreamWebSocket(url: websocketUrl)
+                    signalingClient = SignalingClient(webSocket: websocketProvider)
+                    signalingClient?.delegate = self
+                    signalingClient?.connect()
                 } catch (let error) {
                     print("Failed to load payload data: \(error.localizedDescription)")
                 }
@@ -187,9 +185,8 @@ extension WebViewController: SignalClientDelegate {
     
     func signalClientDidConnect(_ signalClient: SignalingClient) {
         print("Websocket connected")
-        // Send webRTC socket message to establish initial audio connection
-        self.signalingClient?.sendInitialSocketMessage(initialSocketMessage)
-//        sendLocalSdpOffer()
+//        self.signalingClient?.sendInitialSocketMessage(initialSocketMessage)
+        sendLocalSdpOffer()
     }
     
     func signalClientDidDisconnect(_ signalClient: SignalingClient) {

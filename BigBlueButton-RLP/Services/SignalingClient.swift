@@ -32,7 +32,7 @@ final class SignalingClient {
         self.webSocket.connect()
     }
     
-    func sendInitialSocketMessage(_ message: InitialSocketMessage) {
+    func sendInitialSocketMessage(_ message: JavascriptData.Payload) {
         do {
             let dataMessage = try self.encoder.encode(message)
             self.webSocket.send(data: dataMessage)
