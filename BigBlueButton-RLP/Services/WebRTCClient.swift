@@ -189,6 +189,8 @@ final class WebRTCClient: NSObject {
     }
 }
 
+// MARK: RTCPeerConnectionDelegate Methods
+
 extension WebRTCClient: RTCPeerConnectionDelegate {
     
     func peerConnection(_ peerConnection: RTCPeerConnection, didChange stateChanged: RTCSignalingState) {
@@ -229,6 +231,7 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
         self.remoteDataChannel = dataChannel
     }
 }
+
 extension WebRTCClient {
     private func setTrackEnabled<T: RTCMediaStreamTrack>(_ type: T.Type, isEnabled: Bool) {
         peerConnection.transceivers
@@ -250,6 +253,7 @@ extension WebRTCClient {
         setTrackEnabled(RTCVideoTrack.self, isEnabled: isEnabled)
     }
 }
+
 // MARK:- Audio control
 
 extension WebRTCClient {
