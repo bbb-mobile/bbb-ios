@@ -21,7 +21,8 @@ struct Constants {
                     const { default: currentUser } = require('/imports/ui/services/auth');
                     const { default: { _collection: voiceUserCollection } } = require('/imports/api/voice-users');
                     const { meetingID, userID, fullname } = currentUser;
-                    const { voiceConf } = voiceUserCollection.findOne({ intId: userID });
+                    const { default: { _collection: meetings } } = require('/imports/api/meetings');
+                    const voiceConf = meetings.find({}).fetch()[0].voiceProp.voiceConf;
                     const websocketUrl = `wss://${document.location.host}/bbb-webrtc-sfu?sessionToken=${currentUser.sessionToken}`;
                     const data = JSON.stringify({
                                     websocketUrl,

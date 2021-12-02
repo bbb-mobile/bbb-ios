@@ -6,7 +6,7 @@ enum BBBURL {
     static var baseUrl: URL? {
         return AppEnvironment.isDebugMode ?
         // Debug
-        URL(string: "https://bbbtest.zdv.uni-mainz.de/b/mil-tju-0kl-cja") :
+        URL(string: "https://bbbtest.zdv.uni-mainz.de/b/") :
         // Release
         URL(string: "https://bbb-schulen.rlp.net/b/")
     }

@@ -11,7 +11,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     private var webRTCClient: WebRTCClient
     
     private var isPayloadReceived = false
-    private var hasSesssionToken = false
+    private var hasSessionToken = false
     private var javascriptPayload: JavascriptData.Payload?
     
     // MARK: - Initialization
@@ -110,6 +110,7 @@ class WebViewController: UIViewController, WKUIDelegate {
             guard let `self` = self, var data = self.javascriptPayload else { return }
             data.sdpOffer = localSdpOffer.sdp
             self.signalingClient?.sendInitialSocketMessage(data)
+            print("✅ Sent socket message with local sdp offer: \(data)")
         }
     }
     
@@ -144,9 +145,9 @@ extension WebViewController: WKNavigationDelegate {
         let urlString = String(describing: navigationAction.request.url)
         if urlString.contains(Constants.sessionToken) {
             // Joined the room and connected to BBB server.
-            guard !hasSesssionToken else { return }
+            guard !hasSessionToken else { return }
             runJavascript()
-            hasSesssionToken = true
+            hasSessionToken = true
         }
     }
 }
@@ -157,24 +158,24 @@ extension WebViewController: WKScriptMessageHandler {
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         guard !isPayloadReceived else { return }
-        if message.name == Constants.messageName {
-            guard let messageBody = message.body as? [String: Any] else { return }
-            let payload = Data((messageBody["payload"] as? String)!.utf8)
-            do {
-                let jsData = try JSONDecoder().decode(JavascriptData.self, from: payload)
-                isPayloadReceived = true
-                javascriptPayload = jsData.payload
-                // Get websocket url from the javascript payload
-                let websocketUrlString = jsData.websocketUrl
-                guard let websocketUrl = URL(string: websocketUrlString) else { return }
-                // Use Starscream socket library to establish connection
-                let websocketProvider: WebSocketProvider = StarscreamWebSocket(url: websocketUrl)
-                signalingClient = SignalingClient(webSocket: websocketProvider)
-                signalingClient?.delegate = self
-                signalingClient?.connect()
-            } catch (let error) {
-                print("Failed to load payload data: \(error.localizedDescription)")
-            }
+        guard message.name == Constants.messageName else { return }
+        guard let messageBody = message.body as? [String: Any] else { return }
+        let payload = Data((messageBody["payload"] as? String)!.utf8)
+        do {
+            let jsData = try JSONDecoder().decode(JavascriptData.self, from: payload)
+            isPayloadReceived = true
+            javascriptPayload = jsData.payload
+            print("✅ Received javascript payload: \(String(describing: javascriptPayload))")
+            // Get websocket url from the javascript payload
+            let websocketUrlString = jsData.websocketUrl
+            guard let websocketUrl = URL(string: websocketUrlString) else { return }
+            // Use Starscream socket library to establish connection
+            let websocketProvider: WebSocketProvider = StarscreamWebSocket(url: websocketUrl)
+            signalingClient = SignalingClient(webSocket: websocketProvider)
+            signalingClient?.delegate = self
+            signalingClient?.connect()
+        } catch (let error) {
+            print("⚡️☠️ Failed to load payload data: \(error.localizedDescription)")
         }
     }
 }
