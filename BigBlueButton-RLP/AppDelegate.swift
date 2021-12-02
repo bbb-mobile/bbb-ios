@@ -1,6 +1,10 @@
 import UIKit
 
+/// Protocol representing the behavior of a delegate for opening a URL.
 protocol BBBWebViewDelegate: AnyObject {
+    
+    /// Opens a web page in webview
+    /// - Parameter url: The url to open.
     func didOpen(url: URL)
 }
 
