@@ -9,6 +9,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     private var webView: WKWebView!
     private var signalingClient: SignalingClient?
     private var webRTCClient: WebRTCClient
+    private var decoder = JSONDecoder()
     
     private var isPayloadReceived = false
     private var hasSessionToken = false
@@ -109,24 +110,23 @@ class WebViewController: UIViewController, WKUIDelegate {
         webRTCClient.offer { [weak self] (localSdpOffer) in
             guard let `self` = self, var data = self.javascriptPayload else { return }
             data.sdpOffer = localSdpOffer.sdp
-            self.signalingClient?.sendInitialSocketMessage(data)
+            self.signalingClient?.sendMessageWithSdpOffer(data)
             print("✅ Sent socket message with local sdp offer: \(data)")
         }
     }
-    
-    private func sendLocalSdpOffer() {
-        webRTCClient.offer { [weak self] (localSdpOffer) in
-            guard let `self` = self, let data = self.javascriptPayload else { return }
-            var offer = SdpOffer(from: data)
-            offer.sdpOffer = localSdpOffer.sdp
-            self.signalingClient?.sendOffer(offer)
+        
+    private func setSdpAnswer(_ sdpAnswer: RTCSessionDescription) {
+        webRTCClient.set(remoteSdp: sdpAnswer) { (error) in
+            if error != nil {
+                print("⚡️☠️ Error setting remote sdp answer: \(error!.localizedDescription)")
+            }
         }
     }
     
-    private func setRemoteSdpOffer(_ remoteSdp: RTCSessionDescription) {
-        webRTCClient.set(remoteSdp: remoteSdp) { (error) in
+    private func setRemoteIceCandidate(_ candidate: RTCIceCandidate) {
+        webRTCClient.set(remoteCandidate: candidate) { error in
             if error != nil {
-                print(error!.localizedDescription)
+                print("⚡️☠️ Error setting remote ice candidate: \(error!.localizedDescription)")
             }
         }
     }
@@ -162,7 +162,7 @@ extension WebViewController: WKScriptMessageHandler {
         guard let messageBody = message.body as? [String: Any] else { return }
         let payload = Data((messageBody["payload"] as? String)!.utf8)
         do {
-            let jsData = try JSONDecoder().decode(JavascriptData.self, from: payload)
+            let jsData = try decoder.decode(JavascriptData.self, from: payload)
             isPayloadReceived = true
             javascriptPayload = jsData.payload
             print("✅ Received javascript payload: \(String(describing: javascriptPayload))")
@@ -194,16 +194,12 @@ extension WebViewController: SignalClientDelegate {
         print("Websocket disconnected")
     }
     
-    func signalClient(_ signalClient: SignalingClient, didReceiveSocketMessage message: String) {
-        // TO DO: Check which types of messages are sent from server
-        let webRtcData = Data(message.utf8)
-        do {
-            let webRtcAnswer = try JSONDecoder().decode(SdpAnswer.self, from: webRtcData)
-            let remoteSdp = RTCSessionDescription(type: .answer, sdp: webRtcAnswer.sdpAnswer)
-            setRemoteSdpOffer(remoteSdp)
-        } catch (let error) {
-            print("Failed to load webRTCAnswer: \(error.localizedDescription)")
-        }
+    func signalClient(_ signalClient: SignalingClient, didReceiveSdpAnswer sdpAnswer: RTCSessionDescription) {
+        setSdpAnswer(sdpAnswer)
+    }
+    
+    func signalClient(_ signalClient: SignalingClient, didReceiveRemoteIceCandidate rtcIceCandidate: RTCIceCandidate) {
+        setRemoteIceCandidate(rtcIceCandidate)
     }
 }
 
@@ -213,6 +209,7 @@ extension WebViewController: WebRTCClientDelegate {
     
     func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
         print("Discovered local candidate")
+        // TO DO: Check with BBB which format/model of localIceCandidate they accept
         signalingClient?.send(candidate: candidate)
     }
     
@@ -229,6 +226,8 @@ extension WebViewController: WebRTCClientDelegate {
         }
     }
 }
+
+// MARK: BBBWebViewDelegate
 
 extension WebViewController: BBBWebViewDelegate {
     /// Opens a web page in webview

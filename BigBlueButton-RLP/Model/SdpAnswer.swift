@@ -11,6 +11,7 @@ struct SdpAnswer: Codable {
     
     let id: String
     let type: String
+    let role: String
     let response: String
     var sdpAnswer: String
 }
