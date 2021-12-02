@@ -229,3 +229,11 @@ extension WebViewController: WebRTCClientDelegate {
         }
     }
 }
+
+extension WebViewController: BBBWebViewDelegate {
+    /// Opens a web page in webview
+    /// - Parameter url: The url to open.
+    func didOpen(url: URL) {
+        webView.load(URLRequest(url: url))
+    }
+}
