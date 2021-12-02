@@ -11,7 +11,8 @@ class WebViewController: UIViewController, WKUIDelegate {
     private var webRTCClient: WebRTCClient
     
     private var isPayloadReceived = false
-    private var hasSesssionToken = false
+    private var hasSessionToken = false
+    private var javascriptPayload: JavascriptData.Payload?
     
     // MARK: - Initialization
     
@@ -30,7 +31,8 @@ class WebViewController: UIViewController, WKUIDelegate {
         super.viewDidLoad()
         loadWebsite()
         setupShareButton()
-        
+        // Set webRTC delegate
+        webRTCClient.delegate = self
     }
     
     override func loadView() {
@@ -62,7 +64,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     }
     
     @objc func shareScreen(sender: UIButton!) {
-       sendSDPOffer()
+        // Do nothing for now
     }
     
     // MARK: - Setup WKWebView
@@ -77,7 +79,7 @@ class WebViewController: UIViewController, WKUIDelegate {
         contentController.add(self, name: Constants.messageName)
         webConfiguration.userContentController = contentController
         webConfiguration.preferences.javaScriptEnabled = true
-
+        
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.uiDelegate = self
         webView.navigationDelegate = self
@@ -88,7 +90,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     }
     
     private func loadWebsite() {
-        guard let baseURL = BBBURL.baseURL else { return }
+        guard let baseURL = BBBURL.baseUrl else { return }
         webView.load(URLRequest(url: baseURL))
     }
     
@@ -103,31 +105,49 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     // MARK: - WebRTC
     
-    private func sendSDPOffer() {
-        webRTCClient.offer { [weak self] (sdp) in
-            self?.signalingClient?.send(sdp: sdp)
-            print("Sent sdp offer: \(sdp)")
+    private func sendInitialSocketMessageWithSdpOffer() {
+        webRTCClient.offer { [weak self] (localSdpOffer) in
+            guard let `self` = self, var data = self.javascriptPayload else { return }
+            data.sdpOffer = localSdpOffer.sdp
+            self.signalingClient?.sendInitialSocketMessage(data)
+            print("✅ Sent socket message with local sdp offer: \(data)")
+        }
+    }
+    
+    private func sendLocalSdpOffer() {
+        webRTCClient.offer { [weak self] (localSdpOffer) in
+            guard let `self` = self, let data = self.javascriptPayload else { return }
+            var offer = SdpOffer(from: data)
+            offer.sdpOffer = localSdpOffer.sdp
+            self.signalingClient?.sendOffer(offer)
+        }
+    }
+    
+    private func setRemoteSdpOffer(_ remoteSdp: RTCSessionDescription) {
+        webRTCClient.set(remoteSdp: remoteSdp) { (error) in
+            if error != nil {
+                print(error!.localizedDescription)
+            }
         }
     }
 }
 
 extension WebViewController: WKNavigationDelegate {
     
-    // This method will be called when the webview navigation fails.
+    /// This method will be called when the webview navigation fails.
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         self.presentSimpleAlert(title: Constants.failedLoadUrlTitle, message: Constants.failedLoadUrlMessage)
     }
     
-    // Observe webView URL changes
+    /// Observe webView URL changes
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         decisionHandler(.allow)
         let urlString = String(describing: navigationAction.request.url)
         if urlString.contains(Constants.sessionToken) {
             // Joined the room and connected to BBB server.
-            if !hasSesssionToken {
-                runJavascript()
-                hasSesssionToken = true
-            }
+            guard !hasSessionToken else { return }
+            runJavascript()
+            hasSessionToken = true
         }
     }
 }
@@ -135,39 +155,27 @@ extension WebViewController: WKNavigationDelegate {
 // MARK: - WKScriptMessageHandler Delegate Methods
 
 extension WebViewController: WKScriptMessageHandler {
-
+    
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if !isPayloadReceived {
-            if message.name == Constants.messageName {
-                guard let body = message.body as? [String: Any] else {
-                    print("Could not convert message body to dictionary: \(message.body)")
-                    return
-                }
-                guard let payload = body["payload"] as? String else {
-                    print("Could not locate payload param in callback request")
-                    return
-                }
-                
-                // Create JSON data from payload and parse it
-                isPayloadReceived = true
-                let jsonData = Data(payload.utf8)
-                do {
-                    if let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
-                        // Connect to websocket
-                        if let websocketUrlString = json["websocketUrl"] as? String {
-                            guard let websocketUrl = URL(string: websocketUrlString) else { return }
-                            let websocketProvider: WebSocketProvider = NativeWebSocket(url: websocketUrl)
-                            signalingClient = SignalingClient(webSocket: websocketProvider)
-                            signalingClient?.delegate = self
-                            signalingClient?.connect()
-                        } else {
-                            print("Could not parse websocket URL")
-                        }
-                    }
-                } catch (let error) {
-                    print("Failed to load: \(error.localizedDescription)")
-                }
-            }
+        guard !isPayloadReceived else { return }
+        guard message.name == Constants.messageName else { return }
+        guard let messageBody = message.body as? [String: Any] else { return }
+        let payload = Data((messageBody["payload"] as? String)!.utf8)
+        do {
+            let jsData = try JSONDecoder().decode(JavascriptData.self, from: payload)
+            isPayloadReceived = true
+            javascriptPayload = jsData.payload
+            print("✅ Received javascript payload: \(String(describing: javascriptPayload))")
+            // Get websocket url from the javascript payload
+            let websocketUrlString = jsData.websocketUrl
+            guard let websocketUrl = URL(string: websocketUrlString) else { return }
+            // Use Starscream socket library to establish connection
+            let websocketProvider: WebSocketProvider = StarscreamWebSocket(url: websocketUrl)
+            signalingClient = SignalingClient(webSocket: websocketProvider)
+            signalingClient?.delegate = self
+            signalingClient?.connect()
+        } catch (let error) {
+            print("⚡️☠️ Failed to load payload data: \(error.localizedDescription)")
         }
     }
 }
@@ -175,30 +183,26 @@ extension WebViewController: WKScriptMessageHandler {
 // MARK: - SignalClientDelegate Delegate Methods
 
 extension WebViewController: SignalClientDelegate {
+    
     func signalClientDidConnect(_ signalClient: SignalingClient) {
         print("Websocket connected")
-        DispatchQueue.main.async {
-            self.shareScreenButton.isHidden = false
-        }
+        // Send the first socket message to the server with local sdp offer
+        sendInitialSocketMessageWithSdpOffer()
     }
     
     func signalClientDidDisconnect(_ signalClient: SignalingClient) {
         print("Websocket disconnected")
     }
     
-    func signalClient(_ signalClient: SignalingClient, didReceiveRemoteSdp sdp: RTCSessionDescription) {
-        print("Received remote sdp")
-        // Set remote SDP
-        self.webRTCClient.set(remoteSdp: sdp) { (error) in
-            if error != nil {
-                print(error!.localizedDescription)
-            }
-        }
-    }
-    
-    func signalClient(_ signalClient: SignalingClient, didReceiveCandidate candidate: RTCIceCandidate) {
-        self.webRTCClient.set(remoteCandidate: candidate) { error in
-            print("Received remote candidate")
+    func signalClient(_ signalClient: SignalingClient, didReceiveSocketMessage message: String) {
+        // TO DO: Check which types of messages are sent from server
+        let webRtcData = Data(message.utf8)
+        do {
+            let webRtcAnswer = try JSONDecoder().decode(SdpAnswer.self, from: webRtcData)
+            let remoteSdp = RTCSessionDescription(type: .answer, sdp: webRtcAnswer.sdpAnswer)
+            setRemoteSdpOffer(remoteSdp)
+        } catch (let error) {
+            print("Failed to load webRTCAnswer: \(error.localizedDescription)")
         }
     }
 }

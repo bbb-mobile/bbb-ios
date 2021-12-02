@@ -80,16 +80,6 @@ final class WebRTCClient: NSObject {
         }
     }
     
-    func answer(completion: @escaping (_ sdp: RTCSessionDescription) -> Void)  {
-        let constrains = RTCMediaConstraints(mandatoryConstraints: self.mediaConstrains, optionalConstraints: nil)
-        self.peerConnection.answer(for: constrains) { (sdp, error) in
-            guard let sdp = sdp else { return }
-            self.peerConnection.setLocalDescription(sdp, completionHandler: { (error) in
-                completion(sdp)
-            })
-        }
-    }
-    
     func set(remoteSdp: RTCSessionDescription, completion: @escaping (Error?) -> ()) {
         self.peerConnection.setRemoteDescription(remoteSdp, completionHandler: completion)
     }
@@ -199,6 +189,8 @@ final class WebRTCClient: NSObject {
     }
 }
 
+// MARK: RTCPeerConnectionDelegate Methods
+
 extension WebRTCClient: RTCPeerConnectionDelegate {
     
     func peerConnection(_ peerConnection: RTCPeerConnection, didChange stateChanged: RTCSignalingState) {
@@ -239,6 +231,7 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
         self.remoteDataChannel = dataChannel
     }
 }
+
 extension WebRTCClient {
     private func setTrackEnabled<T: RTCMediaStreamTrack>(_ type: T.Type, isEnabled: Bool) {
         peerConnection.transceivers
@@ -260,6 +253,7 @@ extension WebRTCClient {
         setTrackEnabled(RTCVideoTrack.self, isEnabled: isEnabled)
     }
 }
+
 // MARK:- Audio control
 
 extension WebRTCClient {

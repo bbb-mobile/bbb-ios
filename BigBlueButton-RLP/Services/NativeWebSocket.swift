@@ -35,6 +35,14 @@ class NativeWebSocket: NSObject, WebSocketProvider {
         }
     }
     
+    func send(message: String) {
+        self.socket?.send(.string(message)) { error in
+            if error != nil {
+                print(error!.localizedDescription)
+            }
+        }
+    }
+    
     private func listen() {
         self.socket?.receive { [weak self] message in
             guard let self = self else { return }
@@ -42,6 +50,10 @@ class NativeWebSocket: NSObject, WebSocketProvider {
             switch message {
             case .success(.data(let data)):
                 self.delegate?.webSocket(self, didReceiveData: data)
+                self.listen()
+                
+            case .success(.string(let message)):
+                self.delegate?.webSocket(self, didReceiveSocketMessage: message)
                 self.listen()
                 
             case .success:
