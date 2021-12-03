@@ -10,7 +10,6 @@ import WebRTC
 
 protocol SignalClientDelegate: AnyObject {
     func signalClientDidConnect(_ signalClient: SignalingClient)
-    func signalClientDidDisconnect(_ signalClient: SignalingClient)
     func signalClient(_ signalClient: SignalingClient, didReceiveSdpAnswer sdpAnswer: RTCSessionDescription)
     func signalClient(_ signalClient: SignalingClient, didReceiveRemoteIceCandidate rtcIceCandidate: RTCIceCandidate)
 }
@@ -57,13 +56,11 @@ final class SignalingClient {
 extension SignalingClient: WebSocketProviderDelegate {
     
     func webSocketDidConnect(_ webSocket: WebSocketProvider) {
+        print("Websocket connected")
         delegate?.signalClientDidConnect(self)
     }
     
     func webSocketDidDisconnect(_ webSocket: WebSocketProvider) {
-        delegate?.signalClientDidDisconnect(self)
-        
-        // try to reconnect every two seconds
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
             debugPrint("Trying to reconnect to signaling server...")
             webSocket.connect()
@@ -75,9 +72,8 @@ extension SignalingClient: WebSocketProviderDelegate {
         if message.contains(Constants.sdpAnswer) {
             // Remote sdpAnswer received
             do {
-                let webRtcAnswer = try decoder.decode(SdpAnswer.self, from: webRtcData)
-                let sdpAnswer = RTCSessionDescription(type: .answer, sdp: webRtcAnswer.sdpAnswer)
-                delegate?.signalClient(self, didReceiveSdpAnswer: sdpAnswer)
+                let sdpAnswer = try decoder.decode(SdpAnswer.self, from: webRtcData)
+                delegate?.signalClient(self, didReceiveSdpAnswer: sdpAnswer.rtcSdpAnswer)
             } catch (let error) {
                 print("⚡️☠️ Failed to load sdpAnswer: \(error.localizedDescription)")
             }

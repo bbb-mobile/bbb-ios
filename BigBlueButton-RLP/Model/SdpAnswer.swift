@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import WebRTC
 
 struct SdpAnswer: Codable {
     
@@ -14,4 +15,8 @@ struct SdpAnswer: Codable {
     let role: String
     let response: String
     var sdpAnswer: String
+    
+    var rtcSdpAnswer: RTCSessionDescription {
+        return RTCSessionDescription(type: .answer, sdp: sdpAnswer)
+    }
 }

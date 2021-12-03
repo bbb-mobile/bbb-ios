@@ -104,6 +104,17 @@ class WebViewController: UIViewController, WKUIDelegate {
         }
     }
     
+    // MARK: Setup WebSocket
+    
+    private func setupWebSocketConnection(with url: String) {
+        guard let websocketUrl = URL(string: url) else { return }
+        // Use Starscream socket library to establish connection
+        let websocketProvider: WebSocketProvider = StarscreamWebSocket(url: websocketUrl)
+        signalingClient = SignalingClient(webSocket: websocketProvider)
+        signalingClient?.delegate = self
+        signalingClient?.connect()
+    }
+    
     // MARK: - WebRTC
     
     private func sendInitialSocketMessageWithSdpOffer() {
@@ -165,15 +176,7 @@ extension WebViewController: WKScriptMessageHandler {
             let jsData = try decoder.decode(JavascriptData.self, from: payload)
             isPayloadReceived = true
             javascriptPayload = jsData.payload
-            print("✅ Received javascript payload: \(String(describing: javascriptPayload))")
-            // Get websocket url from the javascript payload
-            let websocketUrlString = jsData.websocketUrl
-            guard let websocketUrl = URL(string: websocketUrlString) else { return }
-            // Use Starscream socket library to establish connection
-            let websocketProvider: WebSocketProvider = StarscreamWebSocket(url: websocketUrl)
-            signalingClient = SignalingClient(webSocket: websocketProvider)
-            signalingClient?.delegate = self
-            signalingClient?.connect()
+            setupWebSocketConnection(with: jsData.websocketUrl)
         } catch (let error) {
             print("⚡️☠️ Failed to load payload data: \(error.localizedDescription)")
         }
@@ -185,8 +188,6 @@ extension WebViewController: WKScriptMessageHandler {
 extension WebViewController: SignalClientDelegate {
     
     func signalClientDidConnect(_ signalClient: SignalingClient) {
-        print("Websocket connected")
-        // Send the first socket message to the server with local sdp offer
         sendInitialSocketMessageWithSdpOffer()
     }
     
@@ -208,22 +209,11 @@ extension WebViewController: SignalClientDelegate {
 extension WebViewController: WebRTCClientDelegate {
     
     func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
-        print("Discovered local candidate")
-        // TO DO: Check with BBB which format/model of localIceCandidate they accept
         signalingClient?.send(candidate: candidate)
     }
     
-    func webRTCClient(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {
-        print(state)
-    }
-    
     func webRTCClient(_ client: WebRTCClient, didReceiveData data: Data) {
-        DispatchQueue.main.async {
-            let message = String(data: data, encoding: .utf8) ?? "(Binary: \(data.count) bytes)"
-            let alert = UIAlertController(title: "Message from WebRTC", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
+        print("Received data through webRTC")
     }
 }
 
