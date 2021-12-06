@@ -1,6 +1,7 @@
 import UIKit
 import WebKit
 import WebRTC
+import ReplayKit
 
 class WebViewController: UIViewController, WKUIDelegate {
     
@@ -14,6 +15,8 @@ class WebViewController: UIViewController, WKUIDelegate {
     private var isPayloadReceived = false
     private var hasSessionToken = false
     private var javascriptPayload: JavascriptData.Payload?
+    
+    private var broadcastPicker: RPSystemBroadcastPickerView?
     
     // MARK: - Initialization
     
@@ -31,7 +34,6 @@ class WebViewController: UIViewController, WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadWebsite()
-        setupShareButton()
         // Set webRTC delegate
         webRTCClient.delegate = self
     }
@@ -40,32 +42,14 @@ class WebViewController: UIViewController, WKUIDelegate {
         setupWebView()
     }
     
-    // MARK: - Mock share screen button
+    // MARK: - Setup Broadcast picker view
     
-    private let shareScreenButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Share Button", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.setTitleColor(.red, for: .normal)
-        button.backgroundColor = .white
-        button.isHidden = true
-        button.addTarget(self, action: #selector(shareScreen), for: .touchUpInside)
-        return button
-    }()
-    
-    private func setupShareButton() {
-        view.addSubview(shareScreenButton)
-        NSLayoutConstraint.activate([
-            shareScreenButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80),
-            shareScreenButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 120),
-            shareScreenButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -120),
-            shareScreenButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
-    }
-    
-    @objc func shareScreen(sender: UIButton!) {
-        // Do nothing for now
+    private func showBroadcastPickerButton() {
+        // TO DO: Find better position for broadcast button
+        let pickerFrame = CGRect(x: 100, y: 100, width: 80, height: 80)
+        broadcastPicker = RPSystemBroadcastPickerView(frame: pickerFrame)
+        broadcastPicker?.preferredExtension = "com.zuehlke.bbb.BBBBroadcast"
+        view.addSubview(broadcastPicker!)
     }
     
     // MARK: - Setup WKWebView
@@ -197,6 +181,8 @@ extension WebViewController: SignalClientDelegate {
     
     func signalClient(_ signalClient: SignalingClient, didReceiveSdpAnswer sdpAnswer: RTCSessionDescription) {
         setSdpAnswer(sdpAnswer)
+        // TO DO: Add broadcast picker button at some other point in time
+        showBroadcastPickerButton()
     }
     
     func signalClient(_ signalClient: SignalingClient, didReceiveRemoteIceCandidate rtcIceCandidate: RTCIceCandidate) {

@@ -15,6 +15,9 @@
 		702CB597274D06A7005D3C17 /* RTCStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB594274D06A7005D3C17 /* RTCStates.swift */; };
 		704FEACF2750E45C00A984A8 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 704FEACE2750E45B00A984A8 /* Starscream */; };
 		704FEAD12750E4DF00A984A8 /* StarscreamWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704FEAD02750E4DF00A984A8 /* StarscreamWebSocket.swift */; };
+		709FB5EA275E434E00FE8349 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 709FB5E9275E434E00FE8349 /* ReplayKit.framework */; };
+		709FB5ED275E434E00FE8349 /* SampleHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709FB5EC275E434E00FE8349 /* SampleHandler.swift */; };
+		709FB5F1275E434E00FE8349 /* BBBBroadcast.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 709FB5E7275E434E00FE8349 /* BBBBroadcast.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		70A824182754E64600C65BC9 /* JavascriptData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A824172754E64600C65BC9 /* JavascriptData.swift */; };
 		70A8241C2754EC1800C65BC9 /* SdpAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A8241B2754EC1800C65BC9 /* SdpAnswer.swift */; };
 		70B32A692746C7E900BA40A7 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = 70B32A682746C7E900BA40A7 /* WebRTC */; };
@@ -32,6 +35,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		709FB5EF275E434E00FE8349 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 94A7B72E273D17AE00862DA1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 709FB5E6275E434E00FE8349;
+			remoteInfo = BBBBroadcast;
+		};
 		94A7B74D273D17B200862DA1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 94A7B72E273D17AE00862DA1 /* Project object */;
@@ -41,6 +51,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		709FB5F2275E434E00FE8349 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				709FB5F1275E434E00FE8349 /* BBBBroadcast.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		702CB58A274D05E8005D3C17 /* WebRTCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
 		702CB58B274D05E8005D3C17 /* SignalingClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
@@ -49,6 +73,10 @@
 		702CB593274D06A7005D3C17 /* IceCandidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceCandidate.swift; sourceTree = "<group>"; };
 		702CB594274D06A7005D3C17 /* RTCStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTCStates.swift; sourceTree = "<group>"; };
 		704FEAD02750E4DF00A984A8 /* StarscreamWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarscreamWebSocket.swift; sourceTree = "<group>"; };
+		709FB5E7275E434E00FE8349 /* BBBBroadcast.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BBBBroadcast.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		709FB5E9275E434E00FE8349 /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
+		709FB5EC275E434E00FE8349 /* SampleHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleHandler.swift; sourceTree = "<group>"; };
+		709FB5EE275E434E00FE8349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70A824172754E64600C65BC9 /* JavascriptData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptData.swift; sourceTree = "<group>"; };
 		70A8241B2754EC1800C65BC9 /* SdpAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdpAnswer.swift; sourceTree = "<group>"; };
 		70BFA3562747D58700AB858A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -70,6 +98,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		709FB5E4275E434E00FE8349 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				709FB5EA275E434E00FE8349 /* ReplayKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		94A7B733273D17AE00862DA1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -110,6 +146,23 @@
 				70A8241B2754EC1800C65BC9 /* SdpAnswer.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		709FB5E8275E434E00FE8349 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				709FB5E9275E434E00FE8349 /* ReplayKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		709FB5EB275E434E00FE8349 /* BBBBroadcast */ = {
+			isa = PBXGroup;
+			children = (
+				709FB5EC275E434E00FE8349 /* SampleHandler.swift */,
+				709FB5EE275E434E00FE8349 /* Info.plist */,
+			);
+			path = BBBBroadcast;
 			sourceTree = "<group>";
 		};
 		946C34CF273D1DB8002C0E2C /* Scenes */ = {
@@ -167,6 +220,8 @@
 			isa = PBXGroup;
 			children = (
 				94A7B738273D17AE00862DA1 /* BigBlueButton-RLP */,
+				709FB5EB275E434E00FE8349 /* BBBBroadcast */,
+				709FB5E8275E434E00FE8349 /* Frameworks */,
 				94A7B74F273D17B200862DA1 /* BigBlueButton-RLPTests */,
 				94A7B737273D17AE00862DA1 /* Products */,
 			);
@@ -177,6 +232,7 @@
 			children = (
 				94A7B736273D17AE00862DA1 /* BigBlueButton-RLP.app */,
 				94A7B74C273D17B200862DA1 /* BigBlueButton-RLPTests.xctest */,
+				709FB5E7275E434E00FE8349 /* BBBBroadcast.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -211,6 +267,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		709FB5E6275E434E00FE8349 /* BBBBroadcast */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 709FB5F5275E434E00FE8349 /* Build configuration list for PBXNativeTarget "BBBBroadcast" */;
+			buildPhases = (
+				709FB5E3275E434E00FE8349 /* Sources */,
+				709FB5E4275E434E00FE8349 /* Frameworks */,
+				709FB5E5275E434E00FE8349 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BBBBroadcast;
+			productName = BBBBroadcast;
+			productReference = 709FB5E7275E434E00FE8349 /* BBBBroadcast.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		94A7B735273D17AE00862DA1 /* BigBlueButton-RLP */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 94A7B760273D17B300862DA1 /* Build configuration list for PBXNativeTarget "BigBlueButton-RLP" */;
@@ -218,10 +291,12 @@
 				94A7B732273D17AE00862DA1 /* Sources */,
 				94A7B733273D17AE00862DA1 /* Frameworks */,
 				94A7B734273D17AE00862DA1 /* Resources */,
+				709FB5F2275E434E00FE8349 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				709FB5F0275E434E00FE8349 /* PBXTargetDependency */,
 			);
 			name = "BigBlueButton-RLP";
 			packageProductDependencies = (
@@ -260,6 +335,9 @@
 				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
+					709FB5E6275E434E00FE8349 = {
+						CreatedOnToolsVersion = 13.1;
+					};
 					94A7B735273D17AE00862DA1 = {
 						CreatedOnToolsVersion = 13.1;
 					};
@@ -288,11 +366,19 @@
 			targets = (
 				94A7B735273D17AE00862DA1 /* BigBlueButton-RLP */,
 				94A7B74B273D17B200862DA1 /* BigBlueButton-RLPTests */,
+				709FB5E6275E434E00FE8349 /* BBBBroadcast */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		709FB5E5275E434E00FE8349 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		94A7B734273D17AE00862DA1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -312,6 +398,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		709FB5E3275E434E00FE8349 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				709FB5ED275E434E00FE8349 /* SampleHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		94A7B732273D17AE00862DA1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -347,6 +441,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		709FB5F0275E434E00FE8349 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 709FB5E6275E434E00FE8349 /* BBBBroadcast */;
+			targetProxy = 709FB5EF275E434E00FE8349 /* PBXContainerItemProxy */;
+		};
 		94A7B74E273D17B200862DA1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 94A7B735273D17AE00862DA1 /* BigBlueButton-RLP */;
@@ -366,6 +465,58 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		709FB5F3275E434E00FE8349 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M6T2825W2N;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BBBBroadcast/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BBBBroadcast;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zuehlke.bbb.BBBBroadcast;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		709FB5F4275E434E00FE8349 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M6T2825W2N;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BBBBroadcast/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BBBBroadcast;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zuehlke.bbb.BBBBroadcast;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		94A7B75E273D17B300862DA1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -485,6 +636,7 @@
 		94A7B761273D17B300862DA1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "BigBlueButton-RLP/BigBlueButton-RLPDebug.entitlements";
@@ -513,6 +665,7 @@
 		94A7B762273D17B300862DA1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "BigBlueButton-RLP/BigBlueButton-RLPRelease.entitlements";
@@ -591,6 +744,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		709FB5F5275E434E00FE8349 /* Build configuration list for PBXNativeTarget "BBBBroadcast" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				709FB5F3275E434E00FE8349 /* Debug */,
+				709FB5F4275E434E00FE8349 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		94A7B731273D17AE00862DA1 /* Build configuration list for PBXProject "BigBlueButton-RLP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
