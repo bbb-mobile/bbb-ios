@@ -8,6 +8,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     // MARK: Properties
     
     private var webView: WKWebView!
+    // TO DO: signallingClient and webRTCClient should be moved to Broadcast Extension
     private var signalingClient: SignalingClient?
     private var webRTCClient: WebRTCClient
     private var decoder = JSONDecoder()
@@ -40,16 +41,6 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     override func loadView() {
         setupWebView()
-    }
-    
-    // MARK: - Setup Broadcast picker view
-    
-    private func showBroadcastPickerButton() {
-        // TO DO: Find better position for broadcast button
-        let pickerFrame = CGRect(x: 100, y: 100, width: 80, height: 80)
-        broadcastPicker = RPSystemBroadcastPickerView(frame: pickerFrame)
-        broadcastPicker?.preferredExtension = "com.zuehlke.bbb.BBBBroadcast"
-        view.addSubview(broadcastPicker!)
     }
     
     // MARK: - Setup WKWebView
@@ -89,7 +80,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     }
     
     // MARK: Setup WebSocket
-    
+    // TO DO: Should be moved to Broadcast Extension
     private func setupWebSocketConnection(with url: String) {
         guard let websocketUrl = URL(string: url) else { return }
         // Use Starscream socket library to establish connection
@@ -100,8 +91,9 @@ class WebViewController: UIViewController, WKUIDelegate {
     }
     
     // MARK: - WebRTC
-    
+    // TO DO: Should be moved to Broadcast Extension
     private func sendInitialSocketMessageWithSdpOffer() {
+        // TO DO: Create AppGroups to share JavascriptData model with Broadcast Extension, then start everything there
         webRTCClient.offer { [weak self] (localSdpOffer) in
             guard let `self` = self, var data = self.javascriptPayload else { return }
             data.sdpOffer = localSdpOffer.sdp
@@ -122,6 +114,21 @@ class WebViewController: UIViewController, WKUIDelegate {
         webRTCClient.set(remoteCandidate: candidate) { error in
             if error != nil {
                 print("⚡️☠️ Error setting remote ice candidate: \(error!.localizedDescription)")
+            }
+        }
+    }
+    
+    // MARK: - Setup Broadcast picker view
+    
+    private func showBroadcastPicker() {
+        // This is against Apple UX policy. App may be rejected for showing pickerView without its default button tap
+        let pickerFrame = CGRect(x: 0, y: 0, width: 5, height: 5)
+        broadcastPicker = RPSystemBroadcastPickerView(frame: pickerFrame)
+        broadcastPicker?.preferredExtension = "com.zuehlke.bbb.BBBBroadcast"
+        // Hack
+        for view in broadcastPicker!.subviews {
+            if let button = view as? UIButton {
+                button.sendActions(for: .allEvents)
             }
         }
     }
@@ -168,9 +175,8 @@ extension WebViewController: WKScriptMessageHandler {
 }
 
 // MARK: - SignalClientDelegate Delegate Methods
-
+// TO DO: Whole flow for sending offer should be moved to Broadcast Extension.
 extension WebViewController: SignalClientDelegate {
-    
     func signalClientDidConnect(_ signalClient: SignalingClient) {
         sendInitialSocketMessageWithSdpOffer()
     }
@@ -182,7 +188,7 @@ extension WebViewController: SignalClientDelegate {
     func signalClient(_ signalClient: SignalingClient, didReceiveSdpAnswer sdpAnswer: RTCSessionDescription) {
         setSdpAnswer(sdpAnswer)
         // TO DO: Add broadcast picker button at some other point in time
-        showBroadcastPickerButton()
+        showBroadcastPicker()
     }
     
     func signalClient(_ signalClient: SignalingClient, didReceiveRemoteIceCandidate rtcIceCandidate: RTCIceCandidate) {
@@ -191,7 +197,7 @@ extension WebViewController: SignalClientDelegate {
 }
 
 // MARK: - WebRTCClient Delegate Methods
-
+// TO DO: Whole flow for sending offer should be moved to Broadcast Extension.
 extension WebViewController: WebRTCClientDelegate {
     
     func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {

@@ -7,6 +7,7 @@
 
 import ReplayKit
 import VideoToolbox
+import WebRTC
 
 class SampleHandler: RPBroadcastSampleHandler {
 
@@ -33,16 +34,16 @@ class SampleHandler: RPBroadcastSampleHandler {
     override func processSampleBuffer(_ sampleBuffer: CMSampleBuffer, with sampleBufferType: RPSampleBufferType) {
         print("Broadcast sample buffer: \(sampleBuffer)")
         switch sampleBufferType {
-        case RPSampleBufferType.video:
+        case .video:
             // Handle video sample buffer
 //            var imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
 //            var pts = CMSampleBufferGetPresentationTimeStamp(sampleBuffer) as CMTime
 //            VTCompressionSessionEncodeFrame(session, imageBuffer: imageBuffer, presentationTimeStamp: pts, duration: kCMTimeInvalid, frameProperties: nil, infoFlagsOut: nil, outputHandler: nil)
             break
-        case RPSampleBufferType.audioApp:
+        case .audioApp:
             // Handle audio sample buffer for app audio
             break
-        case RPSampleBufferType.audioMic:
+        case .audioMic:
             // Handle audio sample buffer for mic audio
             break
         @unknown default:
