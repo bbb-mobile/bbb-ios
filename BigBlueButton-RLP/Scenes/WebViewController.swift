@@ -11,7 +11,9 @@ class WebViewController: UIViewController, WKUIDelegate {
     // TO DO: signallingClient and webRTCClient should be moved to Broadcast Extension
     private var signalingClient: SignalingClient?
     private var webRTCClient: WebRTCClient
+    private var encoder = JSONEncoder()
     private var decoder = JSONDecoder()
+    private let defaults = UserDefaults.init(suiteName: "group.com.zuehlke.bbb")
     
     private var isPayloadReceived = false
     private var hasSessionToken = false
@@ -122,15 +124,16 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     private func showBroadcastPicker() {
         // This is against Apple UX policy. App may be rejected for showing pickerView without its default button tap
-        let pickerFrame = CGRect(x: 0, y: 0, width: 5, height: 5)
+        let pickerFrame = CGRect(x: 100, y: 100, width: 80, height: 80)
         broadcastPicker = RPSystemBroadcastPickerView(frame: pickerFrame)
         broadcastPicker?.preferredExtension = "com.zuehlke.bbb.BBBBroadcast"
+        view.addSubview(broadcastPicker!)
         // Hack
-        for view in broadcastPicker!.subviews {
-            if let button = view as? UIButton {
-                button.sendActions(for: .allEvents)
-            }
-        }
+//        for view in broadcastPicker!.subviews {
+//            if let button = view as? UIButton {
+//                button.sendActions(for: .allEvents)
+//            }
+//        }
     }
 }
 
@@ -166,8 +169,9 @@ extension WebViewController: WKScriptMessageHandler {
         do {
             let jsData = try decoder.decode(JavascriptData.self, from: payload)
             isPayloadReceived = true
-            javascriptPayload = jsData.payload
-            setupWebSocketConnection(with: jsData.websocketUrl)
+            if let encodedData = try? encoder.encode(jsData) {
+                defaults?.set(encodedData, forKey: Constants.javascriptData)
+            }
         } catch (let error) {
             print("⚡️☠️ Failed to load payload data: \(error.localizedDescription)")
         }
@@ -178,7 +182,9 @@ extension WebViewController: WKScriptMessageHandler {
 // TO DO: Whole flow for sending offer should be moved to Broadcast Extension.
 extension WebViewController: SignalClientDelegate {
     func signalClientDidConnect(_ signalClient: SignalingClient) {
-        sendInitialSocketMessageWithSdpOffer()
+        // TO DO: Add broadcast picker button at some other point in time
+        showBroadcastPicker()
+//        sendInitialSocketMessageWithSdpOffer()
     }
     
     func signalClientDidDisconnect(_ signalClient: SignalingClient) {
@@ -186,13 +192,12 @@ extension WebViewController: SignalClientDelegate {
     }
     
     func signalClient(_ signalClient: SignalingClient, didReceiveSdpAnswer sdpAnswer: RTCSessionDescription) {
-        setSdpAnswer(sdpAnswer)
-        // TO DO: Add broadcast picker button at some other point in time
-        showBroadcastPicker()
+//        setSdpAnswer(sdpAnswer)
+        
     }
     
     func signalClient(_ signalClient: SignalingClient, didReceiveRemoteIceCandidate rtcIceCandidate: RTCIceCandidate) {
-        setRemoteIceCandidate(rtcIceCandidate)
+//        setRemoteIceCandidate(rtcIceCandidate)
     }
 }
 

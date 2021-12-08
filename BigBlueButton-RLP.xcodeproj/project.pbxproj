@@ -81,6 +81,8 @@
 		70A8241B2754EC1800C65BC9 /* SdpAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdpAnswer.swift; sourceTree = "<group>"; };
 		70BFA3562747D58700AB858A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		70DD9C002759035E00B00EB7 /* RemoteIceCandidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteIceCandidate.swift; sourceTree = "<group>"; };
+		70E3CA5B2760BBF700A7C0CC /* BBBBroadcast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BBBBroadcast.entitlements; sourceTree = "<group>"; };
+		70E3CA5C2760BC3F00A7C0CC /* BBBBroadcastRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BBBBroadcastRelease.entitlements; sourceTree = "<group>"; };
 		942077F0273E722800E6EEBB /* ViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+.swift"; sourceTree = "<group>"; };
 		942077F2273E759300E6EEBB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		94576E262750E8960087A2E1 /* BigBlueButton-RLPRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BigBlueButton-RLPRelease.entitlements"; sourceTree = "<group>"; };
@@ -159,6 +161,8 @@
 		709FB5EB275E434E00FE8349 /* BBBBroadcast */ = {
 			isa = PBXGroup;
 			children = (
+				70E3CA5C2760BC3F00A7C0CC /* BBBBroadcastRelease.entitlements */,
+				70E3CA5B2760BBF700A7C0CC /* BBBBroadcast.entitlements */,
 				709FB5EC275E434E00FE8349 /* SampleHandler.swift */,
 				709FB5EE275E434E00FE8349 /* Info.plist */,
 			);
@@ -468,6 +472,7 @@
 		709FB5F3275E434E00FE8349 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = BBBBroadcast/BBBBroadcast.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M6T2825W2N;
@@ -494,6 +499,7 @@
 		709FB5F4275E434E00FE8349 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = BBBBroadcast/BBBBroadcastRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M6T2825W2N;
