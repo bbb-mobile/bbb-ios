@@ -10,7 +10,7 @@ import Foundation
 /// Model which parse data returned from executed javascript snippet
 struct JavascriptData: Codable {
     let websocketUrl: String
-    let payload: Payload
+    var payload: Payload
     
     /// Payload received after javascript snippet executed
     struct Payload: Codable {

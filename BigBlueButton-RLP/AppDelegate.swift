@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let webViewController = buildWebViewController()
+        let webViewController = WebViewController()
         webViewDelegate = webViewController
         
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -34,12 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         webViewDelegate?.didOpen(url: incomingURL)
         return true
-    }
-    
-    private func buildWebViewController() -> WebViewController {
-        let webRTCClient = WebRTCClient(iceServers: BBBURL.bbbTurnServers)
-        let webViewController = WebViewController(webRTCClient: webRTCClient)
-        return webViewController
     }
 }
 
