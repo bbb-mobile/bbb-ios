@@ -54,7 +54,6 @@ class SampleHandler: RPBroadcastSampleHandler {
         case .video:
             // Handle video sample buffer
             guard isConnected, let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { break }
-//            let pixelFormat = CVPixelBufferGetPixelFormatType(imageBuffer) // kCVPixelFormatType_420YpCbCr8BiPlanarFullRange
             let timeStampNs: Int64 = Int64(CMTimeGetSeconds(CMSampleBufferGetPresentationTimeStamp(sampleBuffer)) * 1000000000)
             let rtcPixlBuffer = RTCCVPixelBuffer(pixelBuffer: imageBuffer)
             let rtcVideoFrame = RTCVideoFrame(buffer: rtcPixlBuffer, rotation: ._0, timeStampNs: timeStampNs)
