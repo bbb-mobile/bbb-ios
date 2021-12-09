@@ -29,6 +29,7 @@
 		942077F3273E759300E6EEBB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942077F2273E759300E6EEBB /* Constants.swift */; };
 		946C34D9273D2EFE002C0E2C /* BBBURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946C34D8273D2EFE002C0E2C /* BBBURL.swift */; };
 		946C34DB273D42EB002C0E2C /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946C34DA273D42EB002C0E2C /* AppEnvironment.swift */; };
+		948F507C2761EF9A0045BEED /* WebNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948F507B2761EF9A0045BEED /* WebNavigationView.swift */; };
 		94A7B73A273D17AE00862DA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7B739273D17AE00862DA1 /* AppDelegate.swift */; };
 		94A7B73E273D17AE00862DA1 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A7B73D273D17AE00862DA1 /* WebViewController.swift */; };
 		94A7B743273D17B200862DA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94A7B742273D17B200862DA1 /* Assets.xcassets */; };
@@ -90,6 +91,7 @@
 		94576E272750E8CD0087A2E1 /* BigBlueButton-RLPDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BigBlueButton-RLPDebug.entitlements"; sourceTree = "<group>"; };
 		946C34D8273D2EFE002C0E2C /* BBBURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBBURL.swift; sourceTree = "<group>"; };
 		946C34DA273D42EB002C0E2C /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		948F507B2761EF9A0045BEED /* WebNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebNavigationView.swift; sourceTree = "<group>"; };
 		94A7B736273D17AE00862DA1 /* BigBlueButton-RLP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BigBlueButton-RLP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94A7B739273D17AE00862DA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94A7B73D273D17AE00862DA1 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -228,6 +230,14 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		948F507A2761EF660045BEED /* View */ = {
+			isa = PBXGroup;
+			children = (
+				948F507B2761EF9A0045BEED /* WebNavigationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		94A7B72D273D17AE00862DA1 = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +266,7 @@
 				94576E262750E8960087A2E1 /* BigBlueButton-RLPRelease.entitlements */,
 				94A7B739273D17AE00862DA1 /* AppDelegate.swift */,
 				946C34CF273D1DB8002C0E2C /* Scenes */,
+				948F507A2761EF660045BEED /* View */,
 				702CB599274D074E005D3C17 /* Model */,
 				946C34D5273D1EAB002C0E2C /* Utilities */,
 				946C34D7273D1EF3002C0E2C /* Constants */,
@@ -433,6 +444,8 @@
 			files = (
 				942077F3273E759300E6EEBB /* Constants.swift in Sources */,
 				70A824182754E64600C65BC9 /* JavascriptData.swift in Sources */,
+				702CB58D274D05E8005D3C17 /* WebRTCClient.swift in Sources */,
+				948F507C2761EF9A0045BEED /* WebNavigationView.swift in Sources */,
 				946C34DB273D42EB002C0E2C /* AppEnvironment.swift in Sources */,
 				70BFA3572747D58700AB858A /* String+.swift in Sources */,
 				946C34D9273D2EFE002C0E2C /* BBBURL.swift in Sources */,

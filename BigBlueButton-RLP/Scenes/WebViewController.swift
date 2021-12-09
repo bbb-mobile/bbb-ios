@@ -6,7 +6,7 @@ import ReplayKit
 class WebViewController: UIViewController, WKUIDelegate {
     
     // MARK: Properties
-    
+    private let webNavigationView = WebNavigationView(frame: .zero)
     private var webView: WKWebView!
     private var encoder = JSONEncoder()
     private var decoder = JSONDecoder()
@@ -19,7 +19,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     // MARK: - Initialization
     
     init() {
-        super.init(nibName: String(describing: WebViewController.self), bundle: .main)
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -30,13 +30,32 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupWebView()
+        setupWebNavigationView()
+        layout()
         loadWebsite()
         // TO DO: Trigger broadcastPickerView with webhook, and not here
         showBroadcastPicker()
     }
     
-    override func loadView() {
-        setupWebView()
+    private func layout() {
+        let views: [UIView] = [webView, webNavigationView]
+        for subView in views {
+            subView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(subView)
+        }
+        
+        NSLayoutConstraint.activate([
+            webNavigationView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            webNavigationView.heightAnchor.constraint(equalToConstant: 50),
+            webNavigationView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            webNavigationView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            
+            webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            webView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            webView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            webView.bottomAnchor.constraint(equalTo: webNavigationView.topAnchor)
+        ])
     }
     
     // MARK: - Setup WKWebView
@@ -51,14 +70,17 @@ class WebViewController: UIViewController, WKUIDelegate {
         contentController.add(self, name: Constants.messageName)
         webConfiguration.userContentController = contentController
         webConfiguration.preferences.javaScriptEnabled = true
-        
+
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.uiDelegate = self
         webView.navigationDelegate = self
         webView.allowsBackForwardNavigationGestures = true
         // Add custom UserAgent
         webView.customUserAgent = Constants.userAgent
-        view = webView
+    }
+    
+    private func setupWebNavigationView() {
+        webNavigationView.webNavigationDelegate = self
     }
     
     private func loadWebsite() {
@@ -141,5 +163,19 @@ extension WebViewController: BBBWebViewDelegate {
     /// - Parameter url: The url to open.
     func didOpen(url: URL) {
         webView.load(URLRequest(url: url))
+    }
+}
+
+extension WebViewController: WebNavigationViewDelegate {
+    func didTapBackBtn() {
+        webView.goBack()
+    }
+    
+    func didTapForwardBtn() {
+        webView.goForward()
+    }
+    
+    func didTapRefreshBtn() {
+        webView.reload()
     }
 }
