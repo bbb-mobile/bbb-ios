@@ -52,6 +52,16 @@ class WebNavigationView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func update(canGoBack: Bool, canGoForward: Bool) {
+        btnInteraction(backButton, isEnabled: canGoBack)
+        btnInteraction(forwardButton, isEnabled: canGoForward)
+    }
+    
+    private func btnInteraction(_ btn: UIButton, isEnabled: Bool) {
+        btn.isUserInteractionEnabled = isEnabled
+        btn.alpha = isEnabled ? .enabled : .disabled
+    }
+    
     private func setupTargets() {
         backButton.addTarget(self, action: #selector(didTapBackButton(_:)), for: .touchUpInside)
         forwardButton.addTarget(self, action: #selector(didTapForwardButton(_:)), for: .touchUpInside)

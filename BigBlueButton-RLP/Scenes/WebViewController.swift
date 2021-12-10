@@ -77,10 +77,13 @@ class WebViewController: UIViewController, WKUIDelegate {
         webView.allowsBackForwardNavigationGestures = true
         // Add custom UserAgent
         webView.customUserAgent = Constants.userAgent
+        self.webView.addObserver(self, forKeyPath: WKWebView.canGoForwardKey, options: .new, context: nil)
+        self.webView.addObserver(self, forKeyPath: WKWebView.canGoBackKey, options: .new, context: nil)
     }
     
     private func setupWebNavigationView() {
         webNavigationView.webNavigationDelegate = self
+        webNavigationView.update(canGoBack: webView.canGoBack, canGoForward: webView.canGoForward)
     }
     
     private func loadWebsite() {
@@ -112,6 +115,17 @@ class WebViewController: UIViewController, WKUIDelegate {
         //                button.sendActions(for: .allEvents)
         //            }
         //        }
+    }
+    
+    // Needed because didStartProvisionalNavigation and decidePolicyForNavigationAction don't fire if only part of the webpage is reloaded
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        guard keyPath == WKWebView.canGoBackKey ||
+                keyPath == WKWebView.canGoForwardKey else { return }
+        didUpdate(url: webView.url)
+    }
+    
+    private func didUpdate(url: URL?) {
+        webNavigationView.update(canGoBack: webView.canGoBack, canGoForward: webView.canGoForward)
     }
 }
 
