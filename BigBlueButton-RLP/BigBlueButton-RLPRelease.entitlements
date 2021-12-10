@@ -6,5 +6,9 @@
 	<array>
 		<string>applinks:bbbtest-scalelite-01.zdv.uni-mainz.de</string>
 	</array>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.com.zuehlke.bbb</string>
+	</array>
 </dict>
 </plist>
