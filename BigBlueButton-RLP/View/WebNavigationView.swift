@@ -68,7 +68,8 @@ class WebNavigationView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(stackView)
         
-        stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Self.spacing).isActive = true
+        stackView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: Self.spacing).isActive = true
+        stackView.rightAnchor.constraint(lessThanOrEqualTo: self.rightAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }

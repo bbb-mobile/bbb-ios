@@ -444,7 +444,6 @@
 			files = (
 				942077F3273E759300E6EEBB /* Constants.swift in Sources */,
 				70A824182754E64600C65BC9 /* JavascriptData.swift in Sources */,
-				702CB58D274D05E8005D3C17 /* WebRTCClient.swift in Sources */,
 				948F507C2761EF9A0045BEED /* WebNavigationView.swift in Sources */,
 				946C34DB273D42EB002C0E2C /* AppEnvironment.swift in Sources */,
 				70BFA3572747D58700AB858A /* String+.swift in Sources */,
