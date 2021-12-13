@@ -118,7 +118,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     }
     
     // Needed because didStartProvisionalNavigation and decidePolicyForNavigationAction don't fire if only part of the webpage is reloaded
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         guard keyPath == WKWebView.canGoBackKey ||
                 keyPath == WKWebView.canGoForwardKey else { return }
         didUpdate(url: webView.url)
