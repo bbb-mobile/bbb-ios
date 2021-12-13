@@ -6,6 +6,11 @@ protocol WebNavigationViewDelegate: AnyObject {
     func didTapRefreshBtn()
 }
 
+enum Opacity: CGFloat {
+    case enabled = 1.0
+    case disabled = 0.3
+}
+
 class WebNavigationView: UIView {
     
     private static let spacing: CGFloat = 32
@@ -53,13 +58,13 @@ class WebNavigationView: UIView {
     }
     
     func update(canGoBack: Bool, canGoForward: Bool) {
-        btnInteraction(backButton, isEnabled: canGoBack)
-        btnInteraction(forwardButton, isEnabled: canGoForward)
+        interact(with: backButton, isEnabled: canGoBack)
+        interact(with: forwardButton, isEnabled: canGoForward)
     }
     
-    private func btnInteraction(_ btn: UIButton, isEnabled: Bool) {
+    private func interact(with btn: UIButton, isEnabled: Bool) {
         btn.isUserInteractionEnabled = isEnabled
-        btn.alpha = isEnabled ? .enabled : .disabled
+        btn.alpha = isEnabled ? Opacity.enabled.rawValue : Opacity.disabled.rawValue
     }
     
     private func setupTargets() {
