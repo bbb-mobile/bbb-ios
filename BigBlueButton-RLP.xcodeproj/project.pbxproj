@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		704709FA276A038600764761 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = 704709F9276A038600764761 /* WebRTC */; };
 		709FB5EA275E434E00FE8349 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 709FB5E9275E434E00FE8349 /* ReplayKit.framework */; };
 		709FB5ED275E434E00FE8349 /* SampleHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709FB5EC275E434E00FE8349 /* SampleHandler.swift */; };
 		709FB5F1275E434E00FE8349 /* BBBBroadcast.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 709FB5E7275E434E00FE8349 /* BBBBroadcast.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		70A824182754E64600C65BC9 /* JavascriptData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A824172754E64600C65BC9 /* JavascriptData.swift */; };
-		70B32A692746C7E900BA40A7 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = 70B32A682746C7E900BA40A7 /* WebRTC */; };
 		70BFA3572747D58700AB858A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFA3562747D58700AB858A /* String+.swift */; };
 		70E3CA5E2760CC8E00A7C0CC /* WebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB590274D0620005D3C17 /* WebSocketProvider.swift */; };
 		70E3CA602760CC9C00A7C0CC /* NativeWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB58F274D0620005D3C17 /* NativeWebSocket.swift */; };
@@ -110,6 +110,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				709FB5EA275E434E00FE8349 /* ReplayKit.framework in Frameworks */,
+				704709FA276A038600764761 /* WebRTC in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,7 +118,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70B32A692746C7E900BA40A7 /* WebRTC in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +305,9 @@
 			dependencies = (
 			);
 			name = BBBBroadcast;
+			packageProductDependencies = (
+				704709F9276A038600764761 /* WebRTC */,
+			);
 			productName = BBBBroadcast;
 			productReference = 709FB5E7275E434E00FE8349 /* BBBBroadcast.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -325,7 +328,6 @@
 			);
 			name = "BigBlueButton-RLP";
 			packageProductDependencies = (
-				70B32A682746C7E900BA40A7 /* WebRTC */,
 			);
 			productName = "BigBlueButton-RLP";
 			productReference = 94A7B736273D17AE00862DA1 /* BigBlueButton-RLP.app */;
@@ -381,7 +383,7 @@
 			);
 			mainGroup = 94A7B72D273D17AE00862DA1;
 			packageReferences = (
-				70B32A672746C7E900BA40A7 /* XCRemoteSwiftPackageReference "WebRTC" */,
+				704709F8276A038600764761 /* XCRemoteSwiftPackageReference "WebRTC" */,
 			);
 			productRefGroup = 94A7B737273D17AE00862DA1 /* Products */;
 			projectDirPath = "";
@@ -504,7 +506,7 @@
 				INFOPLIST_FILE = BBBBroadcast/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BBBBroadcast;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -531,7 +533,7 @@
 				INFOPLIST_FILE = BBBBroadcast/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BBBBroadcast;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -813,20 +815,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		70B32A672746C7E900BA40A7 /* XCRemoteSwiftPackageReference "WebRTC" */ = {
+		704709F8276A038600764761 /* XCRemoteSwiftPackageReference "WebRTC" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stasel/WebRTC";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 95.0.0;
+				minimumVersion = 96.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		70B32A682746C7E900BA40A7 /* WebRTC */ = {
+		704709F9276A038600764761 /* WebRTC */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 70B32A672746C7E900BA40A7 /* XCRemoteSwiftPackageReference "WebRTC" */;
+			package = 704709F8276A038600764761 /* XCRemoteSwiftPackageReference "WebRTC" */;
 			productName = WebRTC;
 		};
 /* End XCSwiftPackageProductDependency section */
