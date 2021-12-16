@@ -1,6 +1,5 @@
 import UIKit
 import WebKit
-import WebRTC
 import ReplayKit
 
 class WebViewController: UIViewController, WKUIDelegate {
