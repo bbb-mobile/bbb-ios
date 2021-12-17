@@ -132,7 +132,7 @@ class WebViewController: UIViewController, WKUIDelegate {
                 keyPath == WKWebView.canGoForwardKey else { return }
         didUpdate(url: webView.url)
     }
-    ç
+
     private func didUpdate(url: URL?) {
         webNavigationView.update(canGoBack: webView.canGoBack, canGoForward: webView.canGoForward)
     }
