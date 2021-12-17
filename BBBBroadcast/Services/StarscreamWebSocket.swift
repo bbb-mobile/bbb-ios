@@ -18,6 +18,7 @@ class StarscreamWebSocket: WebSocketProvider {
     init(url: URL) {
         var request = URLRequest(url: url)
         request.timeoutInterval = 5
+        // Set cookie obtained from webView in order to authorize socket connection
         let jsessionId = defaults?.object(forKey: Constants.jsessionId) as? String
         request.setValue("\(Constants.jsessionId)=\(jsessionId ?? "")", forHTTPHeaderField: "Cookie")
         socket = WebSocket(request: request)
@@ -47,11 +48,11 @@ extension StarscreamWebSocket: WebSocketDelegate {
         switch event {
         case .connected(let headers):
             isConnected = true
-            print("websocket is connected: \(headers)")
+            print("Websocket is connected: \(headers)")
             self.delegate?.webSocketDidConnect(self)
         case .disconnected(let reason, let code):
             isConnected = false
-            print("websocket is disconnected: \(reason) with code: \(code)")
+            print("Websocket is disconnected: \(reason) with code: \(code)")
             self.delegate?.webSocketDidDisconnect(self)
         case .text(let message):
             print("Received text: \(message)")

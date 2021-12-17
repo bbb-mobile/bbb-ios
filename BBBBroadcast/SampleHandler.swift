@@ -120,7 +120,6 @@ class SampleHandler: RPBroadcastSampleHandler {
 
 extension SampleHandler: SignalClientDelegate {
     func signalClientDidConnect(_ signalClient: SignalingClient) {
-        print("Websocket connected")
         sendInitialSocketMessageWithSdpOffer()
     }
     
