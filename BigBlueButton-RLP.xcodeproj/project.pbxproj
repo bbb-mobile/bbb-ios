@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7007DAEB276CD8360012944B /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 7007DAEA276CD8360012944B /* Starscream */; };
+		7007DAED276CD8630012944B /* StarscreamWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007DAEC276CD8630012944B /* StarscreamWebSocket.swift */; };
 		704709FA276A038600764761 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = 704709F9276A038600764761 /* WebRTC */; };
 		709FB5EA275E434E00FE8349 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 709FB5E9275E434E00FE8349 /* ReplayKit.framework */; };
 		709FB5ED275E434E00FE8349 /* SampleHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709FB5EC275E434E00FE8349 /* SampleHandler.swift */; };
@@ -70,6 +72,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7007DAEC276CD8630012944B /* StarscreamWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarscreamWebSocket.swift; sourceTree = "<group>"; };
 		702CB58A274D05E8005D3C17 /* WebRTCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
 		702CB58B274D05E8005D3C17 /* SignalingClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
 		702CB58F274D0620005D3C17 /* NativeWebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeWebSocket.swift; sourceTree = "<group>"; };
@@ -111,6 +114,7 @@
 			files = (
 				709FB5EA275E434E00FE8349 /* ReplayKit.framework in Frameworks */,
 				704709FA276A038600764761 /* WebRTC in Frameworks */,
+				7007DAEB276CD8360012944B /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +140,7 @@
 			children = (
 				702CB590274D0620005D3C17 /* WebSocketProvider.swift */,
 				702CB58F274D0620005D3C17 /* NativeWebSocket.swift */,
+				7007DAEC276CD8630012944B /* StarscreamWebSocket.swift */,
 				702CB58B274D05E8005D3C17 /* SignalingClient.swift */,
 				702CB58A274D05E8005D3C17 /* WebRTCClient.swift */,
 			);
@@ -307,6 +312,7 @@
 			name = BBBBroadcast;
 			packageProductDependencies = (
 				704709F9276A038600764761 /* WebRTC */,
+				7007DAEA276CD8360012944B /* Starscream */,
 			);
 			productName = BBBBroadcast;
 			productReference = 709FB5E7275E434E00FE8349 /* BBBBroadcast.appex */;
@@ -384,6 +390,7 @@
 			mainGroup = 94A7B72D273D17AE00862DA1;
 			packageReferences = (
 				704709F8276A038600764761 /* XCRemoteSwiftPackageReference "WebRTC" */,
+				7007DAE9276CD8360012944B /* XCRemoteSwiftPackageReference "Starscream" */,
 			);
 			productRefGroup = 94A7B737273D17AE00862DA1 /* Products */;
 			projectDirPath = "";
@@ -437,6 +444,7 @@
 				70E3CA652760CCBA00A7C0CC /* RemoteIceCandidate.swift in Sources */,
 				70E3CA692760CF1A00A7C0CC /* AppEnvironment.swift in Sources */,
 				70E3CA632760CCAA00A7C0CC /* RTCStates.swift in Sources */,
+				7007DAED276CD8630012944B /* StarscreamWebSocket.swift in Sources */,
 				70E3CA6A2760CF2900A7C0CC /* Constants.swift in Sources */,
 				70E3CA622760CCA600A7C0CC /* WebRTCClient.swift in Sources */,
 				70E3CA662760CCBF00A7C0CC /* SdpAnswer.swift in Sources */,
@@ -815,6 +823,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7007DAE9276CD8360012944B /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		704709F8276A038600764761 /* XCRemoteSwiftPackageReference "WebRTC" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stasel/WebRTC";
@@ -826,6 +842,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7007DAEA276CD8360012944B /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7007DAE9276CD8360012944B /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
+		};
 		704709F9276A038600764761 /* WebRTC */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 704709F8276A038600764761 /* XCRemoteSwiftPackageReference "WebRTC" */;

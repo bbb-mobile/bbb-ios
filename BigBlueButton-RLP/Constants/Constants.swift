@@ -14,6 +14,7 @@ struct Constants {
     // WKWebView
     static let userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Safari/605.1.15"
     static let sessionToken = "sessionToken"
+    static let jsessionId = "JSESSIONID"
     static let javascriptData = "javascriptData"
     static let eventName = "message" /// Important: do not change event name!
     static let messageName = "iosListener"

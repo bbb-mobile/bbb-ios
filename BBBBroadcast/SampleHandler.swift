@@ -76,7 +76,7 @@ class SampleHandler: RPBroadcastSampleHandler {
     private func setupWebSocketConnection(with url: String) {
         guard let websocketUrl = URL(string: url) else { return }
         // Use Native socket to establish connection
-        let websocketProvider: WebSocketProvider = NativeWebSocket(url: websocketUrl)
+        let websocketProvider: WebSocketProvider = StarscreamWebSocket(url: websocketUrl)
         signalingClient = SignalingClient(webSocket: websocketProvider)
         signalingClient?.delegate = self
         signalingClient?.connect()

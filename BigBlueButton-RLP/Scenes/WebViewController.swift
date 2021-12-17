@@ -99,6 +99,16 @@ class WebViewController: UIViewController, WKUIDelegate {
         }
     }
     
+    private func getJSessionId() {
+        webView.configuration.websiteDataStore.httpCookieStore.getAllCookies { [weak self] cookies in
+            for cookie in cookies {
+                if cookie.name == Constants.jsessionId {
+                    self?.defaults?.set(cookie.value, forKey: Constants.jsessionId)
+                }
+            }
+        }
+    }
+    
     // MARK: - Setup Broadcast picker view
     
     private func showBroadcastPicker() {
@@ -122,7 +132,7 @@ class WebViewController: UIViewController, WKUIDelegate {
                 keyPath == WKWebView.canGoForwardKey else { return }
         didUpdate(url: webView.url)
     }
-    
+    ç
     private func didUpdate(url: URL?) {
         webNavigationView.update(canGoBack: webView.canGoBack, canGoForward: webView.canGoForward)
     }
@@ -143,6 +153,7 @@ extension WebViewController: WKNavigationDelegate {
             // Joined the room and connected to BBB server.
             guard !hasSessionToken else { return }
             runJavascript()
+            getJSessionId()
             hasSessionToken = true
         }
     }
