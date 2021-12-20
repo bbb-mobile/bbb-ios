@@ -63,10 +63,13 @@ class WebViewController: UIViewController, WKUIDelegate {
         let webConfiguration = WKWebViewConfiguration()
         let contentController = WKUserContentController()
         // Inject JavaScript which sends message to App
-        let userScript = WKUserScript(source: Constants.jsEventListener, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
-        contentController.addUserScript(userScript)
+        let getMeetingRoomPayloadScript = WKUserScript(source: Script.meetingRoomPayloadListener, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+        let muteButtonScript = WKUserScript(source: Script.muteButtonListener, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+        contentController.addUserScript(getMeetingRoomPayloadScript)
+        contentController.addUserScript(muteButtonScript)
         // Add ScriptMessageHandler
-        contentController.add(self, name: Constants.messageName)
+        contentController.add(self, name: Script.meetingRoomMessage)
+        contentController.add(self, name: Script.muteButtonMessage)
         webConfiguration.userContentController = contentController
         webConfiguration.preferences.javaScriptEnabled = true
 
@@ -92,7 +95,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     private func runJavascript() {
         // Fire event to execute javascript
-        webView.evaluateJavaScript(Constants.fireJSEvent) { (_, error) in
+        webView.evaluateJavaScript(Script.fireJSEvent) { (_, error) in
             if error != nil {
                 print("⚡️☠️ Error executing injected javascript script ☠️⚡️")
             }
@@ -164,9 +167,14 @@ extension WebViewController: WKNavigationDelegate {
 extension WebViewController: WKScriptMessageHandler {
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        guard !isPayloadReceived else { return }
-        guard message.name == Constants.messageName else { return }
         guard let messageBody = message.body as? [String: Any] else { return }
+        
+        if message.name == Script.muteButtonMessage {
+            print(messageBody)
+        }
+        
+        guard !isPayloadReceived else { return }
+        guard message.name == Script.meetingRoomMessage else { return }
         let payload = Data((messageBody["payload"] as? String)!.utf8)
         do {
             let jsData = try decoder.decode(JavascriptData.self, from: payload)

@@ -16,35 +16,7 @@ struct Constants {
     static let sessionToken = "sessionToken"
     static let jsessionId = "JSESSIONID"
     static let javascriptData = "javascriptData"
-    static let eventName = "message" /// Important: do not change event name!
-    static let messageName = "iosListener"
-    static let jsEventListener =
-                """
-                window.addEventListener('\(eventName)', function(e) {
-                    const { default: currentUser } = require('/imports/ui/services/auth');
-                    const { default: { _collection: voiceUserCollection } } = require('/imports/api/voice-users');
-                    const { meetingID, userID, fullname } = currentUser;
-                    const { default: { _collection: meetings } } = require('/imports/api/meetings');
-                    const voiceConf = meetings.find({}).fetch()[0].voiceProp.voiceConf;
-                    const websocketUrl = `wss://${document.location.host}/bbb-webrtc-sfu?sessionToken=${currentUser.sessionToken}`;
-                    const data = JSON.stringify({
-                                    websocketUrl,
-                                    payload: {
-                                    callerName: userID,
-                                    bitrate: 1500,
-                                    hasAudio: false,
-                                    id: "start",
-                                    internalMeetingId: meetingID,
-                                    role: "send",
-                                    sdpOffer: null,
-                                    type: "screenshare",
-                                    userName: fullname,
-                                    voiceBridge: voiceConf
-                                    }});
-                window.webkit.messageHandlers.\(messageName).postMessage({'payload': data}) });
-                """
-    static let fireJSEvent = "document.dispatchEvent(new Event('\(eventName)'));"
-
+    
     // WebRTC
     static let sdpAnswer = "sdpAnswer"
     static let iceCandidate = "iceCandidate"
