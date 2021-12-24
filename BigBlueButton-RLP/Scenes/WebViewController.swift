@@ -83,8 +83,8 @@ class WebViewController: UIViewController, WKUIDelegate {
         webView.allowsBackForwardNavigationGestures = true
         // Add custom UserAgent
         webView.customUserAgent = Constants.userAgent
-        self.webView.addObserver(self, forKeyPath: WKWebView.canGoForwardKey, options: .new, context: nil)
-        self.webView.addObserver(self, forKeyPath: WKWebView.canGoBackKey, options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: WKWebView.canGoForwardKey, options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: WKWebView.canGoBackKey, options: .new, context: nil)
     }
     
     private func setupWebNavigationView() {

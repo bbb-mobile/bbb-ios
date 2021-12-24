@@ -8,16 +8,12 @@
 import Foundation
 
 struct Script {
-    
-    static let eventName = "message" /// Important: do not change event name because it is window event type!
-    static let fireJSEvent = "document.dispatchEvent(new Event('\(eventName)'));"
-    static let fireMuteButtonEvent = "document.getElementsByClassName('lg--Q7ufB buttonWrapper--x8uow muteToggle--LY4Tr')[0].click();"
-    
+        
     // Meeting room listener
     static let meetingRoomMessage = "meetingRoomPayloadReceived"
     static let meetingRoomPayloadListener =
                 """
-                window.addEventListener('\(eventName)', function(e) {
+                window.addEventListener('message', function(e) {
                     const { default: currentUser } = require('/imports/ui/services/auth');
                     const { default: { _collection: voiceUserCollection } } = require('/imports/api/voice-users');
                     const { meetingID, userID, fullname } = currentUser;
@@ -42,10 +38,21 @@ struct Script {
                 """
     
     // Mute button listener
+    /* NOTE: Mute button is visible only if microphone audio is enabled.
+             Need to get exact event from BBB when microphone is enabled in order to evaluate/register muteButtonListener script.
+             Mute button ID is dinamically changed and cannot be used.
+             Class name is used in listener script but is too long and strange.
+             Conclusion: Adding javascript listener for mute button states is not the best approach.
+    */
+    /* TO DO: Decide what is the best way to observe the microphone audio enable/disable events in webView BBB html client.
+              Propose to receive microphone enabled/disabled events via websocket because we need to regulate
+              webRTC audio transfer state in Broadcast Upload Extension where socket and webRTC are instantiated.
+    */
     static let muteButtonMessage = "muteButtonMessage"
     static let muteButtonListener =
                 """
-                document.getElementsByClassName('lg--Q7ufB buttonWrapper--x8uow muteToggle--LY4Tr')[0].addEventListener('click', () => {
+                document.getElementsByClassName('lg--Q7ufB buttonWrapper--x8uow muteToggle--LY4Tr')[0].addEventListener('click', (event) => {
+                    event.stopPropagation();
                     window.webkit.messageHandlers.\(muteButtonMessage).postMessage({'status': 'ok'});
                 });
                 """
