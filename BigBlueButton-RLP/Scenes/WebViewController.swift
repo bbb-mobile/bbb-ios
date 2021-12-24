@@ -63,9 +63,13 @@ class WebViewController: UIViewController, WKUIDelegate {
         let webConfiguration = WKWebViewConfiguration()
         let contentController = WKUserContentController()
         // Inject JavaScript which sends message to App
-        let getMeetingRoomPayloadScript = WKUserScript(source: Script.meetingRoomPayloadListener, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
-        let muteButtonScript = WKUserScript(source: Script.muteButtonListener, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+        let getMeetingRoomPayloadScript = WKUserScript(source: Script.meetingRoomPayloadListener,
+                                                       injectionTime: .atDocumentEnd,
+                                                       forMainFrameOnly: false)
         contentController.addUserScript(getMeetingRoomPayloadScript)
+        let muteButtonScript = WKUserScript(source: Script.muteButtonListener,
+                                            injectionTime: .atDocumentEnd,
+                                            forMainFrameOnly: false)
         contentController.addUserScript(muteButtonScript)
         // Add ScriptMessageHandler
         contentController.add(self, name: Script.meetingRoomMessage)
@@ -93,9 +97,9 @@ class WebViewController: UIViewController, WKUIDelegate {
         webView.load(URLRequest(url: baseURL))
     }
     
-    private func runJavascript() {
+    private func runJavascript(_ script: String) {
         // Fire event to execute javascript
-        webView.evaluateJavaScript(Script.fireJSEvent) { (_, error) in
+        webView.evaluateJavaScript(script) { (_, error) in
             if error != nil {
                 print("⚡️☠️ Error executing injected javascript script ☠️⚡️")
             }
@@ -155,7 +159,7 @@ extension WebViewController: WKNavigationDelegate {
         if urlString.contains(Constants.sessionToken) {
             // Joined the room and connected to BBB server.
             guard !hasSessionToken else { return }
-            runJavascript()
+            runJavascript(Script.meetingRoomPayloadListener)
             getJSessionId()
             hasSessionToken = true
         }
@@ -168,22 +172,24 @@ extension WebViewController: WKScriptMessageHandler {
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         guard let messageBody = message.body as? [String: Any] else { return }
-        
-        if message.name == Script.muteButtonMessage {
+        switch message.name {
+        case Script.muteButtonMessage:
             print(messageBody)
-        }
-        
-        guard !isPayloadReceived else { return }
-        guard message.name == Script.meetingRoomMessage else { return }
-        let payload = Data((messageBody["payload"] as? String)!.utf8)
-        do {
-            let jsData = try decoder.decode(JavascriptData.self, from: payload)
-            isPayloadReceived = true
-            if let encodedData = try? encoder.encode(jsData) {
-                defaults?.set(encodedData, forKey: Constants.javascriptData)
+            
+        case Script.meetingRoomMessage:
+            guard !isPayloadReceived else { return }
+            let payload = Data((messageBody["payload"] as? String)!.utf8)
+            do {
+                let jsData = try decoder.decode(JavascriptData.self, from: payload)
+                isPayloadReceived = true
+                if let encodedData = try? encoder.encode(jsData) {
+                    defaults?.set(encodedData, forKey: Constants.javascriptData)
+                }
+            } catch (let error) {
+                print("⚡️☠️ Failed to load payload data: \(error.localizedDescription)")
             }
-        } catch (let error) {
-            print("⚡️☠️ Failed to load payload data: \(error.localizedDescription)")
+            
+        default: return
         }
     }
 }

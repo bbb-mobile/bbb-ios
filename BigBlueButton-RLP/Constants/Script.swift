@@ -11,6 +11,7 @@ struct Script {
     
     static let eventName = "message" /// Important: do not change event name because it is window event type!
     static let fireJSEvent = "document.dispatchEvent(new Event('\(eventName)'));"
+    static let fireMuteButtonEvent = "document.getElementsByClassName('lg--Q7ufB buttonWrapper--x8uow muteToggle--LY4Tr')[0].click();"
     
     // Meeting room listener
     static let meetingRoomMessage = "meetingRoomPayloadReceived"
@@ -44,11 +45,8 @@ struct Script {
     static let muteButtonMessage = "muteButtonMessage"
     static let muteButtonListener =
                 """
-                var button = document.getElementById('tippy-58');
-                if(button != null) {
-                    button.addEventListener('click', function(){
-                        window.webkit.messageHandlers.\(muteButtonMessage).postMessage('muteButton_clicked');
-                    });
-                }
+                document.getElementsByClassName('lg--Q7ufB buttonWrapper--x8uow muteToggle--LY4Tr')[0].addEventListener('click', () => {
+                    window.webkit.messageHandlers.\(muteButtonMessage).postMessage({'status': 'ok'});
+                });
                 """
 }
