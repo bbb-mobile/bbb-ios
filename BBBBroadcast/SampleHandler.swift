@@ -49,7 +49,6 @@ class SampleHandler: RPBroadcastSampleHandler {
     }
     
     override func processSampleBuffer(_ sampleBuffer: CMSampleBuffer, with sampleBufferType: RPSampleBufferType) {
-        print("Broadcast sample buffer received")
         switch sampleBufferType {
         case .video:
             // Handle video sample buffer
@@ -58,6 +57,7 @@ class SampleHandler: RPBroadcastSampleHandler {
             let rtcPixlBuffer = RTCCVPixelBuffer(pixelBuffer: imageBuffer)
             let rtcVideoFrame = RTCVideoFrame(buffer: rtcPixlBuffer, rotation: ._0, timeStampNs: timeStampNs)
             webRTCClient.push(videoFrame: rtcVideoFrame)
+            print("Pushed webRTC video frame")
             break
         case .audioApp:
             // Handle audio sample buffer for app audio
@@ -120,7 +120,6 @@ class SampleHandler: RPBroadcastSampleHandler {
 
 extension SampleHandler: SignalClientDelegate {
     func signalClientDidConnect(_ signalClient: SignalingClient) {
-        print("Websocket connected")
         sendInitialSocketMessageWithSdpOffer()
     }
     

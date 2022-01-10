@@ -1,6 +1,5 @@
 import UIKit
 import WebKit
-import WebRTC
 import ReplayKit
 
 class WebViewController: UIViewController, WKUIDelegate {
@@ -64,10 +63,17 @@ class WebViewController: UIViewController, WKUIDelegate {
         let webConfiguration = WKWebViewConfiguration()
         let contentController = WKUserContentController()
         // Inject JavaScript which sends message to App
-        let userScript = WKUserScript(source: Constants.jsEventListener, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
-        contentController.addUserScript(userScript)
+        let getMeetingRoomPayloadScript = WKUserScript(source: Script.meetingRoomPayloadListener,
+                                                       injectionTime: .atDocumentEnd,
+                                                       forMainFrameOnly: false)
+        contentController.addUserScript(getMeetingRoomPayloadScript)
+        let muteButtonScript = WKUserScript(source: Script.muteButtonListener,
+                                            injectionTime: .atDocumentEnd,
+                                            forMainFrameOnly: false)
+        contentController.addUserScript(muteButtonScript)
         // Add ScriptMessageHandler
-        contentController.add(self, name: Constants.messageName)
+        contentController.add(self, name: Script.meetingRoomMessage)
+        contentController.add(self, name: Script.muteButtonMessage)
         webConfiguration.userContentController = contentController
         webConfiguration.preferences.javaScriptEnabled = true
 
@@ -77,8 +83,8 @@ class WebViewController: UIViewController, WKUIDelegate {
         webView.allowsBackForwardNavigationGestures = true
         // Add custom UserAgent
         webView.customUserAgent = Constants.userAgent
-        self.webView.addObserver(self, forKeyPath: WKWebView.canGoForwardKey, options: .new, context: nil)
-        self.webView.addObserver(self, forKeyPath: WKWebView.canGoBackKey, options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: WKWebView.canGoForwardKey, options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: WKWebView.canGoBackKey, options: .new, context: nil)
     }
     
     private func setupWebNavigationView() {
@@ -91,11 +97,21 @@ class WebViewController: UIViewController, WKUIDelegate {
         webView.load(URLRequest(url: baseURL))
     }
     
-    private func runJavascript() {
+    private func runJavascript(_ script: String) {
         // Fire event to execute javascript
-        webView.evaluateJavaScript(Constants.fireJSEvent) { (_, error) in
+        webView.evaluateJavaScript(script) { (_, error) in
             if error != nil {
                 print("⚡️☠️ Error executing injected javascript script ☠️⚡️")
+            }
+        }
+    }
+    
+    private func saveSessionCookie() {
+        webView.configuration.websiteDataStore.httpCookieStore.getAllCookies { [weak self] cookies in
+            for cookie in cookies {
+                if cookie.name == Constants.jsessionId {
+                    self?.defaults?.set(cookie.value, forKey: Constants.jsessionId)
+                }
             }
         }
     }
@@ -123,7 +139,7 @@ class WebViewController: UIViewController, WKUIDelegate {
                 keyPath == WKWebView.canGoForwardKey else { return }
         didUpdate(url: webView.url)
     }
-    
+
     private func didUpdate(url: URL?) {
         webNavigationView.update(canGoBack: webView.canGoBack, canGoForward: webView.canGoForward)
     }
@@ -143,7 +159,8 @@ extension WebViewController: WKNavigationDelegate {
         if urlString.contains(Constants.sessionToken) {
             // Joined the room and connected to BBB server.
             guard !hasSessionToken else { return }
-            runJavascript()
+            runJavascript(Script.meetingRoomPayloadListener)
+            saveSessionCookie()
             hasSessionToken = true
         }
     }
@@ -154,18 +171,25 @@ extension WebViewController: WKNavigationDelegate {
 extension WebViewController: WKScriptMessageHandler {
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        guard !isPayloadReceived else { return }
-        guard message.name == Constants.messageName else { return }
         guard let messageBody = message.body as? [String: Any] else { return }
-        let payload = Data((messageBody["payload"] as? String)!.utf8)
-        do {
-            let jsData = try decoder.decode(JavascriptData.self, from: payload)
-            isPayloadReceived = true
-            if let encodedData = try? encoder.encode(jsData) {
-                defaults?.set(encodedData, forKey: Constants.javascriptData)
+        switch message.name {
+        case Script.muteButtonMessage:
+            print(messageBody)
+            
+        case Script.meetingRoomMessage:
+            guard !isPayloadReceived else { return }
+            let payload = Data((messageBody["payload"] as? String)!.utf8)
+            do {
+                let jsData = try decoder.decode(JavascriptData.self, from: payload)
+                isPayloadReceived = true
+                if let encodedData = try? encoder.encode(jsData) {
+                    defaults?.set(encodedData, forKey: Constants.javascriptData)
+                }
+            } catch (let error) {
+                print("⚡️☠️ Failed to load payload data: \(error.localizedDescription)")
             }
-        } catch (let error) {
-            print("⚡️☠️ Failed to load payload data: \(error.localizedDescription)")
+            
+        default: return
         }
     }
 }

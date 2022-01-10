@@ -20,6 +20,7 @@ final class WebRTCClient: NSObject {
         RTCInitializeSSL()
         let videoEncoderFactory = RTCDefaultVideoEncoderFactory()
         let videoDecoderFactory = RTCDefaultVideoDecoderFactory()
+        videoEncoderFactory.preferredCodec = RTCVideoCodecInfo(name: kRTCVideoCodecVp8Name)
         return RTCPeerConnectionFactory(encoderFactory: videoEncoderFactory, decoderFactory: videoDecoderFactory)
     }()
     
@@ -60,7 +61,6 @@ final class WebRTCClient: NSObject {
         
         super.init()
         createMediaSenders()
-//        setupVideoStreaming()
         configureAudioSession()
         self.peerConnection.delegate = self
     }
@@ -125,7 +125,7 @@ final class WebRTCClient: NSObject {
     }
     
     private func createVideoTrack() -> RTCVideoTrack {
-        videoSource = WebRTCClient.factory.videoSource()
+        videoSource = WebRTCClient.factory.videoSource(forScreenCast: true)
         videoCapturer = RTCVideoCapturer(delegate: videoSource!)
         videoSource!.adaptOutputFormat(toWidth: 441, height: 736, fps: 15)
         let videoTrack = WebRTCClient.factory.videoTrack(with: videoSource!, trackId: "video0")

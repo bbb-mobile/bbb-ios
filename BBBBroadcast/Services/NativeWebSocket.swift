@@ -14,6 +14,7 @@ class NativeWebSocket: NSObject, WebSocketProvider {
     private let url: URL
     private var socket: URLSessionWebSocketTask?
     private lazy var urlSession: URLSession = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
+    private let defaults = UserDefaults.init(suiteName: Constants.appGroup)
 
     init(url: URL) {
         self.url = url
@@ -21,7 +22,12 @@ class NativeWebSocket: NSObject, WebSocketProvider {
     }
 
     func connect() {
-        let socket = urlSession.webSocketTask(with: url)
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 5
+        // Set cookie obtained from webView in order to authorize socket connection
+        let jsessionId = defaults?.object(forKey: Constants.jsessionId) as? String
+        request.setValue("\(Constants.jsessionId)=\(jsessionId ?? "")", forHTTPHeaderField: "Cookie")
+        let socket = urlSession.webSocketTask(with: request)
         socket.resume()
         self.socket = socket
         self.listen()
@@ -44,22 +50,25 @@ class NativeWebSocket: NSObject, WebSocketProvider {
     }
     
     private func listen() {
-        self.socket?.receive { [weak self] message in
+        self.socket?.receive { [weak self] result in
             guard let self = self else { return }
             
-            switch message {
-            case .success(.data(let data)):
-                self.delegate?.webSocket(self, didReceiveData: data)
-                self.listen()
+            switch result {
+            case .success(let message):
+                switch message {
+                case .data(let data):
+                    self.delegate?.webSocket(self, didReceiveData: data)
+                    self.listen()
+                    
+                case .string(let text):
+                    self.delegate?.webSocket(self, didReceiveSocketMessage: text)
+                    self.listen()
+                    
+                @unknown default:
+                    debugPrint("⚡️ Warning: Unknown socket message format received.")
+                    self.listen()
+                }
                 
-            case .success(.string(let message)):
-                self.delegate?.webSocket(self, didReceiveSocketMessage: message)
-                self.listen()
-                
-            case .success:
-                debugPrint("Warning: Expected to receive data format but received a string. Check the websocket server config.")
-                self.listen()
-
             case .failure:
                 self.disconnect()
             }
