@@ -16,7 +16,7 @@ class SampleHandler: RPBroadcastSampleHandler {
     private let defaults = UserDefaults.init(suiteName: Constants.appGroup)
     
     private var javascriptPayload: JavascriptData.Payload?
-    private var isConnected: Bool = false
+    private var isWebRTCConnected: Bool = false
     
     override func broadcastStarted(withSetupInfo setupInfo: [String : NSObject]?) {
         print("Broadcast has started")
@@ -49,10 +49,11 @@ class SampleHandler: RPBroadcastSampleHandler {
     }
     
     override func processSampleBuffer(_ sampleBuffer: CMSampleBuffer, with sampleBufferType: RPSampleBufferType) {
+//        print("SAMPLE BUFFER: \(sampleBuffer)")
         switch sampleBufferType {
         case .video:
             // Handle video sample buffer
-            guard isConnected, let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { break }
+            guard isWebRTCConnected, let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { break }
             let timeStampNs: Int64 = Int64(CMTimeGetSeconds(CMSampleBufferGetPresentationTimeStamp(sampleBuffer)) * 1000000000)
             let rtcPixlBuffer = RTCCVPixelBuffer(pixelBuffer: imageBuffer)
             let rtcVideoFrame = RTCVideoFrame(buffer: rtcPixlBuffer, rotation: ._0, timeStampNs: timeStampNs)
@@ -98,19 +99,17 @@ class SampleHandler: RPBroadcastSampleHandler {
             if error != nil {
                 print("⚡️☠️ Error setting remote sdp answer: \(error!.localizedDescription)")
             } else {
-                print("Set remote SDP answer")
+                print("Set remote SDP answer: \(sdpAnswer.sdp)")
             }
         }
     }
     
     private func setRemoteIceCandidate(_ candidate: RTCIceCandidate) {
-        webRTCClient.set(remoteCandidate: candidate) { [weak self] error in
-            guard let `self` = self else { return }
+        webRTCClient.set(remoteCandidate: candidate) { error in
             if error != nil {
                 print("⚡️☠️ Error setting remote ice candidate: \(error!.localizedDescription)")
             } else {
                 print("Set remote ICECandidate")
-                self.isConnected = true
             }
         }
     }
@@ -143,5 +142,20 @@ extension SampleHandler: WebRTCClientDelegate {
     
     func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
         signalingClient?.send(candidate: candidate)
+    }
+    
+    func webRTCClient(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {
+        switch state {
+        case .connected, .completed:
+            isWebRTCConnected = true
+        case .disconnected:
+            isWebRTCConnected = false
+        case .failed, .closed:
+            isWebRTCConnected = false
+        case .new, .checking, .count:
+           break
+        @unknown default:
+            print("Unknown connection state.")
+        }
     }
 }
