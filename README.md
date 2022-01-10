@@ -22,7 +22,7 @@ Extending BBB ios mobile application to support screen sharing.
 ## Flow
 * When app is run and active, WebViewController will load BBB web page and user must sign in.
 * As a meeting host you create a meeting, allow microphone and camera usage.
-* Now everything function through webView and you can use it as it is.
+* Now everything functions through webView and you can use it as it is.
 * If you want to start screen sharing - click on the grey recording button in top left corner.
 * NOTE: The grey recording button will be removed and BBB screen share button will be available in webView.
 * We use javascript injection to obtain data from webView loaded page and observe event of tapping on screen share button (when it becomes available).
