@@ -106,7 +106,7 @@ class WebViewController: UIViewController, WKUIDelegate {
         }
     }
     
-    private func getJSessionId() {
+    private func saveSessionCookie() {
         webView.configuration.websiteDataStore.httpCookieStore.getAllCookies { [weak self] cookies in
             for cookie in cookies {
                 if cookie.name == Constants.jsessionId {
@@ -160,7 +160,7 @@ extension WebViewController: WKNavigationDelegate {
             // Joined the room and connected to BBB server.
             guard !hasSessionToken else { return }
             runJavascript(Script.meetingRoomPayloadListener)
-            getJSessionId()
+            saveSessionCookie()
             hasSessionToken = true
         }
     }

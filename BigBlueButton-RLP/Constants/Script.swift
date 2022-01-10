@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Script {
+enum Script {
         
     // Meeting room listener
     static let meetingRoomMessage = "meetingRoomPayloadReceived"
