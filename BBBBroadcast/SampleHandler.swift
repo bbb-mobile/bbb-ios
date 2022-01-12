@@ -49,7 +49,6 @@ class SampleHandler: RPBroadcastSampleHandler {
     }
     
     override func processSampleBuffer(_ sampleBuffer: CMSampleBuffer, with sampleBufferType: RPSampleBufferType) {
-//        print("SAMPLE BUFFER: \(sampleBuffer)")
         switch sampleBufferType {
         case .video:
             // Handle video sample buffer
@@ -76,8 +75,9 @@ class SampleHandler: RPBroadcastSampleHandler {
 
     private func setupWebSocketConnection(with url: String) {
         guard let websocketUrl = URL(string: url) else { return }
+        guard let jsessionId = defaults?.object(forKey: Constants.jsessionId) as? String else { return }
         // Use Native socket to establish connection
-        let websocketProvider: WebSocketProvider = NativeWebSocket(url: websocketUrl)
+        let websocketProvider: WebSocketProvider = NativeWebSocket(url: websocketUrl, jsessionId: jsessionId)
         signalingClient = SignalingClient(webSocket: websocketProvider)
         signalingClient?.delegate = self
         signalingClient?.connect()
@@ -90,7 +90,7 @@ class SampleHandler: RPBroadcastSampleHandler {
             guard let `self` = self, var data = self.javascriptPayload else { return }
             data.sdpOffer = localSdpOffer.sdp
             self.signalingClient?.sendMessageWithSdpOffer(data)
-            print("✅ Sent socket message with local sdp offer: \(data)")
+            print("✅ Sent socket message with local sdp offer: \(String(describing: data.sdpOffer))")
         }
     }
         
@@ -99,7 +99,7 @@ class SampleHandler: RPBroadcastSampleHandler {
             if error != nil {
                 print("⚡️☠️ Error setting remote sdp answer: \(error!.localizedDescription)")
             } else {
-                print("Set remote SDP answer: \(sdpAnswer.sdp)")
+                print("✅ Set remote SDP answer: \(sdpAnswer.sdp)")
             }
         }
     }
@@ -109,7 +109,7 @@ class SampleHandler: RPBroadcastSampleHandler {
             if error != nil {
                 print("⚡️☠️ Error setting remote ice candidate: \(error!.localizedDescription)")
             } else {
-                print("Set remote ICECandidate")
+                print("✅ Set remote ICECandidate")
             }
         }
     }
