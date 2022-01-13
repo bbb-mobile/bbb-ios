@@ -90,7 +90,7 @@ class SampleHandler: RPBroadcastSampleHandler {
             guard let `self` = self, var data = self.javascriptPayload else { return }
             data.sdpOffer = localSdpOffer.sdp
             self.signalingClient?.sendMessageWithSdpOffer(data)
-            print("✅ Sent socket message with local sdp offer: \(String(describing: data.sdpOffer))")
+            print("✅ Sent socket message with local sdp offer: \(data.sdpOffer)")
         }
     }
         

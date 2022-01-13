@@ -109,7 +109,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     private func saveSessionCookie() {
         webView.configuration.websiteDataStore.httpCookieStore.getAllCookies { [weak self] cookies in
             for cookie in cookies {
-                if cookie.name == Constants.jsessionId {
+                if cookie.name == Constants.jsessionId && cookie.isSecure {
                     self?.defaults?.set(cookie.value, forKey: Constants.jsessionId)
                 }
             }
