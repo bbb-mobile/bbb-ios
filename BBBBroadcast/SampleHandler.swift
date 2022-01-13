@@ -142,6 +142,7 @@ extension SampleHandler: WebRTCClientDelegate {
     
     func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
         signalingClient?.send(candidate: candidate)
+        print("✅ Sent local ICECandidate to server.")
     }
     
     func webRTCClient(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {
