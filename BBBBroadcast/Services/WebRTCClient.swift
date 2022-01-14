@@ -10,6 +10,7 @@ import WebRTC
 
 protocol WebRTCClientDelegate: AnyObject {
     func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate)
+    func webRTCClient(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState)
 }
 
 final class WebRTCClient: NSObject {
@@ -127,7 +128,7 @@ final class WebRTCClient: NSObject {
     private func createVideoTrack() -> RTCVideoTrack {
         videoSource = WebRTCClient.factory.videoSource(forScreenCast: true)
         videoCapturer = RTCVideoCapturer(delegate: videoSource!)
-        videoSource!.adaptOutputFormat(toWidth: 441, height: 736, fps: 15)
+        videoSource!.adaptOutputFormat(toWidth: 600, height: 800, fps: 15)
         let videoTrack = WebRTCClient.factory.videoTrack(with: videoSource!, trackId: "video0")
         videoTrack.isEnabled = true
         return videoTrack
@@ -156,6 +157,7 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
     
     func peerConnection(_ peerConnection: RTCPeerConnection, didChange newState: RTCIceConnectionState) {
         debugPrint("peerConnection new connection state: \(newState)")
+        self.delegate?.webRTCClient(self, didChangeConnectionState: newState)
     }
     
     func peerConnection(_ peerConnection: RTCPeerConnection, didChange newState: RTCIceGatheringState) {

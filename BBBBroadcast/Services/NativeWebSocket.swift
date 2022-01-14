@@ -12,21 +12,20 @@ class NativeWebSocket: NSObject, WebSocketProvider {
     
     var delegate: WebSocketProviderDelegate?
     private let url: URL
+    private let jsessionId: String
     private var socket: URLSessionWebSocketTask?
     private lazy var urlSession: URLSession = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
-    private let defaults = UserDefaults.init(suiteName: Constants.appGroup)
 
-    init(url: URL) {
+    init(url: URL, jsessionId: String) {
         self.url = url
+        self.jsessionId = jsessionId
         super.init()
     }
 
     func connect() {
         var request = URLRequest(url: url)
         request.timeoutInterval = 5
-        // Set cookie obtained from webView in order to authorize socket connection
-        let jsessionId = defaults?.object(forKey: Constants.jsessionId) as? String
-        request.setValue("\(Constants.jsessionId)=\(jsessionId ?? "")", forHTTPHeaderField: "Cookie")
+        request.setValue("\(Constants.jsessionId)=\(jsessionId)", forHTTPHeaderField: "Cookie")
         let socket = urlSession.webSocketTask(with: request)
         socket.resume()
         self.socket = socket
