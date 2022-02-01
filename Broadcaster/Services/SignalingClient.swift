@@ -30,7 +30,7 @@ final class SignalingClient {
         self.webSocket.connect()
     }
     
-    func sendMessageWithSdpOffer(_ message: JavascriptData.Payload) {
+    func sendMessageWithSdpOffer(_ message: SdpMessage) {
         do {
             let dataMessage = try self.encoder.encode(message)
             self.webSocket.send(data: dataMessage)

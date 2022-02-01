@@ -17,10 +17,6 @@ struct Constants {
     static let jsessionId = "JSESSIONID"
     static let javascriptData = "javascriptData"
     
-    // WebRTC
-    static let sdpAnswer = "sdpAnswer"
-    static let iceCandidate = "iceCandidate"
-    
     // AppGroups
     static let appGroup = "group.com.zuehlke.bbb"
 }

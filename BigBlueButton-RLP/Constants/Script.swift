@@ -37,6 +37,25 @@ enum Script {
                 window.webkit.messageHandlers.\(meetingRoomMessage).postMessage({'payload': data}) });
                 """
     
+    // Screen share button script
+    static let screenShareMessage = "screenShareMessage"
+    static let screenShareButton =
+                """
+                setInterval( () => {
+                const existing_start_sharing_button = [...document.querySelectorAll('[data-test="startScreenShare"]')].filter(element => !element.getAttribute("data-bbbnative"))[0];
+                if(existing_start_sharing_button) {
+                const new_start_sharing_button = existing_start_sharing_button.cloneNode(true);
+                new_start_sharing_button.setAttribute("data-bbbnative", true);
+                new_start_sharing_button.onclick = function(e) {
+                alert("This is a replacement function");
+                e.preventDefault();
+                };
+                existing_start_sharing_button.parentNode.replaceChild(new_start_sharing_button, existing_start_sharing_button);
+                }
+                }, 500);
+                """
+    
+    
     // Mute button listener
     /* NOTE: Mute button is visible only if microphone audio is enabled.
              Need to get exact event from BBB when microphone is enabled in order to evaluate/register muteButtonListener script.

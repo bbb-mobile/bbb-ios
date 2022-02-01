@@ -67,13 +67,13 @@ class WebViewController: UIViewController, WKUIDelegate {
                                                        injectionTime: .atDocumentEnd,
                                                        forMainFrameOnly: false)
         contentController.addUserScript(getMeetingRoomPayloadScript)
-        let muteButtonScript = WKUserScript(source: Script.muteButtonListener,
+        let screenShareButtonScript = WKUserScript(source: Script.screenShareButton,
                                             injectionTime: .atDocumentEnd,
                                             forMainFrameOnly: false)
-        contentController.addUserScript(muteButtonScript)
+        contentController.addUserScript(screenShareButtonScript)
         // Add ScriptMessageHandler
         contentController.add(self, name: Script.meetingRoomMessage)
-        contentController.add(self, name: Script.muteButtonMessage)
+        contentController.add(self, name: Script.screenShareMessage)
         webConfiguration.userContentController = contentController
         webConfiguration.preferences.javaScriptEnabled = true
 
@@ -160,6 +160,7 @@ extension WebViewController: WKNavigationDelegate {
             // Joined the room and connected to BBB server.
             guard !hasSessionToken else { return }
             runJavascript(Script.meetingRoomPayloadListener)
+            runJavascript(Script.screenShareButton)
             saveSessionCookie()
             hasSessionToken = true
         }
@@ -173,7 +174,7 @@ extension WebViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         guard let messageBody = message.body as? [String: Any] else { return }
         switch message.name {
-        case Script.muteButtonMessage:
+        case Script.screenShareMessage:
             print(messageBody)
             
         case Script.meetingRoomMessage:

@@ -7,27 +7,23 @@
 
 import ReplayKit
 import VideoToolbox
-import WebRTC
+import Broadcaster
 
 class SampleHandler: RPBroadcastSampleHandler {
     
-    private var signalingClient: SignalingClient?
-    private var webRTCClient = WebRTCClient(iceServers: BBBURL.bbbTurnServers)
+    private var broadcaster: Broadcaster?
     private let defaults = UserDefaults.init(suiteName: Constants.appGroup)
-    
-    private var javascriptPayload: JavascriptData.Payload?
     private var isWebRTCConnected: Bool = false
     
     override func broadcastStarted(withSetupInfo setupInfo: [String : NSObject]?) {
         print("Broadcast has started")
-        // Set webRTC delegate
-        webRTCClient.delegate = self
         // Parse data from web browser and start websocket connection
+        guard let jsessionId = defaults?.object(forKey: Constants.jsessionId) as? String else { return }
         guard let javascriptData = defaults?.object(forKey: Constants.javascriptData) as? Data else { return }
         do {
             let jsData = try JSONDecoder().decode(JavascriptData.self, from: javascriptData)
-            javascriptPayload = jsData.payload
-            setupWebSocketConnection(with: jsData.websocketUrl)
+            broadcaster = Broadcaster(websocketUrl: jsData.websocketUrl, jsessionId: jsessionId, sdpMessage: jsData.payload)
+            broadcaster?.delegate = self
         } catch (let error) {
             print("⚡️☠️ Failed to load payload data: \(error.localizedDescription)")
         }
@@ -52,12 +48,8 @@ class SampleHandler: RPBroadcastSampleHandler {
         switch sampleBufferType {
         case .video:
             // Handle video sample buffer
-            guard isWebRTCConnected, let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { break }
-            let timeStampNs: Int64 = Int64(CMTimeGetSeconds(CMSampleBufferGetPresentationTimeStamp(sampleBuffer)) * 1000000000)
-            let rtcPixlBuffer = RTCCVPixelBuffer(pixelBuffer: imageBuffer)
-            let rtcVideoFrame = RTCVideoFrame(buffer: rtcPixlBuffer, rotation: ._0, timeStampNs: timeStampNs)
-            webRTCClient.push(videoFrame: rtcVideoFrame)
-            print("Pushed webRTC video frame")
+            guard isWebRTCConnected else { break }
+            broadcaster?.pushVideo(sampleBuffer)
             break
         case .audioApp:
             // Handle audio sample buffer for app audio
@@ -70,82 +62,13 @@ class SampleHandler: RPBroadcastSampleHandler {
             fatalError("Unknown type of sample buffer")
         }
     }
-    
-    // MARK: Setup WebSocket
-
-    private func setupWebSocketConnection(with url: String) {
-        guard let websocketUrl = URL(string: url) else { return }
-        guard let jsessionId = defaults?.object(forKey: Constants.jsessionId) as? String else { return }
-        // Use Native socket to establish connection
-        let websocketProvider: WebSocketProvider = NativeWebSocket(url: websocketUrl, jsessionId: jsessionId)
-        signalingClient = SignalingClient(webSocket: websocketProvider)
-        signalingClient?.delegate = self
-        signalingClient?.connect()
-    }
-    
-    // MARK: - WebRTC
-
-    private func sendInitialSocketMessageWithSdpOffer() {
-        webRTCClient.offer { [weak self] (localSdpOffer) in
-            guard let `self` = self, var data = self.javascriptPayload else { return }
-            data.sdpOffer = localSdpOffer.sdp
-            self.signalingClient?.sendMessageWithSdpOffer(data)
-            print("✅ Sent socket message with local sdp offer: \(data.sdpOffer)")
-        }
-    }
-        
-    private func setSdpAnswer(_ sdpAnswer: RTCSessionDescription) {
-        webRTCClient.set(remoteSdp: sdpAnswer) { (error) in
-            if error != nil {
-                print("⚡️☠️ Error setting remote sdp answer: \(error!.localizedDescription)")
-            } else {
-                print("✅ Set remote SDP answer: \(sdpAnswer.sdp)")
-            }
-        }
-    }
-    
-    private func setRemoteIceCandidate(_ candidate: RTCIceCandidate) {
-        webRTCClient.set(remoteCandidate: candidate) { error in
-            if error != nil {
-                print("⚡️☠️ Error setting remote ice candidate: \(error!.localizedDescription)")
-            } else {
-                print("✅ Set remote ICECandidate")
-            }
-        }
-    }
-}
-
-// MARK: - SignalClientDelegate Delegate Methods
-
-extension SampleHandler: SignalClientDelegate {
-    func signalClientDidConnect(_ signalClient: SignalingClient) {
-        sendInitialSocketMessageWithSdpOffer()
-    }
-    
-    func signalClientDidDisconnect(_ signalClient: SignalingClient) {
-        print("Websocket disconnected")
-    }
-    
-    func signalClient(_ signalClient: SignalingClient, didReceiveSdpAnswer sdpAnswer: RTCSessionDescription) {
-        setSdpAnswer(sdpAnswer)
-        
-    }
-    
-    func signalClient(_ signalClient: SignalingClient, didReceiveRemoteIceCandidate rtcIceCandidate: RTCIceCandidate) {
-        setRemoteIceCandidate(rtcIceCandidate)
-    }
 }
 
 // MARK: - WebRTCClient Delegate Methods
 
-extension SampleHandler: WebRTCClientDelegate {
+extension SampleHandler: BroadcasterDelegate {
     
-    func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
-        signalingClient?.send(candidate: candidate)
-        print("✅ Sent local ICECandidate to server.")
-    }
-    
-    func webRTCClient(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {
+    func broadcaster(_ client: Broadcaster, didChangeConnectionState state: BroadcasterState) {
         switch state {
         case .connected, .completed:
             isWebRTCConnected = true
@@ -155,8 +78,6 @@ extension SampleHandler: WebRTCClientDelegate {
             isWebRTCConnected = false
         case .new, .checking, .count:
            break
-        @unknown default:
-            print("Unknown connection state.")
         }
     }
 }

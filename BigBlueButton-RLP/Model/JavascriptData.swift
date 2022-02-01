@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Broadcaster
 
 /// Model which parse data returned from executed javascript snippet
 struct JavascriptData: Codable {
@@ -13,7 +14,7 @@ struct JavascriptData: Codable {
     var payload: Payload
     
     /// Payload received after javascript snippet executed
-    struct Payload: Codable {
+    struct Payload: Codable, WebsocketSdpMessage {
         let callerName: String
         let bitrate: Int
         let hasAudio: Bool
