@@ -24,6 +24,7 @@ class SampleHandler: RPBroadcastSampleHandler {
             let jsData = try JSONDecoder().decode(JavascriptData.self, from: javascriptData)
             broadcaster = Broadcaster(websocketUrl: jsData.websocketUrl, jsessionId: jsessionId, sdpMessage: jsData.payload)
             broadcaster?.delegate = self
+            broadcaster?.start()
         } catch (let error) {
             print("⚡️☠️ Failed to load payload data: \(error.localizedDescription)")
         }

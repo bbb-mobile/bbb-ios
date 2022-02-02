@@ -7,25 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7024B2F127A977B50070E1CE /* Broadcaster.h in Headers */ = {isa = PBXBuildFile; fileRef = 7024B2F027A977B50070E1CE /* Broadcaster.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7024B2F427A977B60070E1CE /* Broadcaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7024B2EE27A977B50070E1CE /* Broadcaster.framework */; };
-		7024B2F527A977B60070E1CE /* Broadcaster.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7024B2EE27A977B50070E1CE /* Broadcaster.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7024B2FB27A977DE0070E1CE /* Broadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7024B2FA27A977DE0070E1CE /* Broadcaster.swift */; };
-		7024B2FC27A978590070E1CE /* Broadcaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7024B2EE27A977B50070E1CE /* Broadcaster.framework */; platformFilter = ios; };
-		7024B2FD27A978590070E1CE /* Broadcaster.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7024B2EE27A977B50070E1CE /* Broadcaster.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7024B30227A978680070E1CE /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = 7024B30127A978680070E1CE /* WebRTC */; };
-		7024B30427A979C10070E1CE /* STUNServers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7024B30327A979C10070E1CE /* STUNServers.swift */; };
-		7024B30527A979F50070E1CE /* WebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB590274D0620005D3C17 /* WebSocketProvider.swift */; };
-		7024B30627A979FD0070E1CE /* NativeWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB58F274D0620005D3C17 /* NativeWebSocket.swift */; };
-		7024B30727A97A020070E1CE /* SignalingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB58B274D05E8005D3C17 /* SignalingClient.swift */; };
-		7024B30827A97A060070E1CE /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB58A274D05E8005D3C17 /* WebRTCClient.swift */; };
-		7024B30927A97A0C0070E1CE /* RTCStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB594274D06A7005D3C17 /* RTCStates.swift */; };
-		7024B30A27A97A110070E1CE /* IceCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CB593274D06A7005D3C17 /* IceCandidate.swift */; };
-		7024B30B27A97A150070E1CE /* RemoteIceCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DD9C002759035E00B00EB7 /* RemoteIceCandidate.swift */; };
-		7024B30C27A97A190070E1CE /* SdpAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A8241B2754EC1800C65BC9 /* SdpAnswer.swift */; };
-		7024B30E27A980860070E1CE /* WebsocketSdpMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7024B30D27A980860070E1CE /* WebsocketSdpMessage.swift */; };
-		7024B31027A98C970070E1CE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7024B30F27A98C970070E1CE /* Constants.swift */; };
 		7024B31127A98F780070E1CE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942077F2273E759300E6EEBB /* Constants.swift */; };
+		708DF80C27AAD9CC00B22652 /* Broadcaster in Frameworks */ = {isa = PBXBuildFile; productRef = 708DF80B27AAD9CC00B22652 /* Broadcaster */; };
+		708DF80E27AADB9F00B22652 /* Broadcaster in Frameworks */ = {isa = PBXBuildFile; productRef = 708DF80D27AADB9F00B22652 /* Broadcaster */; };
 		709FB5EA275E434E00FE8349 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 709FB5E9275E434E00FE8349 /* ReplayKit.framework */; };
 		709FB5ED275E434E00FE8349 /* SampleHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709FB5EC275E434E00FE8349 /* SampleHandler.swift */; };
 		709FB5F1275E434E00FE8349 /* BBBBroadcast.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 709FB5E7275E434E00FE8349 /* BBBBroadcast.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -47,20 +31,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7024B2F227A977B60070E1CE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 94A7B72E273D17AE00862DA1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7024B2ED27A977B50070E1CE;
-			remoteInfo = Broadcaster;
-		};
-		7024B2FE27A978590070E1CE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 94A7B72E273D17AE00862DA1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7024B2ED27A977B50070E1CE;
-			remoteInfo = Broadcaster;
-		};
 		709FB5EF275E434E00FE8349 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 94A7B72E273D17AE00862DA1 /* Project object */;
@@ -84,7 +54,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7024B2F527A977B60070E1CE /* Broadcaster.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,7 +64,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7024B2FD27A978590070E1CE /* Broadcaster.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,26 +82,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		7024B2EE27A977B50070E1CE /* Broadcaster.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Broadcaster.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7024B2F027A977B50070E1CE /* Broadcaster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Broadcaster.h; sourceTree = "<group>"; };
-		7024B2FA27A977DE0070E1CE /* Broadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Broadcaster.swift; sourceTree = "<group>"; };
-		7024B30327A979C10070E1CE /* STUNServers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STUNServers.swift; sourceTree = "<group>"; };
-		7024B30D27A980860070E1CE /* WebsocketSdpMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsocketSdpMessage.swift; sourceTree = "<group>"; };
-		7024B30F27A98C970070E1CE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		702CB58A274D05E8005D3C17 /* WebRTCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
-		702CB58B274D05E8005D3C17 /* SignalingClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
-		702CB58F274D0620005D3C17 /* NativeWebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeWebSocket.swift; sourceTree = "<group>"; };
-		702CB590274D0620005D3C17 /* WebSocketProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketProvider.swift; sourceTree = "<group>"; };
-		702CB593274D06A7005D3C17 /* IceCandidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceCandidate.swift; sourceTree = "<group>"; };
-		702CB594274D06A7005D3C17 /* RTCStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTCStates.swift; sourceTree = "<group>"; };
 		709FB5E7275E434E00FE8349 /* BBBBroadcast.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BBBBroadcast.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		709FB5E9275E434E00FE8349 /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
 		709FB5EC275E434E00FE8349 /* SampleHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleHandler.swift; sourceTree = "<group>"; };
 		709FB5EE275E434E00FE8349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70A824172754E64600C65BC9 /* JavascriptData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptData.swift; sourceTree = "<group>"; };
-		70A8241B2754EC1800C65BC9 /* SdpAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdpAnswer.swift; sourceTree = "<group>"; };
 		70BFA3562747D58700AB858A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
-		70DD9C002759035E00B00EB7 /* RemoteIceCandidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteIceCandidate.swift; sourceTree = "<group>"; };
+		70DAF6A927AAD89B00EB2E85 /* Broadcaster */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Broadcaster; path = ../Broadcaster; sourceTree = "<group>"; };
 		70E3CA5B2760BBF700A7C0CC /* BBBBroadcast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BBBBroadcast.entitlements; sourceTree = "<group>"; };
 		70E3CA5C2760BC3F00A7C0CC /* BBBBroadcastRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BBBBroadcastRelease.entitlements; sourceTree = "<group>"; };
 		70E9AC28277089F700C010D2 /* Script.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Script.swift; sourceTree = "<group>"; };
@@ -156,20 +111,12 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7024B2EB27A977B50070E1CE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7024B30227A978680070E1CE /* WebRTC in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		709FB5E4275E434E00FE8349 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				709FB5EA275E434E00FE8349 /* ReplayKit.framework in Frameworks */,
-				7024B2FC27A978590070E1CE /* Broadcaster.framework in Frameworks */,
+				708DF80C27AAD9CC00B22652 /* Broadcaster in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,7 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7024B2F427A977B60070E1CE /* Broadcaster.framework in Frameworks */,
+				708DF80E27AADB9F00B22652 /* Broadcaster in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,28 +138,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7024B2EF27A977B50070E1CE /* Broadcaster */ = {
-			isa = PBXGroup;
-			children = (
-				7024B2F027A977B50070E1CE /* Broadcaster.h */,
-				7024B2FA27A977DE0070E1CE /* Broadcaster.swift */,
-				702CB588274D0591005D3C17 /* Services */,
-				70E3CA5D2760CAD200A7C0CC /* Model */,
-			);
-			path = Broadcaster;
-			sourceTree = "<group>";
-		};
-		702CB588274D0591005D3C17 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				702CB590274D0620005D3C17 /* WebSocketProvider.swift */,
-				702CB58F274D0620005D3C17 /* NativeWebSocket.swift */,
-				702CB58B274D05E8005D3C17 /* SignalingClient.swift */,
-				702CB58A274D05E8005D3C17 /* WebRTCClient.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
 		702CB599274D074E005D3C17 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,18 +165,12 @@
 			path = BBBBroadcast;
 			sourceTree = "<group>";
 		};
-		70E3CA5D2760CAD200A7C0CC /* Model */ = {
+		70DAF6A827AAD89B00EB2E85 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				702CB594274D06A7005D3C17 /* RTCStates.swift */,
-				702CB593274D06A7005D3C17 /* IceCandidate.swift */,
-				70DD9C002759035E00B00EB7 /* RemoteIceCandidate.swift */,
-				70A8241B2754EC1800C65BC9 /* SdpAnswer.swift */,
-				7024B30327A979C10070E1CE /* STUNServers.swift */,
-				7024B30D27A980860070E1CE /* WebsocketSdpMessage.swift */,
-				7024B30F27A98C970070E1CE /* Constants.swift */,
+				70DAF6A927AAD89B00EB2E85 /* Broadcaster */,
 			);
-			path = Model;
+			name = Packages;
 			sourceTree = "<group>";
 		};
 		946C34CF273D1DB8002C0E2C /* Scenes */ = {
@@ -319,7 +238,7 @@
 			children = (
 				94A7B738273D17AE00862DA1 /* BigBlueButton-RLP */,
 				709FB5EB275E434E00FE8349 /* BBBBroadcast */,
-				7024B2EF27A977B50070E1CE /* Broadcaster */,
+				70DAF6A827AAD89B00EB2E85 /* Packages */,
 				709FB5E8275E434E00FE8349 /* Frameworks */,
 				94A7B74F273D17B200862DA1 /* BigBlueButton-RLPTests */,
 				94A7B737273D17AE00862DA1 /* Products */,
@@ -332,7 +251,6 @@
 				94A7B736273D17AE00862DA1 /* BigBlueButton-RLP.app */,
 				94A7B74C273D17B200862DA1 /* BigBlueButton-RLPTests.xctest */,
 				709FB5E7275E434E00FE8349 /* BBBBroadcast.appex */,
-				7024B2EE27A977B50070E1CE /* Broadcaster.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -366,39 +284,7 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		7024B2E927A977B50070E1CE /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7024B2F127A977B50070E1CE /* Broadcaster.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		7024B2ED27A977B50070E1CE /* Broadcaster */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7024B2F927A977B60070E1CE /* Build configuration list for PBXNativeTarget "Broadcaster" */;
-			buildPhases = (
-				7024B2E927A977B50070E1CE /* Headers */,
-				7024B2EA27A977B50070E1CE /* Sources */,
-				7024B2EB27A977B50070E1CE /* Frameworks */,
-				7024B2EC27A977B50070E1CE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Broadcaster;
-			packageProductDependencies = (
-				7024B30127A978680070E1CE /* WebRTC */,
-			);
-			productName = Broadcaster;
-			productReference = 7024B2EE27A977B50070E1CE /* Broadcaster.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		709FB5E6275E434E00FE8349 /* BBBBroadcast */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 709FB5F5275E434E00FE8349 /* Build configuration list for PBXNativeTarget "BBBBroadcast" */;
@@ -411,10 +297,10 @@
 			buildRules = (
 			);
 			dependencies = (
-				7024B2FF27A978590070E1CE /* PBXTargetDependency */,
 			);
 			name = BBBBroadcast;
 			packageProductDependencies = (
+				708DF80B27AAD9CC00B22652 /* Broadcaster */,
 			);
 			productName = BBBBroadcast;
 			productReference = 709FB5E7275E434E00FE8349 /* BBBBroadcast.appex */;
@@ -434,10 +320,10 @@
 			);
 			dependencies = (
 				709FB5F0275E434E00FE8349 /* PBXTargetDependency */,
-				7024B2F327A977B60070E1CE /* PBXTargetDependency */,
 			);
 			name = "BigBlueButton-RLP";
 			packageProductDependencies = (
+				708DF80D27AADB9F00B22652 /* Broadcaster */,
 			);
 			productName = "BigBlueButton-RLP";
 			productReference = 94A7B736273D17AE00862DA1 /* BigBlueButton-RLP.app */;
@@ -471,10 +357,6 @@
 				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
-					7024B2ED27A977B50070E1CE = {
-						CreatedOnToolsVersion = 13.2.1;
-						LastSwiftMigration = 1320;
-					};
 					709FB5E6275E434E00FE8349 = {
 						CreatedOnToolsVersion = 13.1;
 					};
@@ -497,7 +379,6 @@
 			);
 			mainGroup = 94A7B72D273D17AE00862DA1;
 			packageReferences = (
-				704709F8276A038600764761 /* XCRemoteSwiftPackageReference "WebRTC" */,
 			);
 			productRefGroup = 94A7B737273D17AE00862DA1 /* Products */;
 			projectDirPath = "";
@@ -506,19 +387,11 @@
 				94A7B735273D17AE00862DA1 /* BigBlueButton-RLP */,
 				94A7B74B273D17B200862DA1 /* BigBlueButton-RLPTests */,
 				709FB5E6275E434E00FE8349 /* BBBBroadcast */,
-				7024B2ED27A977B50070E1CE /* Broadcaster */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7024B2EC27A977B50070E1CE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		709FB5E5275E434E00FE8349 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -545,25 +418,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7024B2EA27A977B50070E1CE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7024B30727A97A020070E1CE /* SignalingClient.swift in Sources */,
-				7024B30427A979C10070E1CE /* STUNServers.swift in Sources */,
-				7024B2FB27A977DE0070E1CE /* Broadcaster.swift in Sources */,
-				7024B30A27A97A110070E1CE /* IceCandidate.swift in Sources */,
-				7024B30627A979FD0070E1CE /* NativeWebSocket.swift in Sources */,
-				7024B30B27A97A150070E1CE /* RemoteIceCandidate.swift in Sources */,
-				7024B30527A979F50070E1CE /* WebSocketProvider.swift in Sources */,
-				7024B30927A97A0C0070E1CE /* RTCStates.swift in Sources */,
-				7024B30E27A980860070E1CE /* WebsocketSdpMessage.swift in Sources */,
-				7024B30827A97A060070E1CE /* WebRTCClient.swift in Sources */,
-				7024B30C27A97A190070E1CE /* SdpAnswer.swift in Sources */,
-				7024B31027A98C970070E1CE /* Constants.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		709FB5E3275E434E00FE8349 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -603,17 +457,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7024B2F327A977B60070E1CE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7024B2ED27A977B50070E1CE /* Broadcaster */;
-			targetProxy = 7024B2F227A977B60070E1CE /* PBXContainerItemProxy */;
-		};
-		7024B2FF27A978590070E1CE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			platformFilter = ios;
-			target = 7024B2ED27A977B50070E1CE /* Broadcaster */;
-			targetProxy = 7024B2FE27A978590070E1CE /* PBXContainerItemProxy */;
-		};
 		709FB5F0275E434E00FE8349 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 709FB5E6275E434E00FE8349 /* BBBBroadcast */;
@@ -638,73 +481,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		7024B2F727A977B60070E1CE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = M6T2825W2N;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.BBB.Broadcaster;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		7024B2F827A977B60070E1CE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = M6T2825W2N;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.BBB.Broadcaster;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		709FB5F3275E434E00FE8349 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -986,15 +762,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7024B2F927A977B60070E1CE /* Build configuration list for PBXNativeTarget "Broadcaster" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7024B2F727A977B60070E1CE /* Debug */,
-				7024B2F827A977B60070E1CE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		709FB5F5275E434E00FE8349 /* Build configuration list for PBXNativeTarget "BBBBroadcast" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1033,22 +800,14 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		704709F8276A038600764761 /* XCRemoteSwiftPackageReference "WebRTC" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/stasel/WebRTC";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 96.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		7024B30127A978680070E1CE /* WebRTC */ = {
+		708DF80B27AAD9CC00B22652 /* Broadcaster */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 704709F8276A038600764761 /* XCRemoteSwiftPackageReference "WebRTC" */;
-			productName = WebRTC;
+			productName = Broadcaster;
+		};
+		708DF80D27AADB9F00B22652 /* Broadcaster */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Broadcaster;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
