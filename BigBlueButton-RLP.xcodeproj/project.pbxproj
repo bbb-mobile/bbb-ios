@@ -82,13 +82,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7062C90027ABCF5000428EF6 /* Broadcaster */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Broadcaster; sourceTree = "<group>"; };
 		709FB5E7275E434E00FE8349 /* BBBBroadcast.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BBBBroadcast.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		709FB5E9275E434E00FE8349 /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
 		709FB5EC275E434E00FE8349 /* SampleHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleHandler.swift; sourceTree = "<group>"; };
 		709FB5EE275E434E00FE8349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70A824172754E64600C65BC9 /* JavascriptData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptData.swift; sourceTree = "<group>"; };
 		70BFA3562747D58700AB858A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
-		70DAF6A927AAD89B00EB2E85 /* Broadcaster */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Broadcaster; path = ../Broadcaster; sourceTree = "<group>"; };
 		70E3CA5B2760BBF700A7C0CC /* BBBBroadcast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BBBBroadcast.entitlements; sourceTree = "<group>"; };
 		70E3CA5C2760BC3F00A7C0CC /* BBBBroadcastRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BBBBroadcastRelease.entitlements; sourceTree = "<group>"; };
 		70E9AC28277089F700C010D2 /* Script.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Script.swift; sourceTree = "<group>"; };
@@ -168,7 +168,7 @@
 		70DAF6A827AAD89B00EB2E85 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				70DAF6A927AAD89B00EB2E85 /* Broadcaster */,
+				7062C90027ABCF5000428EF6 /* Broadcaster */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
