@@ -65,7 +65,7 @@ class SampleHandler: RPBroadcastSampleHandler {
     }
 }
 
-// MARK: - WebRTCClient Delegate Methods
+// MARK: - Broadcaster Delegate Methods
 
 extension SampleHandler: BroadcasterDelegate {
     
