@@ -32,7 +32,8 @@ enum Script {
                                     sdpOffer: null,
                                     type: "screenshare",
                                     userName: fullname,
-                                    voiceBridge: voiceConf
+                                    voiceBridge: voiceConf,
+                                    mediaServer: "kurento"
                                     }});
                 window.webkit.messageHandlers.\(meetingRoomMessage).postMessage({'payload': data}) });
                 """

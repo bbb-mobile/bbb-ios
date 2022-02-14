@@ -1,6 +1,7 @@
 import UIKit
 import WebKit
 import ReplayKit
+import Broadcaster
 
 class WebViewController: UIViewController, WKUIDelegate {
     
@@ -11,6 +12,8 @@ class WebViewController: UIViewController, WKUIDelegate {
     private var decoder = JSONDecoder()
     private let defaults = UserDefaults.init(suiteName: Constants.appGroup)
     private var broadcastPicker: RPSystemBroadcastPickerView?
+    private var broadcaster: Broadcaster?
+    private var jsessionId: String = ""
     
     private var isPayloadReceived = false
     private var hasSessionToken = false
@@ -67,15 +70,14 @@ class WebViewController: UIViewController, WKUIDelegate {
                                                        injectionTime: .atDocumentEnd,
                                                        forMainFrameOnly: false)
         contentController.addUserScript(getMeetingRoomPayloadScript)
-        let screenShareButtonScript = WKUserScript(source: Script.screenShareButton,
-                                            injectionTime: .atDocumentEnd,
-                                            forMainFrameOnly: false)
-        contentController.addUserScript(screenShareButtonScript)
         // Add ScriptMessageHandler
         contentController.add(self, name: Script.meetingRoomMessage)
-        contentController.add(self, name: Script.screenShareMessage)
         webConfiguration.userContentController = contentController
         webConfiguration.preferences.javaScriptEnabled = true
+        webConfiguration.allowsAirPlayForMediaPlayback = true
+        webConfiguration.allowsInlineMediaPlayback = true
+        webConfiguration.allowsPictureInPictureMediaPlayback = true
+        webConfiguration.mediaTypesRequiringUserActionForPlayback = []
 
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.uiDelegate = self
@@ -111,6 +113,7 @@ class WebViewController: UIViewController, WKUIDelegate {
             for cookie in cookies {
                 if cookie.name == Constants.jsessionId && cookie.isSecure {
                     self?.defaults?.set(cookie.value, forKey: Constants.jsessionId)
+                    self?.jsessionId = cookie.value
                 }
             }
         }
@@ -160,7 +163,6 @@ extension WebViewController: WKNavigationDelegate {
             // Joined the room and connected to BBB server.
             guard !hasSessionToken else { return }
             runJavascript(Script.meetingRoomPayloadListener)
-            runJavascript(Script.screenShareButton)
             saveSessionCookie()
             hasSessionToken = true
         }
@@ -185,6 +187,11 @@ extension WebViewController: WKScriptMessageHandler {
                 isPayloadReceived = true
                 if let encodedData = try? encoder.encode(jsData) {
                     defaults?.set(encodedData, forKey: Constants.javascriptData)
+                        guard !self.jsessionId.isEmpty else { return }
+                    // This should be audio broadcaster which take audio websocket url
+                        self.broadcaster = Broadcaster(websocketUrl: jsData.websocketUrl, jsessionId: self.jsessionId, sdpMessage: jsData.payload)
+                        self.broadcaster?.start()
+                        print("BROADCASTER STARTED")
                 }
             } catch (let error) {
                 print("⚡️☠️ Failed to load payload data: \(error.localizedDescription)")
@@ -194,8 +201,6 @@ extension WebViewController: WKScriptMessageHandler {
         }
     }
 }
-
-// MARK: BBBWebViewDelegate
 
 extension WebViewController: BBBWebViewDelegate {
     /// Opens a web page in webview

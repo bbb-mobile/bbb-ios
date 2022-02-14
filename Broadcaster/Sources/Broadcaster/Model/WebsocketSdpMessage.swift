@@ -18,7 +18,7 @@ public protocol WebsocketSdpMessage {
     var type: String { get }
     var userName: String { get }
     var voiceBridge: String { get }
-    
+    var mediaServer: String { get }
 }
 
 struct SdpMessage: Codable, WebsocketSdpMessage {
@@ -32,6 +32,7 @@ struct SdpMessage: Codable, WebsocketSdpMessage {
     let type: String
     let userName: String
     let voiceBridge: String
+    let mediaServer: String
     
     init(_ message: WebsocketSdpMessage) {
         self.callerName = message.callerName
@@ -44,5 +45,6 @@ struct SdpMessage: Codable, WebsocketSdpMessage {
         self.type = message.type
         self.userName = message.userName
         self.voiceBridge = message.voiceBridge
+        self.mediaServer = message.mediaServer
     }
 }

@@ -663,6 +663,8 @@
 				DEVELOPMENT_TEAM = M6T2825W2N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "BigBlueButton-RLP/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is used to allow other participants to see the user in the web conference.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The microphone is used to allow other participants to hear the user in the web conference.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -692,6 +694,8 @@
 				DEVELOPMENT_TEAM = M6T2825W2N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "BigBlueButton-RLP/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is used to allow other participants to see the user in the web conference.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The microphone is used to allow other participants to hear the user in the web conference.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

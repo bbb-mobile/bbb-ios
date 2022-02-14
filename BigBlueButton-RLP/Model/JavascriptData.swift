@@ -25,9 +25,10 @@ struct JavascriptData: Codable {
         let type: String
         let userName: String
         let voiceBridge: String
+        let mediaServer: String
         
         private enum CodingKeys: String, CodingKey {
-            case callerName, bitrate, hasAudio, id, internalMeetingId, role, sdpOffer, type, userName, voiceBridge
+            case callerName, bitrate, hasAudio, id, internalMeetingId, role, sdpOffer, type, userName, voiceBridge, mediaServer
         }
         
         init(from decoder: Decoder) throws {
@@ -42,6 +43,7 @@ struct JavascriptData: Codable {
             type = try values.decode(String.self, forKey: .type)
             userName = try values.decode(String.self, forKey: .userName)
             voiceBridge = try values.decode(String.self, forKey: .voiceBridge)
+            mediaServer = try values.decode(String.self, forKey: .mediaServer)
         }
     }
 }

@@ -66,7 +66,7 @@ public class Broadcaster {
             var sdp = SdpMessage(self.sdpMessage)
             sdp.sdpOffer = localSdpOffer.sdp
             self.signalingClient?.sendMessageWithSdpOffer(sdp)
-            print("✅ Sent socket message with local sdp offer: \(sdp.sdpOffer)")
+            print("✅ Sent socket message with local sdp offer: \(sdp)")
         }
     }
         
